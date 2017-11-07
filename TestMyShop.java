@@ -1,3 +1,4 @@
+//emma
 package OOP2_Project_MyShop;
 
 public class TestMyShop {
@@ -43,5 +44,7 @@ public class TestMyShop {
     {
         return price;
     }
+
+    //To String method here
 
 }
