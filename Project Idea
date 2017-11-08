@@ -4,5 +4,22 @@ My project is a book shop
 so far it will have 3 classes 
 
 book.java
+title - String
+author - String
+noPages - int
+price - double
+
 sales.java
+saleId - ???
+amount - double
+date - date
+totalSales - ???
+
+
+
+
 customer.java
+ firstName String
+ lastName String
+ address String
+ phoneNum int

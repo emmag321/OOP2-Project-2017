@@ -9,7 +9,22 @@ public class Customer {
     private String address;
     private int phoneNum;
 
-    //mutators
+    //no args constructor
+    public Customer()
+    {
+        this("unknown", "unknown", "unknown", 0);
+    }
+
+    //contructor with args
+    public Customer(String firstName, String lastName, String address, int phoneNum)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phoneNum = phoneNum;
+    }
+
+    //mutators -- they set
     public void setFirstName(String firstName)
     {
         this.firstName = firstName;
@@ -30,7 +45,7 @@ public class Customer {
         this.phoneNum = phoneNum;
     }
 
-    //accessors
+    //accessors -- they get
     public String getFirstName()
     {
         return firstName;
