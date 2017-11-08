@@ -1,68 +1,54 @@
-//Emma_Griffin_OOP2_Project
 package OOP2_Project_MyShop;
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer extends Person implements Serializable {
 
     //attributes
-    private String firstName;
-    private String lastName;
-    private String address;
-    private int phoneNum;
+    private String email;
+    private String accNum;
 
-    //no args constructor
+    //Constructors
     public Customer()
     {
-        this("unknown", "unknown", "unknown", 0);
+        super();//this to bring att from person threw-- super class
+
+        email = "unknown";
+        accNum = "unknown";
+
     }
 
-    //contructor with args
-    public Customer(String firstName, String lastName, String address, int phoneNum)
+    public Customer(String firstName, String lastName, String address, int phoneNum, String email, String accNum)
     {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phoneNum = phoneNum;
+        super(firstName, lastName, address, phoneNum);
+
+        this.email = email;
+        this.accNum = accNum;
     }
 
-    //mutators -- they set
-    public void setFirstName(String firstName)
+    public void setEmail(String email)
     {
-        this.firstName = firstName;
+        this.email = email;
     }
 
-    public void setLastName(String lastName)
+    public void setAccNum(String accNum)
     {
-        this.lastName = lastName;
+        this.accNum = accNum;
     }
 
-    public void setAddress(String address)
+    public String getEmail()
     {
-        this.address = address;
+        return email;
     }
 
-    public void setPhoneNum(int phoneNum)
+    public String getAccNum()
     {
-        this.phoneNum = phoneNum;
+        return accNum;
     }
 
-    //accessors -- they get
-    public String getFirstName()
+    //toString method
+    public String toString()
     {
-        return firstName;
-    }
-
-    public String getLastName()
-    {
-        return lastName;
-    }
-
-    public String getAddress()
-    {
-        return address;
-    }
-
-    public int getPhoneNum()
-    {
-        return phoneNum;
+        return super.toString() + "\nEmail: " + email + "\nAccount Number: " + accNum;
     }
 }
