@@ -10,17 +10,15 @@ import java.io.*;
 
 public class MyBookShop extends JFrame implements ActionListener {
 
+    MyBookShop account1 ;
     JMenu fileMenu;
     JMenuBar menuBar, customersMenu, optionsMenu;
-    MyBookShop book1;
+
 
     //array
-    Customer cust1 = new Customer();
-    ArrayList<Customer> customers;
+    Book book1 = new Book();
+    ArrayList<Book> book;
 
-    //customer
-    /*String firstName, lastName, address;
-    float phoneNum;*/
 
     //book
     String title, author,isbn;
