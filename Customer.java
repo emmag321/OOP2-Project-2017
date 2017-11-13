@@ -9,8 +9,6 @@ public class Customer extends Person implements Serializable {
     //attributes
     private String email;
     private String accNum;
-
-
     private int password;
 
     //Constructors
@@ -20,6 +18,7 @@ public class Customer extends Person implements Serializable {
 
         email = "unknown";
         accNum = "unknown";
+        password = 1234;
 
     }
 
@@ -29,6 +28,7 @@ public class Customer extends Person implements Serializable {
 
         this.email = email;
         this.accNum = accNum;
+        this.password = getPassword();
     }
 
     //setters
@@ -58,13 +58,14 @@ public class Customer extends Person implements Serializable {
     public int getPassword() { return password; }
 
     //toString method
-    public String toString()
-    {
-        return super.toString() + "\nEmail: " + email + "\nAccount Number: " + accNum;
+    @Override
+    public String toString() {
+         return super.toString() +
+                   email + ' ' +
+                   accNum + ' ' +
+                  + password +
+                   ' ';
     }
 
-    //CONSTRUCTOR
-    public void setCustomer(String name, String griffin, String causeway, int i) {
 
-    }
 }
