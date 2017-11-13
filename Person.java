@@ -7,7 +7,7 @@ public class Person {
     private String firstName;
     private String lastName;
     private String address;
-    private double phoneNum;
+    private float phoneNum;
 
     //no args constructor
     public Person()
@@ -16,7 +16,7 @@ public class Person {
     }
 
     //contructor with args
-    public Person(String firstName, String lastName, String address, double phoneNum)
+    public Person(String firstName, String lastName, String address, float phoneNum)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,7 +40,7 @@ public class Person {
         this.address = address;
     }
 
-    public void setPhoneNum(double phoneNum)
+    public void setPhoneNum(float phoneNum)
     {
         this.phoneNum = phoneNum;
     }
@@ -61,7 +61,7 @@ public class Person {
         return address;
     }
 
-    public double getPhoneNum()
+    public float getPhoneNum()
     {
         return phoneNum;
     }

@@ -10,6 +10,9 @@ public class Customer extends Person implements Serializable {
     private String email;
     private String accNum;
 
+
+    private int password;
+
     //Constructors
     public Customer()
     {
@@ -28,6 +31,7 @@ public class Customer extends Person implements Serializable {
         this.accNum = accNum;
     }
 
+    //setters
     public void setEmail(String email)
     {
         this.email = email;
@@ -38,6 +42,9 @@ public class Customer extends Person implements Serializable {
         this.accNum = accNum;
     }
 
+    public void setPassword(int password) { this.password = password; }
+
+    //getters
     public String getEmail()
     {
         return email;
@@ -47,6 +54,8 @@ public class Customer extends Person implements Serializable {
     {
         return accNum;
     }
+
+    public int getPassword() { return password; }
 
     //toString method
     public String toString()
