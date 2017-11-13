@@ -8,9 +8,10 @@ import java.io.*;
 
 
 
-public class MyBookShop extends JFrame /*implements ActionListener*/ {
+public class MyBookShop extends JFrame implements ActionListener {
 
     JMenu fileMenu;
+    JMenuBar menuBar, customersMenu, optionsMenu;
     MyBookShop book1;
 
     //array
@@ -43,15 +44,49 @@ public class MyBookShop extends JFrame /*implements ActionListener*/ {
 
         Container cPane = getContentPane();
         cPane.setLayout(new FlowLayout());
-        cPane.setBackground(Color.DARK_GRAY);
+        cPane.setBackground(Color.pink);
 
         //menu
         createFileMenu();
         createCustomersMenu();
         createOptionsMenu();
+
+        //creating menu bar here
+        JMenuBar JMenuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        //menuBar.setBackground(Color.blue);
+       // menuBar.add(fileMenu);
+       // menuBar.add(customersMenu);
+       // menuBar.add(optionsMenu);
     }
 
+    //menu bar
     private void createFileMenu() {
+        JMenuItem item;
+
+        fileMenu = new JMenu("File");
+
+        item = new JMenuItem("Login");
+        item.addActionListener(this);
+
+        fileMenu.add(item);
+
+        item = new JMenuItem("Open");
+        item.addActionListener(this);
+
+        fileMenu.add(item);
+
+        item = new JMenuItem("Save");
+        item.addActionListener(this);
+
+        fileMenu.add(item);
+
+        item = new JMenuItem("Quit");
+        item.addActionListener(this);
+
+        fileMenu.add(item);
+
+
     }
 
     private void createCustomersMenu() {
@@ -60,4 +95,8 @@ public class MyBookShop extends JFrame /*implements ActionListener*/ {
     private void createOptionsMenu() {
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }
