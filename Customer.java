@@ -1,6 +1,8 @@
 package OOP2_Project_MyShop;
 
 import java.io.Serializable;
+import javax.swing.*;
+import java.io.*;
 
 public class Customer extends Person implements Serializable {
 
@@ -50,5 +52,10 @@ public class Customer extends Person implements Serializable {
     public String toString()
     {
         return super.toString() + "\nEmail: " + email + "\nAccount Number: " + accNum;
+    }
+
+    //CONSTRUCTOR
+    public void setCustomer(String name, String griffin, String causeway, int i) {
+
     }
 }

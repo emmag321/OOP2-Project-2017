@@ -7,7 +7,7 @@ public class Person {
     private String firstName;
     private String lastName;
     private String address;
-    private int phoneNum;
+    private double phoneNum;
 
     //no args constructor
     public Person()
@@ -16,7 +16,7 @@ public class Person {
     }
 
     //contructor with args
-    public Person(String firstName, String lastName, String address, int phoneNum)
+    public Person(String firstName, String lastName, String address, double phoneNum)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,7 +40,7 @@ public class Person {
         this.address = address;
     }
 
-    public void setPhoneNum(int phoneNum)
+    public void setPhoneNum(double phoneNum)
     {
         this.phoneNum = phoneNum;
     }
@@ -61,8 +61,19 @@ public class Person {
         return address;
     }
 
-    public int getPhoneNum()
+    public double getPhoneNum()
     {
         return phoneNum;
     }
+
+    @Override
+    public String toString() {
+        return
+                  firstName + ' ' +
+                  lastName + ' ' +
+                  address + ' ' +
+                   phoneNum +
+                ' ';
+    }
+
 }

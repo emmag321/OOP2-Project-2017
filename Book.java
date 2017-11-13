@@ -8,6 +8,7 @@ public class Book {
     private String author;
     private int numPages;
     private double price;
+    private String isbn;
 
     //setters
     public void setTitle( String title)
