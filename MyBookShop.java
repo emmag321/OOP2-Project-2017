@@ -12,8 +12,8 @@ public class MyBookShop extends JFrame implements ActionListener {
 
     private JMenu fileMenu;
     private JMenu editMenu;
-    private JLabel response;
-    private JTextField textfield;
+    //private JLabel response;
+   // private JTextField textfield;
 
 
     //array
@@ -30,19 +30,17 @@ public class MyBookShop extends JFrame implements ActionListener {
     double price;
 
 
-    public static void main(String[] args) {
-       MyBookShop shop = new MyBookShop();
-        shop.setVisible(true);
-    }
-
     /*https://stackoverflow.com/questions/22506331/simple-dropdown-menu-in-java*/
 
     public MyBookShop() {
+
+
         Container cPane;
 
-        setSize(500, 500);
-        setLocation(200, 200);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setTitle     ("My Book Shop ADMIN SECTION");
+        setSize      (500,550);
+        setResizable (true);
+        setLocation  (500,100);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -53,23 +51,37 @@ public class MyBookShop extends JFrame implements ActionListener {
         createFileMenu();
         createEditMenu();
 
+
+
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
         menuBar.setBackground(Color.green);
-        //menuBar.add(fileMenu);
-        //menuBar.add(editMenu);
-
-
+        menuBar.add(fileMenu);
+        menuBar.add(editMenu);
 }
 
     private void createFileMenu() {
+        JMenuItem    item;
+
+        fileMenu = new JMenu("Login");
     }
 
     private void createEditMenu() {
+        JMenuItem    item;
+
+        editMenu = new JMenu("Books");
+
+        item = new JMenuItem("Browse");
+        item.addActionListener( this );
+        editMenu.add( item );
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("Browse"))
+        {
+            JOptionPane.showMessageDialog(null,"Hello Test");
+        }
     }
 }

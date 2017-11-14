@@ -21,10 +21,11 @@ public class Book {
         this.author = author;
     }
 
-    public void setNumPages(int numPages)
-    {
-        this.numPages = numPages;
-    }
+    public void setNumPages(int numPages) { this.numPages = numPages; }
+
+    public void setPrice(double price) { this.price = price; }
+
+    public void setIsbn(String isbn) { this.isbn = isbn; }
 
     //getters
     public String getTitle()
@@ -47,7 +48,18 @@ public class Book {
         return price;
     }
 
+    public String getIsbn() { return isbn; }
     //To String method here
 
+    @Override
+    public String toString() {
+        return
+                 title + ' ' +
+                 author + ' ' +
+                 numPages +
+                 price +
+                 isbn + ' ' +
+                ' ';
+    }
 }
 

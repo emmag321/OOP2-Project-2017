@@ -6,6 +6,7 @@ import javax.swing.*;
 public class TestMyBookShop {
     public static void main(String[] args)
     {
+        //creating customer object
         Customer cust1 = new Customer();
 
         cust1.setFirstName("Emma");
@@ -14,6 +15,15 @@ public class TestMyBookShop {
         cust1.setPhoneNum(07544334);
         cust1.setAccNum("12334F");
         cust1.setEmail("emmag321@gmail.com");
+
+        //creating book object
+        Book book1 = new Book();
+
+        book1.setTitle("harry potter");
+        book1.setAuthor("jk rolling");
+        book1.setNumPages(299);
+        book1.setPrice(7.99);
+        book1.setIsbn("999dsjksj2");
 
         JOptionPane.showMessageDialog(null, cust1.toString(), "Shop Test", JOptionPane.PLAIN_MESSAGE);
     }
