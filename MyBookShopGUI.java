@@ -8,7 +8,7 @@ import java.io.*;
 
 
 
-public class MyBookShop extends JFrame implements ActionListener {
+public class MyBookShopGUI extends JFrame implements ActionListener {
 
     private JMenu fileMenu;
     private JMenu editMenu;
@@ -32,7 +32,7 @@ public class MyBookShop extends JFrame implements ActionListener {
 
     /*https://stackoverflow.com/questions/22506331/simple-dropdown-menu-in-java*/
 
-    public MyBookShop() {
+    public MyBookShopGUI() {
 
 
         Container cPane;

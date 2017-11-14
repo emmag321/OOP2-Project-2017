@@ -34,7 +34,7 @@ public class MainGUI extends JFrame {
         adminButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MyBookShop bookShop = new MyBookShop();
+                MyBookShopGUI bookShop = new MyBookShopGUI();
                 bookShop.setVisible(true);
             }
         });
