@@ -10,14 +10,20 @@ import java.io.*;
 
 public class MyBookShop extends JFrame implements ActionListener {
 
-    MyBookShop account1 ;
-    JMenu fileMenu;
-    JMenuBar menuBar, customersMenu, optionsMenu;
+    MyBookShop shop;
+    JLabel logoLabel;
+    JButton registerButton, loginButton, saveCustButton, cancelButton;
+    JMenu fileMenu, customersMenu, optionsMenu;
+    JLabel buttonLabel, response, welcomeMsg;
+    JTextArea display, calcList, custList;
 
 
     //array
     Book book1 = new Book();
-    ArrayList<Book> book;
+    ArrayList<Book> books;
+
+    Customer cust1 = new Customer();
+    ArrayList<Customer> customers;
 
 
     //book
@@ -27,42 +33,32 @@ public class MyBookShop extends JFrame implements ActionListener {
 
 
     public static void main(String[] args) {
-        MyBookShop book1 = new MyBookShop();
-        book1.setVisible(true);
+       MyBookShop shop = new MyBookShop();
+        shop.setVisible(true);
     }
 
     public MyBookShop() {
-        super("Book");
+        super("Book Shop");
 
         setSize(500, 500);
         setLocation(200, 200);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        //addWindowListener(new WindowEventHandler());
+       JPanel panel = new JPanel();
 
-        Container cPane = getContentPane();
-        cPane.setLayout(new FlowLayout());
-        cPane.setBackground(Color.pink);
+       super.add(panel);
 
-        //menu
-        createFileMenu();
-        createCustomersMenu();
-        createOptionsMenu();
+       JLabel lbl = new JLabel("hello");
+       lbl.setVisible(true);
 
-        //creating menu bar here
-        JMenuBar JMenuBar = new JMenuBar();
-        setJMenuBar(menuBar);
-        //menuBar.setBackground(Color.blue);
-       // menuBar.add(fileMenu);
-       // menuBar.add(customersMenu);
-       // menuBar.add(optionsMenu);
-    }
+       panel.add(lbl);
+}
 
     //menu bar
     private void createFileMenu() {
         JMenuItem item;
 
-        fileMenu = new JMenu("File");
+        fileMenu = new JMenu("Main Menu");
 
         item = new JMenuItem("Login");
         item.addActionListener(this);
