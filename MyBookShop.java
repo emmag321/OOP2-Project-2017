@@ -10,12 +10,10 @@ import java.io.*;
 
 public class MyBookShop extends JFrame implements ActionListener {
 
-    MyBookShop shop;
-    JLabel logoLabel;
-    JButton registerButton, loginButton, saveCustButton, cancelButton;
-    JMenu fileMenu, customersMenu, optionsMenu;
-    JLabel buttonLabel, response, welcomeMsg;
-    JTextArea display, calcList, custList;
+    private JMenu fileMenu;
+    private JMenu editMenu;
+    private JLabel response;
+    private JTextField textfield;
 
 
     //array
@@ -37,60 +35,41 @@ public class MyBookShop extends JFrame implements ActionListener {
         shop.setVisible(true);
     }
 
+    /*https://stackoverflow.com/questions/22506331/simple-dropdown-menu-in-java*/
+
     public MyBookShop() {
-        super("Book Shop");
+        Container cPane;
 
         setSize(500, 500);
         setLocation(200, 200);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-       JPanel panel = new JPanel();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-       super.add(panel);
+        cPane = getContentPane( );
+        cPane.setLayout(new FlowLayout());
 
-       JLabel lbl = new JLabel("hello");
-       lbl.setVisible(true);
 
-       panel.add(lbl);
+        createFileMenu();
+        createEditMenu();
+
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        menuBar.setBackground(Color.green);
+        //menuBar.add(fileMenu);
+        //menuBar.add(editMenu);
+
+
 }
 
-    //menu bar
     private void createFileMenu() {
-        JMenuItem item;
-
-        fileMenu = new JMenu("Main Menu");
-
-        item = new JMenuItem("Login");
-        item.addActionListener(this);
-
-        fileMenu.add(item);
-
-        item = new JMenuItem("Open");
-        item.addActionListener(this);
-
-        fileMenu.add(item);
-
-        item = new JMenuItem("Save");
-        item.addActionListener(this);
-
-        fileMenu.add(item);
-
-        item = new JMenuItem("Quit");
-        item.addActionListener(this);
-
-        fileMenu.add(item);
-
-
     }
 
-    private void createCustomersMenu() {
+    private void createEditMenu() {
     }
 
-    private void createOptionsMenu() {
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
     }
 }
