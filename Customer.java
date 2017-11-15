@@ -61,10 +61,9 @@ public class Customer extends Person implements Serializable {
     @Override
     public String toString() {
          return super.toString() +
-                   email + ' ' +
-                   accNum + ' ' +
-                  + password +
-                   ' ';
+                 "Email: " + email + "\n" +
+                 "Account Number: " +  accNum + "\n" +
+                 "Password: " + password + "\n";
     }
 
 

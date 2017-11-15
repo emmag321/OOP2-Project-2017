@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//this main GUI calls AdminGUI and MyCustomerGUI
+
 public class MainGUI extends JFrame {
 
     //main method
@@ -20,6 +22,7 @@ public class MainGUI extends JFrame {
         setLocation  (500,100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        //creates buttons
         JButton adminButton = new JButton("Admin");
         JButton customerButton = new JButton("Customer");
 
@@ -34,7 +37,7 @@ public class MainGUI extends JFrame {
         adminButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MyBookShopGUI bookShop = new MyBookShopGUI();
+                AdminGUI bookShop = new AdminGUI();
                 bookShop.setVisible(true);
             }
         });

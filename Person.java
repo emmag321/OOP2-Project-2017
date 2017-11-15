@@ -69,11 +69,10 @@ public class Person {
     @Override
     public String toString() {
         return
-                  firstName + ' ' +
-                  lastName + ' ' +
-                  address + ' ' +
-                   phoneNum +
-                ' ';
+                  "First Name: " + firstName + "\n" +
+                  "Last Name: " + lastName + "\n" +
+                  "Address: " + address + "\n" +
+                  "Phone Number: " + phoneNum + "\n";
     }
 
 }

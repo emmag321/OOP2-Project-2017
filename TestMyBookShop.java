@@ -23,9 +23,9 @@ public class TestMyBookShop {
         book1.setAuthor("jk rolling");
         book1.setNumPages(299);
         book1.setPrice(7.99);
-        book1.setIsbn("999dsjksj2");
+        book1.setIsbn("12345IE");
 
-        JOptionPane.showMessageDialog(null, cust1.toString(), "Shop Test", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, book1.toString(), "Shop Test", JOptionPane.PLAIN_MESSAGE);
     }
 
 }
