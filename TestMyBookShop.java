@@ -12,9 +12,10 @@ public class TestMyBookShop {
         cust1.setFirstName("Emma");
         cust1.setLastName("Griffin");
         cust1.setAddress("Causeway");
-        cust1.setPhoneNum(07544334);
+        cust1.setPassword(150514);
+        cust1.setPhoneNum(492);
         cust1.setAccNum("12334F");
-        cust1.setEmail("emmag321@gmail.com");
+        cust1.setEmail("emma@gmail.com");
 
         //creating book object
         Book book1 = new Book();
