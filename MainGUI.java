@@ -39,6 +39,8 @@ public class MainGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 AdminGUI bookShop = new AdminGUI();
                 bookShop.setVisible(true);
+                //MainGUI.setVisable(false);
+
             }
         });
 
