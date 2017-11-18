@@ -25,6 +25,7 @@ public class MainGUI extends JFrame {
         //creates buttons
         JButton adminButton = new JButton("Admin");
         JButton customerButton = new JButton("Customer");
+        JButton quitButton = new JButton("Quit");
 
         Container cpane = getContentPane();
 
@@ -32,6 +33,7 @@ public class MainGUI extends JFrame {
 
         cpane.add(adminButton);
         cpane.add(customerButton);
+        cpane.add(quitButton);
 
         //makes button do something here
         adminButton.addActionListener(new ActionListener() {
@@ -44,11 +46,26 @@ public class MainGUI extends JFrame {
             }
         });
 
+        //makes cutomer GUI come up when button is clicked
         customerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MyCustomerGUI customerShop = new MyCustomerGUI();
                 customerShop.setVisible(true);
+            }
+        });
+
+        //quit button - when clicked system closes
+        quitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String quitButton;
+                quitButton = e.getActionCommand();
+
+                if(quitButton.equals("Quit"))
+                {
+                    System.exit(0);
+                }
             }
         });
     }

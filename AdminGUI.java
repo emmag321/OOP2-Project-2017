@@ -9,8 +9,8 @@ import java.io.*;
 
 public class AdminGUI extends JFrame implements ActionListener{
 
-    private JMenu fileMenu;
-    private JMenu editMenu;
+    private JMenu optionsMenu;
+    private JMenu adminMenu;
     private JButton backButton, loginButton;
 
     /*//array
@@ -46,15 +46,15 @@ public class AdminGUI extends JFrame implements ActionListener{
         cPane = getContentPane( );
         cPane.setLayout(new FlowLayout());
 
-        createFileMenu();
-        createEditMenu();
+        createOptionsMenu();
+        createAdminMenu();
 
         //menu bar for customer section
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
         menuBar.setBackground(Color.green);
-        menuBar.add(fileMenu);
-        menuBar.add(editMenu);
+        menuBar.add(optionsMenu);
+        menuBar.add(adminMenu);
 
         //creating new JButton here - says 'LOGIN'
         loginButton = new JButton("LOGIN");
@@ -99,36 +99,36 @@ public class AdminGUI extends JFrame implements ActionListener{
         });
     }
     //method
-    private void createFileMenu() {
+    private void createOptionsMenu() {
         JMenuItem    item;
 
-        fileMenu = new JMenu("Options");
+        optionsMenu = new JMenu("Options");
 
         item = new JMenuItem("Quit");
         item.addActionListener( this );
-        fileMenu.add( item );
+        optionsMenu.add( item );
     }
 
     //method
-    private void createEditMenu() {
+    private void createAdminMenu() {
         JMenuItem    item;
 
-        editMenu = new JMenu("Admin");
+       adminMenu = new JMenu("Admin");
 
         //add employee button
         item = new JMenuItem("Add New Employee");
         item.addActionListener( this );
-        editMenu.add( item );
+        adminMenu.add( item );
 
         //remove employee button
         item = new JMenuItem("Remove Employee");
         item.addActionListener( this );
-        editMenu.add( item );
+        adminMenu.add( item );
 
         //list employee button
         item = new JMenuItem("List Employees");
         item.addActionListener( this );
-        editMenu.add( item );
+        adminMenu.add( item );
     }
 
     @Override

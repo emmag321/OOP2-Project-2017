@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 
 public class MyCustomerGUI extends JFrame implements ActionListener {
 
-    private JMenu fileMenu;
-    private JMenu editMenu;
+    private JMenu optionsMenu;
+    private JMenu bookMenu;
     // private JLabel response;
     //private JTextField textfield;
 
@@ -28,15 +28,15 @@ public class MyCustomerGUI extends JFrame implements ActionListener {
         //layout type
         cPane.setLayout(new FlowLayout());
 
-        createFileMenu();
-        createEditMenu();
+        createOptionsMenu();
+        createBookMenu();
 
         //menu bar for customer section
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
         menuBar.setBackground(Color.green);
-        menuBar.add(fileMenu);
-        menuBar.add(editMenu);
+        menuBar.add(optionsMenu);
+        menuBar.add(bookMenu);
 
         //Jbutton here - to back
         JButton backButton = new JButton("Back");
@@ -51,32 +51,29 @@ public class MyCustomerGUI extends JFrame implements ActionListener {
     }
 
     //creates section of menu bar that says options
-    private void createFileMenu() {
+    private void createOptionsMenu() {
         JMenuItem    item;
 
-        fileMenu = new JMenu("Options");
+        optionsMenu = new JMenu("Options");
 
         //quit button
         item = new JMenuItem("Quit");
         item.addActionListener( this );
-        fileMenu.add( item );
+        optionsMenu.add( item );
     }
 
     //creates section of menu bar that says options
-    private void createEditMenu() {
+    private void createBookMenu() {
         JMenuItem    item;
 
-        editMenu = new JMenu("Books");
+        bookMenu = new JMenu("Books");
 
         item = new JMenuItem("Browse");
         item.addActionListener( this );
-        editMenu.add( item );
-
-        item = new JMenuItem("Add Books");
-        item.addActionListener( this );
-        editMenu.add( item );
+        bookMenu.add( item );
     }
 
+    //events
     public void actionPerformed(ActionEvent e) {
         String fileMenu;
         fileMenu = e.getActionCommand();
