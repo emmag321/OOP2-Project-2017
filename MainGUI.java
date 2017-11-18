@@ -1,9 +1,9 @@
 package OOP2_Project_MyShop;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+        import javax.swing.*;
+        import java.awt.*;
+        import java.awt.event.ActionEvent;
+        import java.awt.event.ActionListener;
 
 //this main GUI calls AdminGUI and MyCustomerGUI
 
@@ -39,6 +39,8 @@ public class MainGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 AdminGUI bookShop = new AdminGUI();
                 bookShop.setVisible(true);
+                //MainGUI.setVisable(false);
+
             }
         });
 
@@ -49,6 +51,5 @@ public class MainGUI extends JFrame {
                 customerShop.setVisible(true);
             }
         });
-
     }
 }

@@ -1,19 +1,18 @@
 package OOP2_Project_MyShop;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class MyCustomerGUI extends JFrame implements ActionListener {
 
     private JMenu fileMenu;
     private JMenu editMenu;
-   // private JLabel response;
-    //private JTextField textfield;
+    private JButton backButton;
 
-    public MyCustomerGUI(){
+    MyCustomerGUI(){
         //Jpane section declared here
         Container cPane;
 
@@ -39,7 +38,14 @@ public class MyCustomerGUI extends JFrame implements ActionListener {
         menuBar.add(editMenu);
 
         //Jbutton here - to back
-        JButton backButton = new JButton("Back");
+        backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                setVisible(false);
+            }
+        });
         cPane.add(backButton);
     }
 
@@ -66,10 +72,7 @@ public class MyCustomerGUI extends JFrame implements ActionListener {
     }
 
 
-    //Main method not needed for now
-    /*public static void main(String[] args) {
-
-    }*/
+    //the back button - bring u to MainGUI
 
 
     public void actionPerformed(ActionEvent e) {
@@ -79,3 +82,6 @@ public class MyCustomerGUI extends JFrame implements ActionListener {
         }
     }
 }
+
+
+
