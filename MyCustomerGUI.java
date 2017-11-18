@@ -41,6 +41,13 @@ public class MyCustomerGUI extends JFrame implements ActionListener {
         //Jbutton here - to back
         JButton backButton = new JButton("Back");
         cPane.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        });
     }
 
     //creates section of menu bar that says options
@@ -48,6 +55,11 @@ public class MyCustomerGUI extends JFrame implements ActionListener {
         JMenuItem    item;
 
         fileMenu = new JMenu("Options");
+
+        //quit button
+        item = new JMenuItem("Quit");
+        item.addActionListener( this );
+        fileMenu.add( item );
     }
 
     //creates section of menu bar that says options
@@ -66,9 +78,12 @@ public class MyCustomerGUI extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        String fileMenu;
+        fileMenu = e.getActionCommand();
 
+        if(fileMenu.equals("Quit"))
         {
-            JOptionPane.showMessageDialog(null,"Hello Customer");
+            System.exit(0);
         }
     }
 }
