@@ -9,9 +9,10 @@ import java.io.*;
 
 public class AdminGUI extends JFrame implements ActionListener{
 
-    private JMenu optionsMenu;
-    private JMenu adminMenu;
-    private JButton backButton, loginButton;
+    JMenu optionsMenu;
+    JMenu adminMenu;
+    JButton backButton, loginButton, saveCustButton, cancelButton, registerButton;
+    JTextArea display, custList;
 
     /*//array
     Book book1 = new Book();
@@ -20,6 +21,11 @@ public class AdminGUI extends JFrame implements ActionListener{
     //need this it brings threw customer!!!!!
     Customer cust1 = new Customer();
     ArrayList<Customer> customers;
+
+    //customer
+     String email, firstName, lastName, address, accNum;
+     int password;
+     float phoneNum;
 
 
     /*//book
@@ -48,6 +54,7 @@ public class AdminGUI extends JFrame implements ActionListener{
 
         createOptionsMenu();
         createAdminMenu();
+        //createCustomerMenu();
 
         //menu bar for customer section
         JMenuBar menuBar = new JMenuBar();
@@ -59,6 +66,12 @@ public class AdminGUI extends JFrame implements ActionListener{
         //creating new JButton here - says 'LOGIN'
         loginButton = new JButton("LOGIN");
         cPane.add(loginButton);
+
+        //register
+        registerButton = new JButton("Register");
+        registerButton.addActionListener(this);
+        cPane.add(registerButton);
+
         //the login button
         loginButton.addActionListener(new ActionListener() {
             @Override
@@ -97,6 +110,10 @@ public class AdminGUI extends JFrame implements ActionListener{
                 setVisible(false);
             }
         });
+
+        //display added customers
+        display = new JTextArea();
+        cPane.add(display);
     }
     //method
     private void createOptionsMenu() {
@@ -133,13 +150,89 @@ public class AdminGUI extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String fileMenu;
-        fileMenu = e.getActionCommand();
-
-        if(fileMenu.equals("Quit"))
-        {
+        if (e.getActionCommand() .equals ("Quit")){
+            showMessage("Shutting down the system");
             System.exit(0);
         }
+
+        if(e.getSource() == registerButton)
+        {
+            addCust();
+
+            registerButton.setVisible(false);
+            loginButton.setVisible(false);
+            //buttonLabel.setVisible(false);
+        }
+    }
+
+    private void showMessage(String s) {
+        JOptionPane.showMessageDialog(null,s);
+    }
+
+    public void addCust()
+    {
+        int numCusts = Integer.parseInt(JOptionPane.showInputDialog(null,"How many customers would you like to add?"));
+
+        for(int i=0; i<numCusts; i++)
+        {
+            //first name
+            cust1.setFirstName(JOptionPane.showInputDialog(null,"Enter Name:"));
+            firstName = cust1.getFirstName();
+
+            //last name
+            cust1.setLastName(JOptionPane.showInputDialog(null,"Enter Last Name:"));
+            lastName = cust1.getLastName();
+
+            //address
+            cust1.setAddress(JOptionPane.showInputDialog(null,"Enter Address"));
+            address = cust1.getAddress();
+
+            //account number
+            cust1.setAccNum(JOptionPane.showInputDialog(null,"Enter Age"));
+            accNum = cust1.getAccNum();
+
+            //password
+            cust1.setPassword(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Gender")));
+            password = cust1.getPassword();
+
+            //phone number
+            cust1.setPhoneNum(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Account Number")));
+            phoneNum = cust1.getPhoneNum();
+
+            //email
+            cust1.setEmail(JOptionPane.showInputDialog(null,"Enter Email"));
+            email = cust1.getEmail();
+
+            /*****************************************************
+             *    Title: Way to get number of digits in an int
+             *    Author: John Saunders
+             *    Site owner/sponsor: stackoverflow.com
+             *    Date: 20/08/2009
+             *    Code version: edited Aug 21 '09 at 08:01
+             *    Availability: http://stackoverflow.com/questions/1306727/way-to-get-number-of-digits-in-an-int (Accessed on 03/12/2016)
+             *    Modified:  Names of variables and used specific length to compare and validate
+             *****************************************************/
+
+            if(String.valueOf(phoneNum).length()!=4)//referenced code
+            {
+                JOptionPane.showMessageDialog(null,"Error! Pin must be 4 digits only", "Error", JOptionPane.WARNING_MESSAGE);
+                cust1.setPassword(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Pin")));
+                password = cust1.getPassword();
+            }
+
+        }
+        for(int i=0; i<numCusts; i++)
+        {
+            display.append("Customer Info: " + cust1.toString());
+
+            customers = new ArrayList<Customer>();
+            customers.add(cust1);
+        }
+
+        display.setVisible(true);
+        Container cPane = getContentPane();
+        cPane.add(saveCustButton);
+        cPane.add(cancelButton);
     }
 }
 

@@ -39,8 +39,8 @@ public class MainGUI extends JFrame {
         adminButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AdminGUI bookShop = new AdminGUI();
-                bookShop.setVisible(true);
+                loginGUI login = new loginGUI();
+                login.setVisible(true);
                 //MainGUI.setVisable(false);
 
             }
@@ -59,13 +59,25 @@ public class MainGUI extends JFrame {
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String quitButton;
-                quitButton = e.getActionCommand();
-
-                if(quitButton.equals("Quit"))
                 {
-                    System.exit(0);
+                    String quitButton;
+                    quitButton = e.getActionCommand();
+
+                    if (quitButton.equals("Quit")) {
+                        System.exit(0);
+                    }
                 }
+                /*
+                //buttons
+                 if(e.getSource() == registerButton)
+                {
+                    addCust();
+
+                    registerButton.setVisible(false);
+                    loginButton.setVisible(false);
+                    buttonLabel.setVisible(false);
+                }*/
+
             }
         });
     }
