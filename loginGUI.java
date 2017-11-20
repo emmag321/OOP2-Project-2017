@@ -8,13 +8,7 @@ import java.util.ArrayList;
 
 public class loginGUI extends JFrame {
 
-    public static void main(String[] args) {
-        loginGUI gui = new loginGUI();
-        gui.setVisible(true);
-    }
-
-
-    JButton loginButton;
+    JButton loginAdminButton, backButton;
 
     //need this it brings threw customer!!!!!
     Customer cust1 = new Customer();
@@ -42,11 +36,21 @@ public class loginGUI extends JFrame {
         cPane.setLayout(new FlowLayout());
 
         //creating new JButton here - says 'LOGIN'
-        loginButton = new JButton("LOGIN");
-        cPane.add(loginButton);
+        loginAdminButton = new JButton("LOGIN");
+        cPane.add(loginAdminButton);
+
+        backButton = new JButton("BACk");
+        cPane.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        });
 
         //the login button
-        loginButton.addActionListener(new ActionListener() {
+        loginAdminButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
