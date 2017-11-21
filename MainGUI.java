@@ -55,30 +55,18 @@ public class MainGUI extends JFrame {
             }
         });
 
-        //quit button - when clicked system closes
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                {
-                    String quitButton;
-                    quitButton = e.getActionCommand();
+                int confirmMessage = JOptionPane.showConfirmDialog(null,"Are you sure you want to Quit?",
+                        "Closing", JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
-                    if (quitButton.equals("Quit")) {
-                        System.exit(0);
-                    }
+                if(confirmMessage == 0)
+                {
+                    System.exit(0);
                 }
-                /*
-                //buttons
-                 if(e.getSource() == registerButton)
-                {
-                    addCust();
-
-                    registerButton.setVisible(false);
-                    loginButton.setVisible(false);
-                    buttonLabel.setVisible(false);
-                }*/
-
             }
         });
+
     }
 }

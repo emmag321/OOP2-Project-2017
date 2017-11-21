@@ -8,6 +8,12 @@ import java.awt.event.ActionListener;
 
 public class MyCustomerGUI extends JFrame implements ActionListener {
 
+    public static void main(String[] args) {
+        MyCustomerGUI gui = new MyCustomerGUI();
+        gui.setVisible(true);
+    }
+
+
     private JMenu optionsMenu;
     private JMenu bookMenu;
     // private JLabel response;
@@ -75,12 +81,14 @@ public class MyCustomerGUI extends JFrame implements ActionListener {
 
     //events
     public void actionPerformed(ActionEvent e) {
-        String fileMenu;
-        fileMenu = e.getActionCommand();
-
-        if(fileMenu.equals("Quit"))
-        {
+        if (e.getActionCommand() .equals ("Quit")){
+            showMessage("Shutting down the system");
             System.exit(0);
         }
+
+    }
+
+    private void showMessage(String s) {
+        JOptionPane.showMessageDialog(null,s);
     }
 }

@@ -1,7 +1,16 @@
 //Emma_Griffin_OOP2_Project
 package OOP2_Project_MyShop;
 
-public class Book {
+import javax.swing.*;
+import java.awt.*;
+
+public class Book extends JFrame {
+
+
+    public static void main(String[] args) {
+        Book book = new Book();
+        book.setVisible(true);
+    }
 
     //attributes
     private String title;
@@ -60,5 +69,9 @@ public class Book {
                 "Price: " +price + "\n" +
                 "ISBN: " +isbn + "\n" ;
     }
+
+
+
+
 }
 

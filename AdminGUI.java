@@ -9,10 +9,15 @@ import java.io.*;
 
 public class AdminGUI extends JFrame implements ActionListener{
 
+    public static void main(String[] args) {
+        AdminGUI gui = new AdminGUI();
+        gui.setVisible(true);
+    }
+
     JMenu optionsMenu;
     JMenu adminMenu;
-    JButton backButton, loginButton, saveCustButton, cancelButton, registerButton;
-    JTextArea display, custList;
+    JButton backButton, loginButton, addCustButton, cancelButton, registerButton;
+    JTextArea display, customerList;
 
     /*//array
     Book book1 = new Book();
@@ -37,6 +42,20 @@ public class AdminGUI extends JFrame implements ActionListener{
     /*https://stackoverflow.com/questions/22506331/simple-dropdown-menu-in-java*/
 
     public AdminGUI() {
+
+        JPanel panel = new JPanel();
+        JPanel panel1 = new JPanel();
+
+        list.setForeground(Color.RED);
+        list.setBackground(Color.WHITE);
+        list.setSelectionForeground(Color.GREEN);
+        list.setSelectionBackground(Color.LIGHT_GRAY);
+        list.setFixedCellWidth(150);
+        list.setFixedCellHeight(50);
+        list.setFont(new Font("Serif",Font.BOLD,16));
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        panel.add(list);
+        add(panel,BorderLayout.WEST);
 
         Container cPane;
 
@@ -63,12 +82,18 @@ public class AdminGUI extends JFrame implements ActionListener{
         menuBar.add(optionsMenu);
         menuBar.add(adminMenu);
 
-
+        //display added customers
+        display = new JTextArea();
+        cPane.add(display);
 
         //register
         registerButton = new JButton("Register New Employee");
         registerButton.addActionListener(this);
         cPane.add(registerButton);
+
+        addCustButton = new JButton("Add Customer");
+        addCustButton.addActionListener(this);
+        cPane.add(addCustButton);
 
         backButton = new JButton("BACK");
         cPane.add(backButton);
@@ -80,10 +105,6 @@ public class AdminGUI extends JFrame implements ActionListener{
                 setVisible(false);
             }
         });
-
-        //display added customers
-        display = new JTextArea();
-        cPane.add(display);
     }
     //method
     private void createOptionsMenu() {
@@ -103,7 +124,7 @@ public class AdminGUI extends JFrame implements ActionListener{
        adminMenu = new JMenu("Admin");
 
         //add employee button
-        item = new JMenuItem("Add New Employee");
+        item = new JMenuItem("Register New Employee");
         item.addActionListener( this );
         adminMenu.add( item );
 
@@ -132,6 +153,46 @@ public class AdminGUI extends JFrame implements ActionListener{
             registerButton.setVisible(false);
             loginButton.setVisible(false);
         }
+
+        //customerMenu
+        else if(adminMenu.equals("Add New Employee"))
+        {
+            //calcList.setVisible(false);
+            display.setVisible(true);
+            customerList.setVisible(false);
+            addCustButton.setVisible(true);
+            cancelButton.setVisible(true);
+
+            addCust();
+        }
+
+        else if(adminMenu.equals("Remove Employee"))
+        {
+           // calcList.setVisible(false);
+            customerList.setVisible(true);
+
+            int cust = Integer.parseInt(JOptionPane.showInputDialog(null, "Which customer would "
+                    + "you like to remove?"));
+
+            customers.remove(cust);
+        }
+
+        else if(adminMenu.equals("List Customers"))
+        {
+            //calcList.setVisible(false);
+            addCustButton.setVisible(false);
+            cancelButton.setVisible(false);
+            //welcomeMsg.setVisible(false);
+            display.setVisible(false);
+
+            for(int x=0; x<customers.size(); x++)
+            {
+                customerList.append(customers.get(x).toString());
+            }
+
+            customerList.setVisible(true);
+        }
+
     }
 
     private void showMessage(String s) {
@@ -200,9 +261,13 @@ public class AdminGUI extends JFrame implements ActionListener{
 
         display.setVisible(true);
         Container cPane = getContentPane();
-        cPane.add(saveCustButton);
+        cPane.add(addCustButton);
         cPane.add(cancelButton);
     }
+
+    JList list = new JList(
+            new String[]{"Add Book","Delete Book","Display Details"}
+    );
 }
 
 
