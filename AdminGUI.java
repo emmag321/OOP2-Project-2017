@@ -43,19 +43,8 @@ public class AdminGUI extends JFrame implements ActionListener{
 
     public AdminGUI() {
 
-        JPanel panel = new JPanel();
-        JPanel panel1 = new JPanel();
-
-        list.setForeground(Color.RED);
-        list.setBackground(Color.WHITE);
-        list.setSelectionForeground(Color.GREEN);
-        list.setSelectionBackground(Color.LIGHT_GRAY);
-        list.setFixedCellWidth(150);
-        list.setFixedCellHeight(50);
-        list.setFont(new Font("Serif",Font.BOLD,16));
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        panel.add(list);
-        add(panel,BorderLayout.WEST);
+        DefaultListModel listCust = new DefaultListModel();
+        JList list = new JList(listCust);
 
         Container cPane;
 
@@ -91,12 +80,16 @@ public class AdminGUI extends JFrame implements ActionListener{
         registerButton.addActionListener(this);
         cPane.add(registerButton);
 
-        addCustButton = new JButton("Add Customer");
+        addCustButton = new JButton("Save Customer To System");
         addCustButton.addActionListener(this);
         cPane.add(addCustButton);
 
         backButton = new JButton("BACK");
         cPane.add(backButton);
+
+        //list of customers
+        customerList = new JTextArea("Customer List");
+        cPane.add(customerList);
 
         //the back button - bring u to MainGUI
         backButton.addActionListener(new ActionListener() {
@@ -185,6 +178,7 @@ public class AdminGUI extends JFrame implements ActionListener{
             //welcomeMsg.setVisible(false);
             display.setVisible(false);
 
+
             for(int x=0; x<customers.size(); x++)
             {
                 customerList.append(customers.get(x).toString());
@@ -222,7 +216,7 @@ public class AdminGUI extends JFrame implements ActionListener{
             accNum = cust1.getAccNum();
 
             //password
-            cust1.setPassword(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Gender")));
+            cust1.setPassword(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Password")));
             password = cust1.getPassword();
 
             //phone number
@@ -261,13 +255,9 @@ public class AdminGUI extends JFrame implements ActionListener{
 
         display.setVisible(true);
         Container cPane = getContentPane();
-        cPane.add(addCustButton);
-        cPane.add(cancelButton);
+        //cPane.add(addCustButton);
+       // cPane.add(cancelButton);
     }
-
-    JList list = new JList(
-            new String[]{"Add Book","Delete Book","Display Details"}
-    );
 }
 
 
