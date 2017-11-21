@@ -26,7 +26,7 @@ public class TestMyBookShop {
         book1.setPrice(7.99);
         book1.setIsbn("12345IE");
 
-        JOptionPane.showMessageDialog(null, book1.toString(), "Shop Test", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, cust1.toString(), "Shop Test", JOptionPane.PLAIN_MESSAGE);
     }
 
 }

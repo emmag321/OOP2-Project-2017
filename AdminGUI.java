@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.*;
 import java.io.*;
 
-public class AdminGUI extends JFrame implements ActionListener{
+public class AdminGUI extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         AdminGUI gui = new AdminGUI();
@@ -28,9 +28,9 @@ public class AdminGUI extends JFrame implements ActionListener{
     ArrayList<Customer> customers;
 
     //customer
-     String email, firstName, lastName, address, accNum;
-     int password;
-     float phoneNum;
+    String email, firstName, lastName, address, accNum;
+    int password;
+    float phoneNum;
 
 
     /*//book
@@ -49,15 +49,15 @@ public class AdminGUI extends JFrame implements ActionListener{
         Container cPane;
 
         //setting default values for GUI
-        setTitle     ("My Book Shop ADMIN SECTION");
-        setSize      (600,550);
-        setResizable (true);
-        setLocation  (500,100);
+        setTitle("My Book Shop ADMIN SECTION");
+        setSize(600, 550);
+        setResizable(true);
+        setLocation(500, 100);
 
         //this is what the GUI does when you press the 'x' button
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        cPane = getContentPane( );
+        cPane = getContentPane();
         cPane.setLayout(new FlowLayout());
 
         createOptionsMenu();
@@ -99,79 +99,74 @@ public class AdminGUI extends JFrame implements ActionListener{
             }
         });
     }
+
     //method
     private void createOptionsMenu() {
-        JMenuItem    item;
+        JMenuItem item;
 
         optionsMenu = new JMenu("Options");
 
         item = new JMenuItem("Quit");
-        item.addActionListener( this );
-        optionsMenu.add( item );
+        item.addActionListener(this);
+        optionsMenu.add(item);
     }
 
     //method
     private void createAdminMenu() {
-        JMenuItem    item;
+        JMenuItem item;
 
-       adminMenu = new JMenu("Admin");
+        adminMenu = new JMenu("Admin");
 
         //add employee button
         item = new JMenuItem("Register New Employee");
-        item.addActionListener( this );
-        adminMenu.add( item );
+        item.addActionListener(this);
+        adminMenu.add(item);
 
         //remove employee button
         item = new JMenuItem("Remove Employee");
-        item.addActionListener( this );
-        adminMenu.add( item );
+        item.addActionListener(this);
+        adminMenu.add(item);
 
         //list employee button
         item = new JMenuItem("List Employees");
-        item.addActionListener( this );
-        adminMenu.add( item );
+        item.addActionListener(this);
+        adminMenu.add(item);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand() .equals ("Quit")){
+        if (e.getActionCommand().equals("Quit")) {
             showMessage("Shutting down the system");
             System.exit(0);
         }
 
-        if(e.getSource() == registerButton)
-        {
+        if (e.getSource() == registerButton) {
             addCust();
 
             registerButton.setVisible(false);
-            loginButton.setVisible(false);
+            // loginButton.setVisible(false);
         }
 
         //customerMenu
-        else if(adminMenu.equals("Add New Employee"))
-        {
+        else if (adminMenu.equals("Add New Employee")) {
             //calcList.setVisible(false);
             display.setVisible(true);
             customerList.setVisible(false);
             addCustButton.setVisible(true);
             cancelButton.setVisible(true);
 
-            addCust();
-        }
 
-        else if(adminMenu.equals("Remove Employee"))
-        {
-           // calcList.setVisible(false);
+        } else if (e.getSource() == addCustButton) {
+
+        } else if (adminMenu.equals("Remove Employee")) {
+            // calcList.setVisible(false);
             customerList.setVisible(true);
 
             int cust = Integer.parseInt(JOptionPane.showInputDialog(null, "Which customer would "
                     + "you like to remove?"));
 
             customers.remove(cust);
-        }
-
-        else if(adminMenu.equals("List Customers"))
-        {
+        } else if (adminMenu.equals("List Customers")) {
             //calcList.setVisible(false);
             addCustButton.setVisible(false);
             cancelButton.setVisible(false);
@@ -179,8 +174,7 @@ public class AdminGUI extends JFrame implements ActionListener{
             display.setVisible(false);
 
 
-            for(int x=0; x<customers.size(); x++)
-            {
+            for (int x = 0; x < customers.size(); x++) {
                 customerList.append(customers.get(x).toString());
             }
 
@@ -190,41 +184,40 @@ public class AdminGUI extends JFrame implements ActionListener{
     }
 
     private void showMessage(String s) {
-        JOptionPane.showMessageDialog(null,s);
+        JOptionPane.showMessageDialog(null, s);
     }
 
-    public void addCust()
-    {
-        int numCusts = Integer.parseInt(JOptionPane.showInputDialog(null,"How many customers would you like to add?"));
+    public void addCust() {
+        //int numCusts = Integer.parseInt(JOptionPane.showInputDialog(null,"How many customers would you like to add?"));
 
-        for(int i=0; i<numCusts; i++)
+        //for(int i=0; i<numCusts; i++)
         {
             //first name
-            cust1.setFirstName(JOptionPane.showInputDialog(null,"Enter Name:"));
+            cust1.setFirstName(JOptionPane.showInputDialog(null, "Enter Name:"));
             firstName = cust1.getFirstName();
 
             //last name
-            cust1.setLastName(JOptionPane.showInputDialog(null,"Enter Last Name:"));
+            cust1.setLastName(JOptionPane.showInputDialog(null, "Enter Last Name:"));
             lastName = cust1.getLastName();
 
             //address
-            cust1.setAddress(JOptionPane.showInputDialog(null,"Enter Address"));
+            cust1.setAddress(JOptionPane.showInputDialog(null, "Enter Address"));
             address = cust1.getAddress();
 
             //account number
-            cust1.setAccNum(JOptionPane.showInputDialog(null,"Enter Age"));
+            cust1.setAccNum(JOptionPane.showInputDialog(null, "Enter Age"));
             accNum = cust1.getAccNum();
 
             //password
-            cust1.setPassword(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Password")));
+            cust1.setPassword(Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Password")));
             password = cust1.getPassword();
 
             //phone number
-            cust1.setPhoneNum(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Account Number")));
+            cust1.setPhoneNum(Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Account Number")));
             phoneNum = cust1.getPhoneNum();
 
             //email
-            cust1.setEmail(JOptionPane.showInputDialog(null,"Enter Email"));
+            cust1.setEmail(JOptionPane.showInputDialog(null, "Enter Email"));
             email = cust1.getEmail();
 
             /*****************************************************
@@ -237,26 +230,27 @@ public class AdminGUI extends JFrame implements ActionListener{
              *    Modified:  Names of variables and used specific length to compare and validate
              *****************************************************/
 
-            if(String.valueOf(phoneNum).length()!=4)//referenced code
+            if (String.valueOf(phoneNum).length() != 10)//referenced code
             {
-                JOptionPane.showMessageDialog(null,"Error! Pin must be 4 digits only", "Error", JOptionPane.WARNING_MESSAGE);
-                cust1.setPassword(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Pin")));
+                JOptionPane.showMessageDialog(null, "Error! Phone NUmber must be 10 digits long", "Error", JOptionPane.WARNING_MESSAGE);
+                cust1.setPassword(Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Password Correwctly")));
                 password = cust1.getPassword();
             }
 
-        }
-        for(int i=0; i<numCusts; i++)
-        {
+            //}
+            //for(int i=0; i<numCusts; i++)
+            //{
             display.append("Customer Info: " + cust1.toString());
 
             customers = new ArrayList<Customer>();
             customers.add(cust1);
-        }
+            //}
 
-        display.setVisible(true);
-        Container cPane = getContentPane();
-        //cPane.add(addCustButton);
-       // cPane.add(cancelButton);
+            display.setVisible(true);
+            Container cPane = getContentPane();
+            //cPane.add(addCustButton);
+            // cPane.add(cancelButton);
+        }
     }
 }
 

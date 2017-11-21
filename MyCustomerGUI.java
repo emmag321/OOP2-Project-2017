@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 
 public class MyCustomerGUI extends JFrame implements ActionListener {
 
+    DefaultListModel dm = new DefaultListModel();
+
     public static void main(String[] args) {
         MyCustomerGUI gui = new MyCustomerGUI();
         gui.setVisible(true);
@@ -20,6 +22,7 @@ public class MyCustomerGUI extends JFrame implements ActionListener {
     //private JTextField textfield;
 
     MyCustomerGUI(){
+
         //Jpane section declared here
         Container cPane;
 
