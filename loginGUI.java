@@ -77,7 +77,7 @@ public class loginGUI extends JFrame {
 
                     else
                     {
-                        JOptionPane.showMessageDialog(null,"Error! Your email or pin was incorrect","Warning!",
+                        JOptionPane.showMessageDialog(null,"Error! Your email or pin was incorrect \n HINT Email: emmag321@gmail.com \nPassword: 150514","Warning!",
                                 JOptionPane.ERROR_MESSAGE);
                     }
 

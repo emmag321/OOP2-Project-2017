@@ -120,7 +120,16 @@ public class AddBookGUI extends JFrame implements ActionListener{
     // MINOR CHANGES
     public void addBook(){
       Book temp = new Book();
+      //title
       temp.setTitle(JOptionPane.showInputDialog("What is the title of this Book??"));
+      //author
+      temp.setAuthor(JOptionPane.showInputDialog("What is the author of this Book??"));
+      //number of pages
+      temp.setNumPages(Integer.parseInt(JOptionPane.showInputDialog("How many pages in this book??")));
+      //price
+      temp.setPrice(Integer.parseInt(JOptionPane.showInputDialog("What is the price??")));
+      //ISBN
+      temp.setIsbn(JOptionPane.showInputDialog("What is the ISBN of this Book??"));
       books.add(temp); // CHANGED
     }
 
