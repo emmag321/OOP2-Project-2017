@@ -4,41 +4,27 @@ package OOP2_Project_MyShop;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.io.*;
 import java.util.*;
 
 public class AdminGUI extends JFrame implements ActionListener {
-
-    public static void main(String[] args) {
-        AdminGUI gui = new AdminGUI();
-        gui.setVisible(true);
-    }
 
     JMenu optionsMenu;
     JMenu adminMenu;
     JButton backButton, loginButton, addCustButton, cancelButton, registerButton, bookButton;
     JTextArea display, customerList;
 
-    /*//array
-    Book book1 = new Book();
-    ArrayList<Book> books;*/
+    ArrayList<Person> customers;
 
-    //need this it brings threw customer!!!!!
-    Customer cust1 = new Customer();
-    ArrayList<Customer> customers;
+    public static void main(String[] args) {
+        AdminGUI gui = new AdminGUI();
+        gui.setVisible(true);
+    }
 
     //customer
     String email, firstName, lastName, address, accNum;
     int password;
     float phoneNum;
-
-
-    /*//book
-    String title, author,isbn;
-    int numPages;
-    double price;*/
-
-
-    /*https://stackoverflow.com/questions/22506331/simple-dropdown-menu-in-java*/
 
     public AdminGUI() {
 
@@ -74,25 +60,11 @@ public class AdminGUI extends JFrame implements ActionListener {
         display = new JTextArea();
         cPane.add(display);
 
-        //register
-        registerButton = new JButton("Register New Employee");
-        registerButton.addActionListener(this);
-        cPane.add(registerButton);
-
         bookButton = new JButton("Book");
         cPane.add(bookButton);
 
-
-        addCustButton = new JButton("Save Customer To System");
-        addCustButton.addActionListener(this);
-        cPane.add(addCustButton);
-
         backButton = new JButton("BACK");
         cPane.add(backButton);
-
-        //list of customers
-        customerList = new JTextArea("Customer List");
-        cPane.add(customerList);
 
         //the back button - bring u to MainGUI
         backButton.addActionListener(new ActionListener() {
@@ -112,6 +84,69 @@ public class AdminGUI extends JFrame implements ActionListener {
         });
     }
 
+    public void newSystem() {
+        customers = new ArrayList<Person>();
+    }
+    public void save() throws IOException {
+        ObjectOutputStream os;
+        os = new ObjectOutputStream(new FileOutputStream("users.dat"));
+        os.writeObject(customers);
+        os.close();
+    }
+    public void open() {
+        try {
+            ObjectInputStream is;
+            is = new ObjectInputStream(new FileInputStream("users.dat"));
+            customers = (ArrayList<Person>) is.readObject();
+            is.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "open didn't work");
+            e.printStackTrace();
+        }
+
+    }//here
+
+    public void addCust(){
+        String firstName = JOptionPane.showInputDialog("Enter name: ");
+        //int age = Integer.parseInt(JOptionPane.showInputDialog("Enter Users age: "));
+        //String gender = JOptionPane.showInputDialog("Enter Users Gender: ");
+        //char g = gender.charAt(0);
+        //String username = JOptionPane.showInputDialog("Enter Username for Account Holder: ");
+        //String password = JOptionPane.showInputDialog("Enter Password for Account Holder: ");
+        //double amount = Double.parseDouble(JOptionPane.showInputDialog("Balance: "));
+        Person user = new Person(firstName,lastName,address,phoneNum);
+        customers.add(user);
+
+        JOptionPane.showMessageDialog(null,lastName + "s account has successfully created");
+    }
+
+    public void display(){
+        JTextArea area = new JTextArea();
+        int numCustomers = customers.size();
+        if (numCustomers>0) {
+            area.setText("Account Holders: \n\n");
+            for (int i = 0; i<numCustomers; i++)
+                area.append("User no: " + i + " " + customers.get(i).toString()+"\n");
+            showMessage(area);
+        }
+        else
+            showMessage("No Users in the system");
+    }
+
+    public void display2(){
+        int numCustomers = customers.size();
+        if (numCustomers <1)
+            showMessage("No users in the system");
+        else {
+            JTextArea area = new JTextArea();
+            Iterator <Person> iterator = customers.iterator( );
+            while ( iterator.hasNext( ) )
+                area.append(iterator.next( ) + "\n");
+            showMessage(area);
+        }
+    }
+
+
     //method
     private void createOptionsMenu() {
         JMenuItem item;
@@ -130,19 +165,15 @@ public class AdminGUI extends JFrame implements ActionListener {
         adminMenu = new JMenu("Admin");
 
         //add employee button
-        item = new JMenuItem("Register New Employee");
+        item = new JMenuItem("Add Employee");
         item.addActionListener(this);
         adminMenu.add(item);
 
-        //remove employee button
-        item = new JMenuItem("Remove Employee");
+        //lists employee button
+        item = new JMenuItem("Display");
         item.addActionListener(this);
         adminMenu.add(item);
 
-        //list employee button
-        item = new JMenuItem("List Employees");
-        item.addActionListener(this);
-        adminMenu.add(item);
     }
 
     @Override
@@ -151,118 +182,39 @@ public class AdminGUI extends JFrame implements ActionListener {
             showMessage("Shutting down the system");
             System.exit(0);
         }
-
-        if (e.getSource() == registerButton) {
+        else if (e.getActionCommand() .equals ("Add")){
             addCust();
-
-            registerButton.setVisible(false);
-            // loginButton.setVisible(false);
         }
-
-        //customerMenu
-        else if (adminMenu.equals("Add New Employee")) {
-            //calcList.setVisible(false);
-            display.setVisible(true);
-            customerList.setVisible(false);
-            addCustButton.setVisible(true);
-            cancelButton.setVisible(true);
-
-
-        } else if (e.getSource() == addCustButton) {
-
-        } else if (adminMenu.equals("Remove Employee")) {
-            // calcList.setVisible(false);
-            customerList.setVisible(true);
-
-            int cust = Integer.parseInt(JOptionPane.showInputDialog(null, "Which customer would "
-                    + "you like to remove?"));
-
-            customers.remove(cust);
-        } else if (adminMenu.equals("List Customers")) {
-            //calcList.setVisible(false);
-            addCustButton.setVisible(false);
-            cancelButton.setVisible(false);
-            //welcomeMsg.setVisible(false);
-            display.setVisible(false);
-
-
-            for (int x = 0; x < customers.size(); x++) {
-                customerList.append(customers.get(x).toString());
+        else if (e.getActionCommand() .equals ("Display")){
+            display();
+        }
+        else if (e.getActionCommand() .equals ("New File")){
+            newSystem();
+        }
+        else if (e.getActionCommand() .equals ("Save")){
+            try{
+                save();
+                showMessage("Data saved successfully");
             }
-
-            customerList.setVisible(true);
+            catch (IOException f){
+                showMessage("Not able to save the file:\n"+
+                        "Check the console printout to see why ");
+                f.printStackTrace();
+            }
         }
 
+        else if (e.getActionCommand() .equals ("Open")){
+            open();
+            display();
+        }
+        else
+            showMessage("Did not work");
     }
 
-    private void showMessage(String s) {
-        JOptionPane.showMessageDialog(null, s);
-    }
+    public void showMessage (String s){ JOptionPane.showMessageDialog(null,s); }
 
-    public void addCust() {
-        //int numCusts = Integer.parseInt(JOptionPane.showInputDialog(null,"How many customers would you like to add?"));
-
-        //for(int i=0; i<numCusts; i++)
-        {
-            //first name
-            cust1.setFirstName(JOptionPane.showInputDialog(null, "Enter Name:"));
-            firstName = cust1.getFirstName();
-
-            //last name
-            cust1.setLastName(JOptionPane.showInputDialog(null, "Enter Last Name:"));
-            lastName = cust1.getLastName();
-
-            //address
-            cust1.setAddress(JOptionPane.showInputDialog(null, "Enter Address"));
-            address = cust1.getAddress();
-
-            //account number
-            cust1.setAccNum(JOptionPane.showInputDialog(null, "Enter Age"));
-            accNum = cust1.getAccNum();
-
-            //password
-            cust1.setPassword(Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Password")));
-            password = cust1.getPassword();
-
-            //phone number
-            cust1.setPhoneNum(Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Account Number")));
-            phoneNum = cust1.getPhoneNum();
-
-            //email
-            cust1.setEmail(JOptionPane.showInputDialog(null, "Enter Email"));
-            email = cust1.getEmail();
-
-            /*****************************************************
-             *    Title: Way to get number of digits in an int
-             *    Author: John Saunders
-             *    Site owner/sponsor: stackoverflow.com
-             *    Date: 20/08/2009
-             *    Code version: edited Aug 21 '09 at 08:01
-             *    Availability: http://stackoverflow.com/questions/1306727/way-to-get-number-of-digits-in-an-int (Accessed on 03/12/2016)
-             *    Modified:  Names of variables and used specific length to compare and validate
-             *****************************************************/
-
-            if (String.valueOf(phoneNum).length() != 10)//referenced code
-            {
-                JOptionPane.showMessageDialog(null, "Error! Phone NUmber must be 10 digits long", "Error", JOptionPane.WARNING_MESSAGE);
-                cust1.setPassword(Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Password Correwctly")));
-                password = cust1.getPassword();
-            }
-
-            //}
-            //for(int i=0; i<numCusts; i++)
-            //{
-            display.append("Customer Info: " + cust1.toString());
-
-            customers = new ArrayList<Customer>();
-            customers.add(cust1);
-            //}
-
-            display.setVisible(true);
-            Container cPane = getContentPane();
-            //cPane.add(addCustButton);
-            // cPane.add(cancelButton);
-        }
+    public void showMessage (JTextArea s){
+        JOptionPane.showMessageDialog(null,s);
     }
 }
 
