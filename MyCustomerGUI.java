@@ -39,7 +39,7 @@ public class MyCustomerGUI extends JFrame implements ActionListener{
         setDefaultCloseOperation( EXIT_ON_CLOSE );
 
         createFileMenu();
-        createBikeMenu();
+        createBookMenu();
         //and add them to the menubar
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -111,8 +111,8 @@ public class MyCustomerGUI extends JFrame implements ActionListener{
 
     // Version of display which uses an iterator
     public void display2(){
-        int numBikes = books.size();
-        if (numBikes <1)
+        int numBooks = books.size();
+        if (numBooks <1)
             showMessage("No book in the system");
         else {
             JTextArea area = new JTextArea();
@@ -134,7 +134,7 @@ public class MyCustomerGUI extends JFrame implements ActionListener{
         else if (e.getActionCommand() .equals ("Add Book")){
             addBook(); // branch to a separate method
         }
-        else if (e.getActionCommand() .equals ("Display Book")){
+        else if (e.getActionCommand() .equals ("Display")){
             display();
         }
         else if (e.getActionCommand() .equals ("New File")){
@@ -181,7 +181,7 @@ public class MyCustomerGUI extends JFrame implements ActionListener{
         fileMenu.add(item);
     }
 
-    private void createBikeMenu(){
+    private void createBookMenu(){
         // create the menu
         bookMenu = new JMenu("Books");
         // declare a menu item (re-usable)
@@ -191,7 +191,7 @@ public class MyCustomerGUI extends JFrame implements ActionListener{
         item.addActionListener(this);
         bookMenu.add(item);
 
-        item = new JMenuItem("Display Books");
+        item = new JMenuItem("Display");
         item.addActionListener(this);
         bookMenu.add(item);
     }

@@ -84,13 +84,18 @@ public class Book implements Serializable {
     //To String method here
 
     @Override
-    public String toString() {
+    /*public String toString() {
         return
                 "Title: " + title + "\n" +
                 "Author: " + author + "\n" +
                 "Number of Pages: " +numPages + "\n" +
                 "Price: " +price + "\n" +
                 "ISBN: " +isbn + "\n" ;
+    }*/
+
+    public String toString() {
+        return
+                "Title: " + title + "\n" ;
     }
 
 
