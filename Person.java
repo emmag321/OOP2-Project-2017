@@ -1,7 +1,9 @@
 //Emma_Griffin_OOP2_Project
 package OOP2_Project_MyShop;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
 
     //attributes
     private String firstName;

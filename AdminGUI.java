@@ -89,14 +89,14 @@ public class AdminGUI extends JFrame implements ActionListener {
     }
     public void save() throws IOException {
         ObjectOutputStream os;
-        os = new ObjectOutputStream(new FileOutputStream("users.dat"));
+        os = new ObjectOutputStream(new FileOutputStream("customers.dat"));
         os.writeObject(customers);
         os.close();
     }
     public void open() {
         try {
             ObjectInputStream is;
-            is = new ObjectInputStream(new FileInputStream("users.dat"));
+            is = new ObjectInputStream(new FileInputStream("customers.dat"));
             customers = (ArrayList<Person>) is.readObject();
             is.close();
         } catch (Exception e) {
@@ -107,17 +107,14 @@ public class AdminGUI extends JFrame implements ActionListener {
     }//here
 
     public void addCust(){
-        String firstName = JOptionPane.showInputDialog("Enter name: ");
-        //int age = Integer.parseInt(JOptionPane.showInputDialog("Enter Users age: "));
-        //String gender = JOptionPane.showInputDialog("Enter Users Gender: ");
-        //char g = gender.charAt(0);
-        //String username = JOptionPane.showInputDialog("Enter Username for Account Holder: ");
-        //String password = JOptionPane.showInputDialog("Enter Password for Account Holder: ");
-        //double amount = Double.parseDouble(JOptionPane.showInputDialog("Balance: "));
-        Person user = new Person(firstName,lastName,address,phoneNum);
-        customers.add(user);
+        String firstName = JOptionPane.showInputDialog("Enter first name: ");
+        String lastName = JOptionPane.showInputDialog("Enter surname: ");
+        String address = JOptionPane.showInputDialog("Enter address: ");
+        float phoneNum = (Integer.parseInt(JOptionPane.showInputDialog("Enter address: ")));
+        Person customer = new Person(firstName,lastName,address,phoneNum);
+        customers.add(customer);
 
-        JOptionPane.showMessageDialog(null,lastName + "s account has successfully created");
+        JOptionPane.showMessageDialog(null,firstName + "s account has successfully created");
     }
 
     public void display(){
@@ -182,16 +179,16 @@ public class AdminGUI extends JFrame implements ActionListener {
             showMessage("Shutting down the system");
             System.exit(0);
         }
-        else if (e.getActionCommand() .equals ("Add")){
+        else if (e.getActionCommand().equals ("Add Employee")){
             addCust();
         }
-        else if (e.getActionCommand() .equals ("Display")){
+        else if (e.getActionCommand().equals ("Display")){
             display();
         }
-        else if (e.getActionCommand() .equals ("New File")){
+        else if (e.getActionCommand().equals ("New File")){
             newSystem();
         }
-        else if (e.getActionCommand() .equals ("Save")){
+        else if (e.getActionCommand().equals ("Save")){
             try{
                 save();
                 showMessage("Data saved successfully");
