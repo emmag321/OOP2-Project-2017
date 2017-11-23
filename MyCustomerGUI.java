@@ -1,97 +1,206 @@
 package OOP2_Project_MyShop;
 
+//import books.Book;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*; // ADDED
+/** manages a collection of bikes, holding the info in a LinkedList */
 
+//use of annotation to supress compiler warning
 
-public class MyCustomerGUI extends JFrame implements ActionListener {
+@SuppressWarnings({"unchecked", "deprecation"})
 
-    DefaultListModel dm = new DefaultListModel();
+public class MyCustomerGUI extends JFrame implements ActionListener{
 
-    public static void main(String[] args) {
-        MyCustomerGUI gui = new MyCustomerGUI();
-        gui.setVisible(true);
+    JMenu fileMenu, bookMenu;
+    ArrayList <Book> books; // set of bikes : CHANGED
+    // int count; NOT NEEDED
+
+    // driver
+    public static void main( String[] args ) {
+        MyCustomerGUI frame = new MyCustomerGUI();
+        frame.setVisible(true);
     }
 
+    // constructor
+    public MyCustomerGUI( ) {
+        newSystem();
+        //set the frame default properties
+        setTitle     ( "Book Shop System" );
+        setSize      ( 400,200 );
+        setLocation  ( 100,100 );
+        Container pane = getContentPane();
+        //  pane.setBackground(Color.blue);
+        pane.setBackground(new Color(240,210,240));
+        //register 'Exit upon closing' as a default close operation
+        setDefaultCloseOperation( EXIT_ON_CLOSE );
 
-    private JMenu optionsMenu;
-    private JMenu bookMenu;
-    // private JLabel response;
-    //private JTextField textfield;
-
-    MyCustomerGUI(){
-
-        //Jpane section declared here
-        Container cPane;
-
-        //setting defaults for the GUI
-        setTitle     ("Customer");
-        setSize      (600,550);
-        setResizable (true);
-        setLocation  (500,100);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        cPane = getContentPane( );
-        //layout type
-        cPane.setLayout(new FlowLayout());
-
-        createOptionsMenu();
-        createBookMenu();
-
-        //menu bar for customer section
+        createFileMenu();
+        createBikeMenu();
+        //and add them to the menubar
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
-        menuBar.setBackground(Color.green);
-        menuBar.add(optionsMenu);
+        menuBar.add(fileMenu);
         menuBar.add(bookMenu);
-
-        //Jbutton here - to back
-        JButton backButton = new JButton("Back");
-        cPane.add(backButton);
-
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-            }
-        });
     }
 
-    //creates section of menu bar that says options
-    private void createOptionsMenu() {
-        JMenuItem    item;
-
-        optionsMenu = new JMenu("Options");
-
-        //quit button
-        item = new JMenuItem("Quit");
-        item.addActionListener( this );
-        optionsMenu.add( item );
+    // CHANGED
+    public void newSystem() {
+        books = new ArrayList<Book>();
     }
 
-    //creates section of menu bar that says options
-    private void createBookMenu() {
-        JMenuItem    item;
-
-        bookMenu = new JMenu("Books");
-
-        item = new JMenuItem("Browse");
-        item.addActionListener( this );
-        bookMenu.add( item );
+    /** writes the array of books to the file "books.dat"
+     */   // UNCHANGED
+    public void save() throws IOException {
+        ObjectOutputStream os;
+        os = new ObjectOutputStream(new FileOutputStream ("books.dat"));
+        os.writeObject(books);
+        os.close();
     }
 
-    //events
-    public void actionPerformed(ActionEvent e) {
+    /** loads an array of books from the file "books.dat"
+     */  // CHANGED
+    public void open() {
+        try{
+            ObjectInputStream is;
+            is = new ObjectInputStream(new FileInputStream ("books.dat"));
+            books  = (ArrayList<Book>) is.readObject(); // CHANGED
+            is.close();
+        }
+
+        catch(FileNotFoundException e){
+            JOptionPane.showMessageDialog(null,"FileNotFound: didn't work");
+            e.printStackTrace();
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null,"IOException: didn't work");
+            e.printStackTrace();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"open didn't work");
+            e.printStackTrace();
+            // counting valid bikes not needed
+
+        }
+    } // end open()
+
+    // MINOR CHANGES
+    public void addBook(){
+      Book temp = new Book();
+      temp.setTitle(JOptionPane.showInputDialog("What is the title of this Book??"));
+      books.add(temp); // CHANGED
+    }
+
+    // MINOR CHANGES: NOTE USE OF GET
+    public void display(){
+        JTextArea area = new JTextArea();
+        int numBooks = books.size();
+        if (numBooks>0) {
+            area.setText("Book List: needs better output formatting\n\n");
+            for (int i = 0; i<numBooks; i++)
+                area.append("Book no: " + i + " " + books.get(i).toString()+"\n");
+            showMessage(area);
+        }
+        else
+            showMessage("No books in the system");
+    } // end display
+
+
+    // Version of display which uses an iterator
+    public void display2(){
+        int numBikes = books.size();
+        if (numBikes <1)
+            showMessage("No book in the system");
+        else {
+            JTextArea area = new JTextArea();
+            Iterator <Book> iterator = books.iterator( );
+            while ( iterator.hasNext( ) )
+                // uses polymorphic 'toString()' to avoid the type cast
+                // typecast still needed if using the 'get' methods
+                area.append(iterator.next( ) + "\n");
+            showMessage(area);
+        }
+    } // end display2
+
+    // NOT CHANGED
+    public void actionPerformed (ActionEvent e) {
         if (e.getActionCommand() .equals ("Quit")){
             showMessage("Shutting down the system");
             System.exit(0);
         }
+        else if (e.getActionCommand() .equals ("Add Book")){
+            addBook(); // branch to a separate method
+        }
+        else if (e.getActionCommand() .equals ("Display Book")){
+            display();
+        }
+        else if (e.getActionCommand() .equals ("New File")){
+            newSystem();
+        }
+        else if (e.getActionCommand() .equals ("Save")){
+            try{
+                save();
+                showMessage("Data saved successfully");
+            } // try
+            catch (IOException f){
+                showMessage("Not able to save the file:\n"+
+                        "Check the console printout for clues to why ");
+                f.printStackTrace();
+            }// catch
+        }// else if
 
+        else if (e.getActionCommand() .equals ("Open")){
+            open();
+            display();
+        }
+        else
+            showMessage("I have no idea what you clicked");
+    } // actionPerformed
+
+    private void createFileMenu(){
+        // create the menu
+        fileMenu = new JMenu("File");
+        // declare a menu item (re-usable)
+        JMenuItem item;
+        item = new JMenuItem("Save");
+        item.addActionListener(this);
+        fileMenu.add(item);
+        item = new JMenuItem("Open");
+        item.addActionListener(this);
+        fileMenu.add(item);
+        item = new JMenuItem("New File");
+        item.addActionListener(this);
+        fileMenu.add(item);
+        // create the 'quit' option
+        fileMenu.addSeparator();
+        item = new JMenuItem("Quit");
+        item.addActionListener(this);
+        fileMenu.add(item);
     }
 
-    private void showMessage(String s) {
+    private void createBikeMenu(){
+        // create the menu
+        bookMenu = new JMenu("Books");
+        // declare a menu item (re-usable)
+        JMenuItem item;
+
+        item = new JMenuItem("Add Book");
+        item.addActionListener(this);
+        bookMenu.add(item);
+
+        item = new JMenuItem("Display Books");
+        item.addActionListener(this);
+        bookMenu.add(item);
+    }
+    /** utility methods to make the code simpler */
+    public void showMessage (String s){
+        JOptionPane.showMessageDialog(null,s);
+    }
+
+    public void showMessage (JTextArea s){
         JOptionPane.showMessageDialog(null,s);
     }
 }
