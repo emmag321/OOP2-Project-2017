@@ -5,9 +5,9 @@ package OOP2_Project_MyShop;
         import java.awt.event.ActionEvent;
         import java.awt.event.ActionListener;
 
-//this main GUI calls AdminGUI and MyCustomerGUI
-
 public class MainGUI extends JFrame {
+
+    JLabel logoLabel;
 
     //main method
     public static void main(String[] args) {
@@ -22,17 +22,18 @@ public class MainGUI extends JFrame {
         setLocation  (500,100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        //creates buttons
-        JButton adminButton = new JButton("Admin");
-        JButton customerButton = new JButton("Customer");
-        JButton quitButton = new JButton("Quit");
-
         Container cpane = getContentPane();
-
         cpane.setLayout(new FlowLayout());
 
+        //image
+        logoLabel = new JLabel(new ImageIcon("book.png"));//https://www.google.es/search?biw=1366&bih=656&tbm=isch&sa=1&ei=qsgWWouPMsTAgAbz5Z2IBg&q=book+shop+logo&oq=book+shop+logo&gs_l=psy-ab.3..0l2.24526.24763.0.25467.3.3.0.0.0.0.111.323.0j3.3.0....0...1c.1.64.psy-ab..0.2.217....0.lgX832TuvBY#imgrc=BrF0Ryz5D9pQ1M:
+        cpane.add(logoLabel);
+
+        //creates buttons
+        JButton adminButton = new JButton("Admin");
+        JButton quitButton = new JButton("Quit");
+
         cpane.add(adminButton);
-        cpane.add(customerButton);
         cpane.add(quitButton);
 
         //makes button do something here
@@ -46,15 +47,16 @@ public class MainGUI extends JFrame {
             }
         });
 
-        //makes cutomer GUI come up when button is clicked
+       /* //makes cutomer GUI come up when button is clicked
         customerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MyCustomerGUI customerShop = new MyCustomerGUI();
+                AddBookGUI customerShop = new AddBookGUI();
                 customerShop.setVisible(true);
             }
-        });
+        });*/
 
+       //closes system when quit is clicked.. shows warning message before hand
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -1,3 +1,14 @@
+/*****************************************************
+ *    Title: BicycleFrame4.java
+ *    Author: John Walsh
+ *    Site owner/sponsor: https://mydocs.ittralee.ie
+ *    Date: 2017
+ *    Code version: edited Jan 10 '13 at 17:42
+ *    Availability: https://mydocs.ittralee.ie/xythoswfs/webview/fileManager.action?x=y&XY_performTicketSessionBypass=true&cookieConsentSet=on&shareLogin=false&stk=00938CC0736D2E9 (Accessed 22/11/2017)
+ *    Modified:  chnaged value to do with bike to book for my project
+ *****************************************************/
+
+
 package OOP2_Project_MyShop;
 
 //import books.Book;
@@ -13,38 +24,57 @@ import java.util.*; // ADDED
 
 @SuppressWarnings({"unchecked", "deprecation"})
 
-public class MyCustomerGUI extends JFrame implements ActionListener{
+public class AddBookGUI extends JFrame implements ActionListener{
 
     JMenu fileMenu, bookMenu;
     ArrayList <Book> books; // set of bikes : CHANGED
     // int count; NOT NEEDED
 
+    JButton backButton;
+
     // driver
     public static void main( String[] args ) {
-        MyCustomerGUI frame = new MyCustomerGUI();
+        AddBookGUI frame = new AddBookGUI();
         frame.setVisible(true);
     }
 
     // constructor
-    public MyCustomerGUI( ) {
+    public AddBookGUI( ) {
         newSystem();
+        Container cPane;
         //set the frame default properties
         setTitle     ( "Book Shop System" );
-        setSize      ( 400,200 );
-        setLocation  ( 100,100 );
+        setSize(600, 550);
+        setResizable(true);
+        setLocation(500, 100);
         Container pane = getContentPane();
         //  pane.setBackground(Color.blue);
         pane.setBackground(new Color(240,210,240));
         //register 'Exit upon closing' as a default close operation
         setDefaultCloseOperation( EXIT_ON_CLOSE );
 
-        createFileMenu();
+        cPane = getContentPane();
+        cPane.setLayout(new FlowLayout());
+
+        createOptionsMenu();
         createBookMenu();
         //and add them to the menubar
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
         menuBar.add(fileMenu);
         menuBar.add(bookMenu);
+
+        backButton = new JButton("BACK");
+        cPane.add(backButton);
+
+        //the back button - bring u to MainGUI
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        });
+
     }
 
     // CHANGED
@@ -125,7 +155,7 @@ public class MyCustomerGUI extends JFrame implements ActionListener{
         }
     } // end display2
 
-    // NOT CHANGED
+    //Events
     public void actionPerformed (ActionEvent e) {
         if (e.getActionCommand() .equals ("Quit")){
             showMessage("Shutting down the system");
@@ -160,20 +190,11 @@ public class MyCustomerGUI extends JFrame implements ActionListener{
             showMessage("I have no idea what you clicked");
     } // actionPerformed
 
-    private void createFileMenu(){
+    private void createOptionsMenu(){
         // create the menu
         fileMenu = new JMenu("File");
         // declare a menu item (re-usable)
         JMenuItem item;
-        item = new JMenuItem("Save");
-        item.addActionListener(this);
-        fileMenu.add(item);
-        item = new JMenuItem("Open");
-        item.addActionListener(this);
-        fileMenu.add(item);
-        item = new JMenuItem("New File");
-        item.addActionListener(this);
-        fileMenu.add(item);
         // create the 'quit' option
         fileMenu.addSeparator();
         item = new JMenuItem("Quit");

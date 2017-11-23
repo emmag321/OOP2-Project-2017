@@ -1,3 +1,13 @@
+/*****************************************************
+ *    Title: Bicycle.java
+ *    Author: John Walsh
+ *    Site owner/sponsor: https://mydocs.ittralee.ie
+ *    Date: 2017
+ *    Code version: edited Nov 13 2017 10.04AM
+ *    Availability: https://mydocs.ittralee.ie/xythoswfs/webview/fileManager.action?x=y&XY_performTicketSessionBypass=true&cookieConsentSet=on&shareLogin=false&stk=00938CC0736D2E9 (Accessed 22/11/2017)
+ *    Modified:  chnaged value to do with bike to book for my project
+ *****************************************************/
+
 //Emma_Griffin_OOP2_Project
 package OOP2_Project_MyShop;
 
@@ -84,22 +94,13 @@ public class Book implements Serializable {
     //To String method here
 
     @Override
-    /*public String toString() {
+    public String toString() {
         return
                 "Title: " + title + "\n" +
                 "Author: " + author + "\n" +
                 "Number of Pages: " +numPages + "\n" +
                 "Price: " +price + "\n" +
                 "ISBN: " +isbn + "\n" ;
-    }*/
-
-    public String toString() {
-        return
-                "Title: " + title + "\n" ;
     }
-
-
-
-
 }
 

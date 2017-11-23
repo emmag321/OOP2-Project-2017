@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.util.*;
-import java.io.*;
 
 public class AdminGUI extends JFrame implements ActionListener {
 
@@ -16,7 +15,7 @@ public class AdminGUI extends JFrame implements ActionListener {
 
     JMenu optionsMenu;
     JMenu adminMenu;
-    JButton backButton, loginButton, addCustButton, cancelButton, registerButton;
+    JButton backButton, loginButton, addCustButton, cancelButton, registerButton, bookButton;
     JTextArea display, customerList;
 
     /*//array
@@ -80,6 +79,10 @@ public class AdminGUI extends JFrame implements ActionListener {
         registerButton.addActionListener(this);
         cPane.add(registerButton);
 
+        bookButton = new JButton("Book");
+        cPane.add(bookButton);
+
+
         addCustButton = new JButton("Save Customer To System");
         addCustButton.addActionListener(this);
         cPane.add(addCustButton);
@@ -96,6 +99,15 @@ public class AdminGUI extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
+            }
+        });
+
+        //makes cutomer GUI come up when button is clicked
+        bookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddBookGUI customerShop = new AddBookGUI();
+                customerShop.setVisible(true);
             }
         });
     }
