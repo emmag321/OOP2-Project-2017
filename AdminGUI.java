@@ -15,6 +15,7 @@ public class AdminGUI extends JFrame implements ActionListener {
     JTextArea display, customerList;
 
     ArrayList<Person> customers;
+    ArrayList<Book> books;
 
     public static void main(String[] args) {
         AdminGUI gui = new AdminGUI();
@@ -110,7 +111,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         String firstName = JOptionPane.showInputDialog("Enter first name: ");
         String lastName = JOptionPane.showInputDialog("Enter surname: ");
         String address = JOptionPane.showInputDialog("Enter address: ");
-        float phoneNum = (Integer.parseInt(JOptionPane.showInputDialog("Enter address: ")));
+        int phoneNum = (Integer.parseInt(JOptionPane.showInputDialog("Enter phone number: ")));
         Person customer = new Person(firstName,lastName,address,phoneNum);
         customers.add(customer);
 
@@ -143,6 +144,31 @@ public class AdminGUI extends JFrame implements ActionListener {
         }
     }
 
+    public void Book(){
+        String title = JOptionPane.showInputDialog("Enter the title: ");
+        String author = JOptionPane.showInputDialog("Enter the author: ");
+        int numPages = (Integer.parseInt(JOptionPane.showInputDialog("Enter the number of pages: ")));
+        float price = (Float.parseFloat(JOptionPane.showInputDialog("Enter the price: ")));
+        String isbn = JOptionPane.showInputDialog("Enter the ISBN: ");
+        Book book = new Book(title,author,numPages,price,isbn);
+        books.add(book);
+
+        JOptionPane.showMessageDialog(null,title + " has been added to the system");
+    }
+
+    public void displayBook(){
+        JTextArea area = new JTextArea();
+        int numBooks = books.size();
+        if (numBooks>0) {
+            area.setText("New Books: \n\n");
+            for (int i = 0; i<numBooks; i++)
+                area.append("User no: " + i + " " + books.get(i).toString()+"\n");
+            showMessage(area);
+        }
+        else
+            showMessage("No Books in the system");
+    }
+
 
     //method
     private void createOptionsMenu() {
@@ -171,6 +197,15 @@ public class AdminGUI extends JFrame implements ActionListener {
         item.addActionListener(this);
         adminMenu.add(item);
 
+        //lists employee button
+        item = new JMenuItem("Book");
+        item.addActionListener(this);
+        adminMenu.add(item);
+
+        //lists employee button
+        item = new JMenuItem("Display Book");
+        item.addActionListener(this);
+        adminMenu.add(item);
     }
 
     @Override
@@ -184,6 +219,12 @@ public class AdminGUI extends JFrame implements ActionListener {
         }
         else if (e.getActionCommand().equals ("Display")){
             display();
+        }
+        else if (e.getActionCommand().equals ("Book")){
+            Book();
+        }
+        else if (e.getActionCommand().equals ("Display Book")){
+            displayBook();
         }
         else if (e.getActionCommand().equals ("New File")){
             newSystem();

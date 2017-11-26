@@ -8,6 +8,7 @@
  *    Modified:  chnaged value to do with bike to book for my project
  *****************************************************/
 
+
 //Emma_Griffin_OOP2_Project
 package OOP2_Project_MyShop;
 
@@ -24,20 +25,26 @@ public class Book implements Serializable {
     private double price;
     private String isbn;
 
-    /*public static void main(String[] args) {
-        Book book = new Book();
-        book.setVisible(true);
-    }*/
 
-    public Book(String t, String a, String i, int n, double p){
-        title = t;
-        author = a;
-        isbn = i;
-        numPages = n;
-        price = p;
+    //no args constructor
+    public Book()
+    {
+        this("unknown", "unknown",0, 0, "unknown");
     }
 
-    public Book(String t){
+    //contructor with args
+    public Book(String title, String author, int numPages, float price, String isbn)
+    {
+        this.title = title;
+        this.author = author;
+        this.numPages = numPages;
+        this.price = price;
+        this.isbn = isbn;
+    }
+
+
+
+   /* public Book(String t){
         title = t;
         author = "unknown";
     }
@@ -50,24 +57,35 @@ public class Book implements Serializable {
     public Book(){
         title = "unknown";
         author = "unknown";
-    }
+    }*/
 
     //setters
-    public void setTitle( String t)
+    // public void setFirstName(String firstName){this.firstName = firstName;}
+    public void setTitle(String Title)
     {
-        title = t;
+        this.title = title;
     }
 
-    public void setAuthor(String a)
+    public void setAuthor(String Author)
     {
-        author = a;
+        this.author = author;
     }
 
-    public void setNumPages(int n) { numPages = n; }
+    public void setNumPages(int numPages)
+    {
+        this.numPages = numPages;
+    }
 
-    public void setPrice(double p) { price = p; }
+    public void setPrice(double price)
+    {
+        this.price = price;
+    }
 
-    public void setIsbn(String i) { isbn = i; }
+    public void setIsbn(String isbn)
+    {
+        this.isbn = isbn;
+    }
+
 
     //getters
     public String getTitle()
