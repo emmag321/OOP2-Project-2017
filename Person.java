@@ -9,16 +9,16 @@ public class Person implements Serializable {
     private String firstName;
     private String lastName;
     private String address;
-    private float phoneNum;
+    private String phoneNum;
 
     //no args constructor
     public Person()
     {
-        this("unknown", "unknown", "unknown", 0);
+        this("unknown", "unknown", "unknown", "unknown");
     }
 
     //contructor with args
-    public Person(String firstName, String lastName, String address, float phoneNum)
+    public Person(String firstName, String lastName, String address, String phoneNum)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,7 +42,7 @@ public class Person implements Serializable {
         this.address = address;
     }
 
-    public void setPhoneNum(float phoneNum)
+    public void setPhoneNum(String phoneNum)
     {
         this.phoneNum = phoneNum;
     }
@@ -63,7 +63,7 @@ public class Person implements Serializable {
         return address;
     }
 
-    public float getPhoneNum()
+    public String getPhoneNum()
     {
         return phoneNum;
     }

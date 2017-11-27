@@ -1,10 +1,8 @@
 package OOP2_Project_MyShop;
 
 import java.io.Serializable;
-import javax.swing.*;
-import java.io.*;
 
-public class Customer extends Person implements Serializable {
+public class Employee extends Person implements Serializable {
 
     //attributes
     private String email;
@@ -12,7 +10,7 @@ public class Customer extends Person implements Serializable {
     private int password;
 
     //Constructors
-    public Customer()
+    public Employee()
     {
         super();//this to bring att from person threw-- super class
 
@@ -22,7 +20,7 @@ public class Customer extends Person implements Serializable {
 
     }
 
-    public Customer(String firstName, String lastName, String address, int phoneNum, String email, String accNum)
+    public Employee(String firstName, String lastName, String address, String phoneNum, String email, String accNum)
     {
         super(firstName, lastName, address, phoneNum);
 

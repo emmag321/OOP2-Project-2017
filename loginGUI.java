@@ -11,8 +11,8 @@ public class loginGUI extends JFrame {
     JButton loginAdminButton, backButton;
 
     //need this it brings threw customer!!!!!
-    Customer cust1 = new Customer();
-    ArrayList<Customer> customers;
+    Employee cust1 = new Employee();
+    ArrayList<Employee> customers;
 
     //customer
     String email, firstName, lastName, address, accNum;

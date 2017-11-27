@@ -7,13 +7,13 @@ public class TestMyBookShop {
     public static void main(String[] args)
     {
         //creating customer object
-        Customer cust1 = new Customer();
+        Employee cust1 = new Employee();
 
         cust1.setFirstName("Emma");
         cust1.setLastName("Griffin");
         cust1.setAddress("Causeway");
         cust1.setPassword(150514);
-        cust1.setPhoneNum(492);
+        cust1.setPhoneNum("99798809");
         cust1.setAccNum("12334F");
         cust1.setEmail("emma@gmail.com");
 

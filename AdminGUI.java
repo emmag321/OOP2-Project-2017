@@ -2,6 +2,7 @@ package OOP2_Project_MyShop;
 
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 import java.awt.*;
 import java.io.*;
@@ -37,9 +38,9 @@ public class AdminGUI extends JFrame implements ActionListener {
 
         //setting default values for GUI
         setTitle("My Book Shop ADMIN SECTION");
-        setSize(600, 550);
+        setSize(900, 550);
         setResizable(true);
-        setLocation(500, 100);
+        setLocation(200, 100);
 
         //this is what the GUI does when you press the 'x' button
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -77,22 +78,145 @@ public class AdminGUI extends JFrame implements ActionListener {
             }
         });
 
-       /* //makes cutomer GUI come up when button is clicked
-        bookButton.addActionListener(new ActionListener() {
+
+
+        //new stuff starts here
+        // create a table model and set a Column Identifiers to this model
+        Object[] columns = {"Id","Title","Author","Pages","Price","ISBN"};
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(columns);
+
+        //http://1bestcsharp.blogspot.ie/2015/05/java-jtable-add-delete-update-row.html
+        // create JFrame and JTable
+        JTable table = new JTable();
+
+        // create JTextFields
+        //JTextField textId = new JTextField();
+        JTextField textTitle = new JTextField();
+        JTextField textAuthor = new JTextField();
+        JTextField textPages = new JTextField();
+        JTextField textPrice = new JTextField();
+        JTextField textIsbn = new JTextField();
+
+        // set the model to the table
+        table.setModel(model);
+
+        // create JButtons
+        JButton btnAdd = new JButton("Add");
+        JButton btnDelete = new JButton("Delete");
+        JButton btnUpdate = new JButton("Update");
+
+        textAuthor.setBounds(20, 220, 100, 25);
+        textTitle.setBounds(20, 250, 100, 25);
+        textAuthor.setBounds(20, 280, 100, 25);
+        textPages.setBounds(20, 310, 100, 25);
+
+        btnAdd.setBounds(150, 220, 100, 25);
+        btnUpdate.setBounds(150, 265, 100, 25);
+        btnDelete.setBounds(150, 310, 100, 25);
+
+        // create JScrollPane
+        JScrollPane pane = new JScrollPane(table);
+        pane.setBounds(0, 0, 880, 200);
+
+        cPane.setLayout(null);
+
+        cPane.add(pane);
+
+        // add JTextFields to the jframe
+        //cPane.add(textId);
+        cPane.add(textTitle);
+        cPane.add(textAuthor);
+        cPane.add(textPages);
+        cPane.add(textPrice);
+        cPane.add(textIsbn);
+
+        // add JButtons to the jframe
+        cPane.add(btnAdd);
+        cPane.add(btnDelete);
+        cPane.add(btnUpdate);
+
+        cPane.setSize(900,400);
+       // frame.setLocationRelativeTo(null);
+       // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // frame.setVisible(true);
+
+        // button add row
+        btnAdd.addActionListener(new ActionListener(){
+
+            // create an array of objects to set the row data
+            Object[] row = new Object[4];
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddBookGUI customerShop = new AddBookGUI();
-                customerShop.setVisible(true);
+
+                row[0] = textTitle.getText();
+                row[1] = textAuthor.getText();
+                row[2] = textPages.getText();
+                row[3] = textPrice.getText();
+                row[4] = textIsbn.getText();
+
+                // add row to the model
+                model.addRow(row);
             }
-        });*/
+        });
+
+        // button remove row
+        btnDelete.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                // i = the index of the selected row
+                int i = table.getSelectedRow();
+                if(i >= 0){
+                    // remove a row from jtable
+                    model.removeRow(i);
+                }
+                else{
+                    System.out.println("Delete Error");
+                }
+            }
+        });
+
+        // get selected row data From table to textfields
+        table.addMouseListener(new MouseAdapter(){
+
+            @Override
+            public void mouseClicked(MouseEvent e){
+
+                // i = the index of the selected row
+                int i = table.getSelectedRow();
+
+                //textId.setText(model.getValueAt(i, 0).toString());
+                textTitle.setText(model.getValueAt(i, 1).toString());
+                textAuthor.setText(model.getValueAt(i, 2).toString());
+                textPages.setText(model.getValueAt(i, 3).toString());
+            }
+        });
+
+        // button update row
+        btnUpdate.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                // i = the index of the selected row
+                int i = table.getSelectedRow();
+
+                if(i >= 0)
+                {
+                   // model.setValueAt(textId.getText(), i, 0);
+                    model.setValueAt(textTitle.getText(), i, 1);
+                    model.setValueAt(textAuthor.getText(), i, 2);
+                    model.setValueAt(textPages.getText(), i, 3);
+                }
+                else{
+                    System.out.println("Update Error");
+                }
+            }
+        });
+        // new stuff ends here
     }
-
-    public void backButton(){
-        MainGUI main = new MainGUI();
-        main.setVisible(true);
-    }
-
-
 
     public void newSystem() {
         //person & book arrays
@@ -121,11 +245,11 @@ public class AdminGUI extends JFrame implements ActionListener {
     }//here
 
     //adds employees to system
-    public void addCust(){
+    public void addEmployee(){
         String firstName = JOptionPane.showInputDialog("Enter first name: ");
         String lastName = JOptionPane.showInputDialog("Enter surname: ");
         String address = JOptionPane.showInputDialog("Enter address: ");
-        int phoneNum = (Integer.parseInt(JOptionPane.showInputDialog("Enter phone number: ")));
+        String phoneNum = JOptionPane.showInputDialog("Enter phone number: ");
         Person customer = new Person(firstName,lastName,address,phoneNum);
         employees.add(customer);
 
@@ -173,7 +297,13 @@ public class AdminGUI extends JFrame implements ActionListener {
             showMessage("No books in the system");
     } // end display
 
-    //menu bar with - options & quit
+    //makes make button go back to MainGUI
+    public void backButton(){
+        MainGUI main = new MainGUI();
+        main.setVisible(true);
+    }
+
+    //menu bar with - back,quit,save
     private void createOptionsMenu() {
         JMenuItem item;
 
@@ -192,7 +322,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         optionsMenu.add(item);
     }
 
-    //method
+    //menubar with Add Employee,Display Employee,Add Book,Display Book
     private void createAdminMenu() {
         JMenuItem item;
 
@@ -219,6 +349,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         adminMenu.add(item);
     }
 
+    //events
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Quit")) {
@@ -226,19 +357,19 @@ public class AdminGUI extends JFrame implements ActionListener {
             System.exit(0);
         }
         else if (e.getActionCommand().equals ("Add Employee")){
-            addCust();
+            addEmployee();//adds employee here to system
         }
         else if (e.getActionCommand().equals ("Display Employee")){
-            display();
+            display();//displays employye
         }
         else if (e.getActionCommand().equals (" Add Book")){
-            addBook();
+            addBook();//adds new book to system
         }
         else if (e.getActionCommand().equals ("Display Book")){
-            displayBook();
+            displayBook();//displays new books
         }
         else if (e.getActionCommand().equals ("Back")){
-            backButton();
+            backButton();//back button
         }
         else if (e.getActionCommand().equals ("New File")){
             newSystem();
