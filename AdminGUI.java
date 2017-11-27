@@ -14,7 +14,7 @@ public class AdminGUI extends JFrame implements ActionListener {
     JButton backButton, loginButton, addCustButton, cancelButton, registerButton, bookButton;
     JTextArea display, customerList;
 
-    ArrayList<Person> customers;
+    ArrayList<Person> employees;
     ArrayList<Book> books;
 
     public static void main(String[] args) {
@@ -28,6 +28,7 @@ public class AdminGUI extends JFrame implements ActionListener {
     float phoneNum;
 
     public AdminGUI() {
+        newSystem();
 
         DefaultListModel listCust = new DefaultListModel();
         JList list = new JList(listCust);
@@ -57,7 +58,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         menuBar.add(optionsMenu);
         menuBar.add(adminMenu);
 
-        //display added customers
+        //display added employees
         display = new JTextArea();
         cPane.add(display);
 
@@ -85,20 +86,26 @@ public class AdminGUI extends JFrame implements ActionListener {
         });
     }
 
+
+
     public void newSystem() {
-        customers = new ArrayList<Person>();
+        //person & book arrays
+        employees = new ArrayList<Person>();
+        books = new ArrayList<Book>();
     }
+
     public void save() throws IOException {
         ObjectOutputStream os;
-        os = new ObjectOutputStream(new FileOutputStream("customers.dat"));
-        os.writeObject(customers);
+        os = new ObjectOutputStream(new FileOutputStream("employees.dat"));
+        os.writeObject(employees);
         os.close();
     }
+
     public void open() {
         try {
             ObjectInputStream is;
-            is = new ObjectInputStream(new FileInputStream("customers.dat"));
-            customers = (ArrayList<Person>) is.readObject();
+            is = new ObjectInputStream(new FileInputStream("employees.dat"));
+            employees = (ArrayList<Person>) is.readObject();
             is.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "open didn't work");
@@ -107,44 +114,34 @@ public class AdminGUI extends JFrame implements ActionListener {
 
     }//here
 
+    //adds employees to system
     public void addCust(){
         String firstName = JOptionPane.showInputDialog("Enter first name: ");
         String lastName = JOptionPane.showInputDialog("Enter surname: ");
         String address = JOptionPane.showInputDialog("Enter address: ");
         int phoneNum = (Integer.parseInt(JOptionPane.showInputDialog("Enter phone number: ")));
         Person customer = new Person(firstName,lastName,address,phoneNum);
-        customers.add(customer);
+        employees.add(customer);
 
         JOptionPane.showMessageDialog(null,firstName + "s account has successfully created");
     }
 
+    //displays employees that have been put into system
     public void display(){
         JTextArea area = new JTextArea();
-        int numCustomers = customers.size();
+        int numCustomers = employees.size();
         if (numCustomers>0) {
-            area.setText("Account Holders: \n\n");
+            area.setText("Employees: \n\n");
             for (int i = 0; i<numCustomers; i++)
-                area.append("User no: " + i + " " + customers.get(i).toString()+"\n");
+                area.append("User no: " + i + " " + employees.get(i).toString()+"\n");
             showMessage(area);
         }
         else
             showMessage("No Users in the system");
     }
 
-    public void display2(){
-        int numCustomers = customers.size();
-        if (numCustomers <1)
-            showMessage("No users in the system");
-        else {
-            JTextArea area = new JTextArea();
-            Iterator <Person> iterator = customers.iterator( );
-            while ( iterator.hasNext( ) )
-                area.append(iterator.next( ) + "\n");
-            showMessage(area);
-        }
-    }
-
-    public void Book(){
+    //adds books that have been put into system
+    public void addBook(){
         String title = JOptionPane.showInputDialog("Enter the title: ");
         String author = JOptionPane.showInputDialog("Enter the author: ");
         int numPages = (Integer.parseInt(JOptionPane.showInputDialog("Enter the number of pages: ")));
@@ -156,27 +153,31 @@ public class AdminGUI extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null,title + " has been added to the system");
     }
 
+    //displays books that have been put into system
     public void displayBook(){
         JTextArea area = new JTextArea();
         int numBooks = books.size();
         if (numBooks>0) {
-            area.setText("New Books: \n\n");
+            area.setText("Book List: \n\n");
             for (int i = 0; i<numBooks; i++)
-                area.append("User no: " + i + " " + books.get(i).toString()+"\n");
+                area.append("Book no: " + i + " " + books.get(i).toString()+"\n");
             showMessage(area);
         }
         else
-            showMessage("No Books in the system");
-    }
+            showMessage("No books in the system");
+    } // end display
 
-
-    //method
+    //menu bar with - options & quit
     private void createOptionsMenu() {
         JMenuItem item;
 
         optionsMenu = new JMenu("Options");
 
         item = new JMenuItem("Quit");
+        item.addActionListener(this);
+        optionsMenu.add(item);
+
+        item = new JMenuItem("Save");
         item.addActionListener(this);
         optionsMenu.add(item);
     }
@@ -193,7 +194,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         adminMenu.add(item);
 
         //lists employee button
-        item = new JMenuItem("Display");
+        item = new JMenuItem("Display Employee");
         item.addActionListener(this);
         adminMenu.add(item);
 
@@ -217,11 +218,11 @@ public class AdminGUI extends JFrame implements ActionListener {
         else if (e.getActionCommand().equals ("Add Employee")){
             addCust();
         }
-        else if (e.getActionCommand().equals ("Display")){
+        else if (e.getActionCommand().equals ("Display Employee")){
             display();
         }
         else if (e.getActionCommand().equals ("Book")){
-            Book();
+            addBook();
         }
         else if (e.getActionCommand().equals ("Display Book")){
             displayBook();
