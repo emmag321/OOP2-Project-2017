@@ -46,6 +46,7 @@ public class AdminGUI extends JFrame implements ActionListener {
 
         cPane = getContentPane();
         cPane.setLayout(new FlowLayout());
+        cPane.setBackground(new Color(240,210,240));
 
         createOptionsMenu();
         createAdminMenu();
@@ -76,14 +77,19 @@ public class AdminGUI extends JFrame implements ActionListener {
             }
         });
 
-        //makes cutomer GUI come up when button is clicked
+       /* //makes cutomer GUI come up when button is clicked
         bookButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AddBookGUI customerShop = new AddBookGUI();
                 customerShop.setVisible(true);
             }
-        });
+        });*/
+    }
+
+    public void backButton(){
+        MainGUI main = new MainGUI();
+        main.setVisible(true);
     }
 
 
@@ -173,6 +179,10 @@ public class AdminGUI extends JFrame implements ActionListener {
 
         optionsMenu = new JMenu("Options");
 
+        item = new JMenuItem("Back");
+        item.addActionListener(this);
+        optionsMenu.add(item);
+
         item = new JMenuItem("Quit");
         item.addActionListener(this);
         optionsMenu.add(item);
@@ -199,7 +209,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         adminMenu.add(item);
 
         //lists employee button
-        item = new JMenuItem("Book");
+        item = new JMenuItem("Add Book");
         item.addActionListener(this);
         adminMenu.add(item);
 
@@ -221,11 +231,14 @@ public class AdminGUI extends JFrame implements ActionListener {
         else if (e.getActionCommand().equals ("Display Employee")){
             display();
         }
-        else if (e.getActionCommand().equals ("Book")){
+        else if (e.getActionCommand().equals (" Add Book")){
             addBook();
         }
         else if (e.getActionCommand().equals ("Display Book")){
             displayBook();
+        }
+        else if (e.getActionCommand().equals ("Back")){
+            backButton();
         }
         else if (e.getActionCommand().equals ("New File")){
             newSystem();

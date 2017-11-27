@@ -143,8 +143,7 @@ public class AddBookGUI extends JFrame implements ActionListener{
                 area.append("Book no: " + i + " " + books.get(i).toString()+"\n");
             showMessage(area);
         }
-        else
-            showMessage("No books in the system");
+        else            showMessage("No books in the system");
     } // end display
 
 
