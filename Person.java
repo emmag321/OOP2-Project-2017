@@ -24,7 +24,7 @@ public class Person implements Serializable {
         this.lastName = lastName;
         this.address = address;
         this.phoneNum = phoneNum;
-    }
+}
 
     //mutators -- they set
     public void setFirstName(String firstName)

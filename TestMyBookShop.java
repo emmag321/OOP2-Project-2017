@@ -6,16 +6,16 @@ import javax.swing.*;
 public class TestMyBookShop {
     public static void main(String[] args)
     {
-        //creating customer object
-        Employee cust1 = new Employee();
+        //creating employee object
+        Employee employee1 = new Employee();
 
-        cust1.setFirstName("Emma");
-        cust1.setLastName("Griffin");
-        cust1.setAddress("Causeway");
-        cust1.setPassword(150514);
-        cust1.setPhoneNum("99798809");
-        cust1.setAccNum("12334F");
-        cust1.setEmail("emma@gmail.com");
+        employee1.setFirstName("Emma");
+        employee1.setLastName("Griffin");
+        employee1.setAddress("Causeway");
+        employee1.setPassword(150514);
+        employee1.setPhoneNum("99798809");
+        employee1.setUserName("12334F");
+        employee1.setEmail("emma@gmail.com");
 
         //creating book object
         Book book1 = new Book();
@@ -26,7 +26,8 @@ public class TestMyBookShop {
         book1.setPrice(7.99);
         book1.setIsbn("12345IE");
 
-        JOptionPane.showMessageDialog(null, cust1.toString(), "Shop Test", JOptionPane.PLAIN_MESSAGE);
+        //displays the emplyee object here - if i change it to book1.toString() - it will then display the book object
+        JOptionPane.showMessageDialog(null, employee1.toString(), "Shop Test", JOptionPane.PLAIN_MESSAGE);
     }
 
 }

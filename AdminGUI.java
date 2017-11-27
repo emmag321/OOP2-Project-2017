@@ -1,3 +1,23 @@
+/*****************************************************
+ *    Title: Bicycle.java
+ *    Author: John Walsh
+ *    Site owner/sponsor: https://mydocs.ittralee.ie
+ *    Date: 2017
+ *    Code version: edited Nov 13 2017 10.04AM
+ *    Availability: https://mydocs.ittralee.ie/xythoswfs/webview/fileManager.action?x=y&XY_performTicketSessionBypass=true&cookieConsentSet=on&shareLogin=false&stk=00938CC0736D2E9 (Accessed 22/11/2017)
+ *    Modified: changed value to do with bike to book for my project
+ *****************************************************/
+
+/*****************************************************
+ *    Title:  JTableRow.java
+ *    Author: unknown- doesn't say
+ *    Site owner/sponsor: 1bestcsharp.blogspot.ie
+ *    Date: unknown- doesn't say
+ *    Code version: unknown- doesn't say
+ *    Availability: http://1bestcsharp.blogspot.ie/2015/05/java-jtable-add-delete-update-row.html(Accessed 27/11/2017)
+ *    Modified: changed to suit my project and to be displayed with in this GUI
+ *****************************************************/
+
 package OOP2_Project_MyShop;
 
 
@@ -14,6 +34,7 @@ public class AdminGUI extends JFrame implements ActionListener {
     JMenu adminMenu;
     JButton backButton, loginButton, addCustButton, cancelButton, registerButton, bookButton;
     JTextArea display, customerList;
+
 
     ArrayList<Person> employees;
     ArrayList<Book> books;
@@ -78,11 +99,9 @@ public class AdminGUI extends JFrame implements ActionListener {
             }
         });
 
-
-
-        //new stuff starts here
+        //referenced code starts here
         // create a table model and set a Column Identifiers to this model
-        Object[] columns = {"Id","Title","Author","Pages","Price","ISBN"};
+        Object[] columns = {"Title","Author","Pages","Price","ISBN"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
 
@@ -106,10 +125,11 @@ public class AdminGUI extends JFrame implements ActionListener {
         JButton btnDelete = new JButton("Delete");
         JButton btnUpdate = new JButton("Update");
 
-        textAuthor.setBounds(20, 220, 100, 25);
-        textTitle.setBounds(20, 250, 100, 25);
-        textAuthor.setBounds(20, 280, 100, 25);
-        textPages.setBounds(20, 310, 100, 25);
+        textTitle.setBounds(20, 220, 100, 25);
+        textAuthor.setBounds(20, 250, 100, 25);
+        textPages.setBounds(20, 280, 100, 25);
+        textPrice.setBounds(20, 310, 100, 25);
+        textIsbn.setBounds(20, 340, 100, 25);
 
         btnAdd.setBounds(150, 220, 100, 25);
         btnUpdate.setBounds(150, 265, 100, 25);
@@ -124,7 +144,6 @@ public class AdminGUI extends JFrame implements ActionListener {
         cPane.add(pane);
 
         // add JTextFields to the jframe
-        //cPane.add(textId);
         cPane.add(textTitle);
         cPane.add(textAuthor);
         cPane.add(textPages);
@@ -145,7 +164,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         btnAdd.addActionListener(new ActionListener(){
 
             // create an array of objects to set the row data
-            Object[] row = new Object[4];
+            Object[] row = new Object[5];
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -187,10 +206,11 @@ public class AdminGUI extends JFrame implements ActionListener {
                 // i = the index of the selected row
                 int i = table.getSelectedRow();
 
-                //textId.setText(model.getValueAt(i, 0).toString());
-                textTitle.setText(model.getValueAt(i, 1).toString());
-                textAuthor.setText(model.getValueAt(i, 2).toString());
-                textPages.setText(model.getValueAt(i, 3).toString());
+                textTitle.setText(model.getValueAt(i, 0).toString());
+                textAuthor.setText(model.getValueAt(i, 1).toString());
+                textPages.setText(model.getValueAt(i, 2).toString());
+                textPrice.setText(model.getValueAt(i, 3).toString());
+                textIsbn.setText(model.getValueAt(i, 4).toString());
             }
         });
 
@@ -205,17 +225,19 @@ public class AdminGUI extends JFrame implements ActionListener {
 
                 if(i >= 0)
                 {
-                   // model.setValueAt(textId.getText(), i, 0);
-                    model.setValueAt(textTitle.getText(), i, 1);
-                    model.setValueAt(textAuthor.getText(), i, 2);
-                    model.setValueAt(textPages.getText(), i, 3);
+                    model.setValueAt(textTitle.getText(), i, 0);
+                    model.setValueAt(textAuthor.getText(), i, 1);
+                    model.setValueAt(textPages.getText(), i, 2);
+                    model.setValueAt(textPrice.getText(), i, 3);
+                    model.setValueAt(textIsbn.getText(), i, 4);
+
                 }
                 else{
                     System.out.println("Update Error");
                 }
             }
         });
-        // new stuff ends here
+        //referenced code ends here
     }
 
     public void newSystem() {
@@ -250,6 +272,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         String lastName = JOptionPane.showInputDialog("Enter surname: ");
         String address = JOptionPane.showInputDialog("Enter address: ");
         String phoneNum = JOptionPane.showInputDialog("Enter phone number: ");
+        String email = JOptionPane.showInputDialog("enter email:");
         Person customer = new Person(firstName,lastName,address,phoneNum);
         employees.add(customer);
 
@@ -269,33 +292,6 @@ public class AdminGUI extends JFrame implements ActionListener {
         else
             showMessage("No Users in the system");
     }
-
-    //adds books that have been put into system
-    public void addBook(){
-        String title = JOptionPane.showInputDialog("Enter the title: ");
-        String author = JOptionPane.showInputDialog("Enter the author: ");
-        int numPages = (Integer.parseInt(JOptionPane.showInputDialog("Enter the number of pages: ")));
-        float price = (Float.parseFloat(JOptionPane.showInputDialog("Enter the price: ")));
-        String isbn = JOptionPane.showInputDialog("Enter the ISBN: ");
-        Book book = new Book(title,author,numPages,price,isbn);
-        books.add(book);
-
-        JOptionPane.showMessageDialog(null,title + " has been added to the system");
-    }
-
-    //displays books that have been put into system
-    public void displayBook(){
-        JTextArea area = new JTextArea();
-        int numBooks = books.size();
-        if (numBooks>0) {
-            area.setText("Book List: \n\n");
-            for (int i = 0; i<numBooks; i++)
-                area.append("Book no: " + i + " " + books.get(i).toString()+"\n");
-            showMessage(area);
-        }
-        else
-            showMessage("No books in the system");
-    } // end display
 
     //makes make button go back to MainGUI
     public void backButton(){
@@ -337,16 +333,6 @@ public class AdminGUI extends JFrame implements ActionListener {
         item = new JMenuItem("Display Employee");
         item.addActionListener(this);
         adminMenu.add(item);
-
-        //lists employee button
-        item = new JMenuItem("Add Book");
-        item.addActionListener(this);
-        adminMenu.add(item);
-
-        //lists employee button
-        item = new JMenuItem("Display Book");
-        item.addActionListener(this);
-        adminMenu.add(item);
     }
 
     //events
@@ -361,12 +347,6 @@ public class AdminGUI extends JFrame implements ActionListener {
         }
         else if (e.getActionCommand().equals ("Display Employee")){
             display();//displays employye
-        }
-        else if (e.getActionCommand().equals (" Add Book")){
-            addBook();//adds new book to system
-        }
-        else if (e.getActionCommand().equals ("Display Book")){
-            displayBook();//displays new books
         }
         else if (e.getActionCommand().equals ("Back")){
             backButton();//back button

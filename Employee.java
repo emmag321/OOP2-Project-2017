@@ -6,7 +6,7 @@ public class Employee extends Person implements Serializable {
 
     //attributes
     private String email;
-    private String accNum;
+    private String userName;
     private int password;
 
     //Constructors
@@ -15,18 +15,18 @@ public class Employee extends Person implements Serializable {
         super();//this to bring att from person threw-- super class
 
         email = "unknown";
-        accNum = "unknown";
+        userName = "unknown";
         password = 1234;
 
     }
 
-    public Employee(String firstName, String lastName, String address, String phoneNum, String email, String accNum)
+    public Employee(String firstName, String lastName, String address, String phoneNum, String email, String userName, int password)
     {
         super(firstName, lastName, address, phoneNum);
 
         this.email = email;
-        this.accNum = accNum;
-        this.password = getPassword();
+        this.userName = userName;
+        this.password = password;
     }
 
     //setters
@@ -35,9 +35,9 @@ public class Employee extends Person implements Serializable {
         this.email = email;
     }
 
-    public void setAccNum(String accNum)
+    public void setUserName(String userName)
     {
-        this.accNum = accNum;
+        this.userName = userName;
     }
 
     public void setPassword(int password) { this.password = password; }
@@ -48,9 +48,9 @@ public class Employee extends Person implements Serializable {
         return email;
     }
 
-    public String getAccNum()
+    public String getUserName()
     {
-        return accNum;
+        return userName;
     }
 
     public int getPassword() { return password; }
@@ -60,7 +60,7 @@ public class Employee extends Person implements Serializable {
     public String toString() {
          return super.toString() +
                  "Email: " + email + "\n" +
-                 "Account Number: " +  accNum + "\n" +
+                 "Account Number: " + userName + "\n" +
                  "Password: " + password + "\n";
     }
 
