@@ -30,6 +30,12 @@ import java.util.*;
 
 public class AdminGUI extends JFrame implements ActionListener {
 
+
+    JTextField textTitle;
+    JTextField textAuthor;
+    JTextField textPages;
+    JTextField textPrice;
+    JTextField textIsbn;
     JMenu optionsMenu;
     JMenu adminMenu;
     JButton backButton, loginButton, addCustButton, cancelButton, registerButton, bookButton;
@@ -37,12 +43,14 @@ public class AdminGUI extends JFrame implements ActionListener {
 
 
     ArrayList<Person> employees;
-    ArrayList<Book> books;
+    static ArrayList<Book> books;
+
 
     public static void main(String[] args) {
         AdminGUI gui = new AdminGUI();
         gui.setVisible(true);
     }
+
 
     //customer
     String email, firstName, lastName, address, accNum;
@@ -111,11 +119,11 @@ public class AdminGUI extends JFrame implements ActionListener {
 
         // create JTextFields
         //JTextField textId = new JTextField();
-        JTextField textTitle = new JTextField();
-        JTextField textAuthor = new JTextField();
-        JTextField textPages = new JTextField();
-        JTextField textPrice = new JTextField();
-        JTextField textIsbn = new JTextField();
+         textTitle = new JTextField();
+         textAuthor = new JTextField();
+         textPages = new JTextField();
+         textPrice = new JTextField();
+         textIsbn = new JTextField();
 
         // set the model to the table
         table.setModel(model);
@@ -176,6 +184,10 @@ public class AdminGUI extends JFrame implements ActionListener {
 
                 // add row to the model
                 model.addRow(row);
+
+                addBook();
+
+
             }
         });
 
@@ -240,6 +252,24 @@ public class AdminGUI extends JFrame implements ActionListener {
         //referenced code ends here
     }
 
+    private void addBook() {
+        String title;
+        String author;
+        int numPages;
+        double price;
+        String isbn;
+
+        title = textTitle.getText();
+        author = textAuthor.getText();
+        numPages = (Integer.parseInt(textPages.getText()));
+        price = (Double.parseDouble(textPrice.getText()));
+        isbn = textIsbn.getText();
+
+        Book book = new Book();
+
+        books.add(book);
+    }
+
     public void newSystem() {
         //person & book arrays
         employees = new ArrayList<Person>();
@@ -273,11 +303,15 @@ public class AdminGUI extends JFrame implements ActionListener {
         String address = JOptionPane.showInputDialog("Enter address: ");
         String phoneNum = JOptionPane.showInputDialog("Enter phone number: ");
         String email = JOptionPane.showInputDialog("enter email:");
-        Person customer = new Person(firstName,lastName,address,phoneNum);
-        employees.add(customer);
+        String userName = JOptionPane.showInputDialog("enter user name:");
+        int password = (Integer.parseInt(JOptionPane.showInputDialog("enter password(must be digits):")));
+        Employee employee = new Employee(firstName,lastName,address,phoneNum, email, userName, password);
+        employees.add(employee);
 
         JOptionPane.showMessageDialog(null,firstName + "s account has successfully created");
     }
+
+
 
     //displays employees that have been put into system
     public void display(){
@@ -344,6 +378,8 @@ public class AdminGUI extends JFrame implements ActionListener {
         }
         else if (e.getActionCommand().equals ("Add Employee")){
             addEmployee();//adds employee here to system
+            CustomerGUI custGUI = new CustomerGUI();
+            custGUI.setVisible(true);
         }
         else if (e.getActionCommand().equals ("Display Employee")){
             display();//displays employye

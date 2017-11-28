@@ -31,9 +31,21 @@ public class MainGUI extends JFrame {
 
         //creates buttons
         JButton adminButton = new JButton("Admin");
+        JButton customerButton = new JButton("Customer");
         JButton quitButton = new JButton("Quit");
 
+        //set bounds for JButtons & Image Jlabel
+        adminButton.setBounds(50, 20, 100, 25);
+        customerButton.setBounds(50, 50, 100, 25);
+        quitButton.setBounds(50, 80, 100, 25);
+        logoLabel.setBounds(150, 180, 300, 225);
+
+        cpane.setBounds(0, 0, 880, 200);
+
+        cpane.setLayout(null);
+
         cpane.add(adminButton);
+        cpane.add(customerButton);
         cpane.add(quitButton);
 
         //makes button do something here
@@ -46,15 +58,6 @@ public class MainGUI extends JFrame {
 
             }
         });
-
-       /* //makes cutomer GUI come up when button is clicked
-        customerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AddBookGUI customerShop = new AddBookGUI();
-                customerShop.setVisible(true);
-            }
-        });*/
 
        //closes system when quit is clicked.. shows warning message before hand
         quitButton.addActionListener(new ActionListener() {

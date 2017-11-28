@@ -26,7 +26,7 @@ public class TestMyBookShop {
         book1.setPrice(7.99);
         book1.setIsbn("12345IE");
 
-        //displays the emplyee object here - if i change it to book1.toString() - it will then display the book object
+        //displays the employee object here - if i change it to book1.toString() - it will then display the book object
         JOptionPane.showMessageDialog(null, employee1.toString(), "Shop Test", JOptionPane.PLAIN_MESSAGE);
     }
 
