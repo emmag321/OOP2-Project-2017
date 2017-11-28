@@ -89,5 +89,3 @@ public class loginGUI extends JFrame {
         });
     }
 }
-
-

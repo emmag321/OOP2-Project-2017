@@ -156,9 +156,9 @@ public class AdminGUI extends JFrame implements ActionListener {
         cPane.add(btnUpdate);
 
         cPane.setSize(900,400);
-       // frame.setLocationRelativeTo(null);
-       // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       // frame.setVisible(true);
+        // frame.setLocationRelativeTo(null);
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setVisible(true);
 
         // button add row
         btnAdd.addActionListener(new ActionListener(){
@@ -380,7 +380,3 @@ public class AdminGUI extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null,s);
     }
 }
-
-
-
-

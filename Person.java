@@ -24,7 +24,7 @@ public class Person implements Serializable {
         this.lastName = lastName;
         this.address = address;
         this.phoneNum = phoneNum;
-}
+    }
 
     //mutators -- they set
     public void setFirstName(String firstName)
@@ -71,10 +71,10 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return
-                  "First Name: " + firstName + "\n" +
-                  "Last Name: " + lastName + "\n" +
-                  "Address: " + address + "\n" +
-                  "Phone Number: " + phoneNum + "\n";
+                "First Name: " + firstName + "\n" +
+                        "Last Name: " + lastName + "\n" +
+                        "Address: " + address + "\n" +
+                        "Phone Number: " + phoneNum + "\n";
     }
 
 }
