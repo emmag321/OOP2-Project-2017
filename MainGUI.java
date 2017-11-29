@@ -3,16 +3,19 @@ package OOP2_Project_MyShop;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import java.util.ArrayList;
 
 public class MainGUI extends JFrame {
 
     JLabel logoLabel;
     Employee employee = new Employee();
-    ArrayList<Employee> customers;
 
-    ArrayList<Person> employees;
-    static ArrayList<Book> books;
+
+    public static ArrayList<Person> employees = new ArrayList<>();
+    public static ArrayList<Person> customers = new ArrayList<>();
+    public static ArrayList<Book> books = new ArrayList<>();
+
 
     //main method
     public static void main(String[] args) {
@@ -26,6 +29,8 @@ public class MainGUI extends JFrame {
         setResizable (true);
         setLocation  (500,100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        loadSavedData();
 
         Container cpane = getContentPane();
         cpane.setLayout(new FlowLayout());
@@ -124,14 +129,82 @@ public class MainGUI extends JFrame {
         // overriide the default window closing event
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Window is closing",
-                        "Window Closing",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
-                //frame.dispose();
+
+                employees.add(new Employee());
+                books.add(new Book());
+
+                // modified from this source: https://www.tutorialspoint.com/java/java_serialization.htm
+                if (employees.size() > 0) {
+                    try {
+                        FileOutputStream fileOut = new FileOutputStream("employees.dat");
+                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                        out.writeObject(employees);
+                        out.close();
+                        fileOut.close();
+                        System.out.printf("Serialized data to employees.dat file");
+                    } catch (IOException i) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Failed to save employees",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                        i.printStackTrace();
+                    }
+                }
+
+                if (books.size() > 0) {
+                    try {
+                        FileOutputStream fileOut = new FileOutputStream("books.dat");
+                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                        out.writeObject(books);
+                        out.close();
+                        fileOut.close();
+                        System.out.printf("Serialized data to books.dat file");
+                    } catch (IOException i) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Failed to save books",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                        i.printStackTrace();
+                    }
+                }
+
+                MainGUI.this.dispose();
+
             }
         });
+    }
+
+    private void loadSavedData () {
+        // load the employees
+        try {
+            FileInputStream fileIn = new FileInputStream("employees.dat");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            employees = (ArrayList<Person>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+            return;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // load the books
+        try {
+            FileInputStream fileIn = new FileInputStream("books.dat");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            books = (ArrayList<Book>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+            return;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

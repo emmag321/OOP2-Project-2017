@@ -21,6 +21,8 @@
 package OOP2_Project_MyShop;
 
 
+import sun.applet.Main;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
@@ -42,8 +44,8 @@ public class AdminGUI extends JFrame implements ActionListener {
     JTextArea display, customerList;
 
 
-    public static ArrayList<Person> employees;
-    public static ArrayList<Book> books;
+    public static ArrayList<Person> employees = MainGUI.employees;
+    public static ArrayList<Book> books = MainGUI.books;
 
     /*
     public static void main(String[] args) {
@@ -59,7 +61,7 @@ public class AdminGUI extends JFrame implements ActionListener {
     float phoneNum;
 
     public AdminGUI() {
-        newSystem();
+        //newSystem();
 
         DefaultListModel listCust = new DefaultListModel();
         JList list = new JList(listCust);
@@ -291,12 +293,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         books.add(book);
     }
 
-    public void newSystem() {
-        //person & book arrays
-        employees = new ArrayList<Person>();
-        books = new ArrayList<Book>();
-    }
-
+    /*
     public void save() throws IOException {
         ObjectOutputStream os;
         os = new ObjectOutputStream(new FileOutputStream("employees.dat"));
@@ -316,6 +313,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         }
 
     }//here
+    */
 
     //adds employees to system
     public void addEmployee(){
@@ -405,11 +403,12 @@ public class AdminGUI extends JFrame implements ActionListener {
             backButton();//back button
         }
         else if (e.getActionCommand().equals ("New File")){
-            newSystem();
+            //newSystem();
         }
         else if (e.getActionCommand().equals ("Save")){
+            /*
             try{
-                save();
+                //save();
                 showMessage("Data saved successfully");
             }
             catch (IOException f){
@@ -417,10 +416,11 @@ public class AdminGUI extends JFrame implements ActionListener {
                         "Check the console printout to see why ");
                 f.printStackTrace();
             }
+            */
         }
 
         else if (e.getActionCommand() .equals ("Open")){
-            open();
+            //open();
             display();
         }
         else
