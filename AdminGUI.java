@@ -38,11 +38,12 @@ public class AdminGUI extends JFrame implements ActionListener {
     JTextField textPages;
     JTextField textPrice;
     JTextField textIsbn;
+    JTextField textNumInStock;
     JMenu optionsMenu;
     JMenu adminMenu;
     JButton backButton, loginButton, addCustButton, cancelButton, registerButton, bookButton;
     JTextArea display, customerList;
-
+    private JFrame parent;
 
     public static ArrayList<Person> employees = MainGUI.employees;
     public static ArrayList<Book> books = MainGUI.books;
@@ -60,11 +61,13 @@ public class AdminGUI extends JFrame implements ActionListener {
     int password;
     float phoneNum;
 
-    public AdminGUI() {
+    public AdminGUI(JFrame parent) {
         //newSystem();
 
         DefaultListModel listCust = new DefaultListModel();
         JList list = new JList(listCust);
+
+        this.parent = parent;
 
         Container cPane;
 
@@ -112,9 +115,24 @@ public class AdminGUI extends JFrame implements ActionListener {
 
         //referenced code starts here
         // create a table model and set a Column Identifiers to this model
-        Object[] columns = {"Title","Author","Pages","Price","ISBN"};
+        Object[] columns = {"Title","Author","Pages","Price","ISBN", "Num in Stock"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
+
+        // display and saved books
+        for (Book book : books) {
+            Object[] row = new Object[6];
+
+            row[0] = book.getTitle();
+            row[1] = book.getAuthor();
+            row[2] = book.getNumPages();
+            row[3] = book.getPrice();
+            row[4] = book.getIsbn();
+            row[5] = book.getNumInStock();
+
+            // add row to the model
+            model.addRow(row);
+        }
 
         //http://1bestcsharp.blogspot.ie/2015/05/java-jtable-add-delete-update-row.html
         // create JFrame and JTable
@@ -127,6 +145,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         textPages = new JTextField();
         textPrice = new JTextField();
         textIsbn = new JTextField();
+        textNumInStock = new JTextField();
 
         //creating JLabels here
         JLabel titleLabel = new JLabel("Title :");
@@ -134,6 +153,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         JLabel pagesLabel = new JLabel("Pages :");
         JLabel priceLabel = new JLabel("Price :");
         JLabel isbnLabel = new JLabel("ISBN :");
+        JLabel numStockLabel = new JLabel("Stock Qty :");
 
         // set the model to the table
         table.setModel(model);
@@ -148,18 +168,21 @@ public class AdminGUI extends JFrame implements ActionListener {
         textPages.setBounds(70, 280, 100, 25);
         textPrice.setBounds(70, 310, 100, 25);
         textIsbn.setBounds(70, 340, 100, 25);
+        textNumInStock.setBounds(70, 370, 100, 25);
 
         titleLabel.setBounds(20, 220, 100, 25);
         authorLabel.setBounds(20, 250, 100, 25);
         pagesLabel.setBounds(20, 280, 100, 25);
         priceLabel.setBounds(20, 310, 100, 25);
         isbnLabel.setBounds(20, 340, 100, 25);
+        numStockLabel.setBounds(20, 370, 100, 25);
 
         cPane.add(titleLabel);
         cPane.add(authorLabel);
         cPane.add(pagesLabel);
         cPane.add(priceLabel);
         cPane.add(isbnLabel);
+        cPane.add(numStockLabel);
 
 
         btnAdd.setBounds(180, 220, 100, 25);
@@ -180,6 +203,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         cPane.add(textPages);
         cPane.add(textPrice);
         cPane.add(textIsbn);
+        cPane.add(textNumInStock);
 
         // add JButtons to the jframe
         cPane.add(btnAdd);
@@ -195,7 +219,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         btnAdd.addActionListener(new ActionListener(){
 
             // create an array of objects to set the row data
-            Object[] row = new Object[5];
+            Object[] row = new Object[6];
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -204,6 +228,7 @@ public class AdminGUI extends JFrame implements ActionListener {
                 row[2] = textPages.getText();
                 row[3] = textPrice.getText();
                 row[4] = textIsbn.getText();
+                row[5] = textNumInStock.getText();
 
                 // add row to the model
                 model.addRow(row);
@@ -281,14 +306,16 @@ public class AdminGUI extends JFrame implements ActionListener {
         int numPages;
         float price;
         String isbn;
+        int numStock;
 
         title = textTitle.getText();
         author = textAuthor.getText();
         numPages = (Integer.parseInt(textPages.getText()));
         price = (Float.parseFloat(textPrice.getText()));
         isbn = textIsbn.getText();
+        numStock = Integer.parseInt(textNumInStock.getText());
 
-        Book book = new Book(title, author, numPages, price, isbn);
+        Book book = new Book(title, author, numPages, price, isbn, numStock);
 
         books.add(book);
     }
@@ -346,8 +373,8 @@ public class AdminGUI extends JFrame implements ActionListener {
 
     //makes make button go back to MainGUI
     public void backButton(){
-        MainGUI main = new MainGUI();
-        main.setVisible(true);
+        this.dispose();
+        parent.setVisible(true);
     }
 
     //menu bar with - back,quit,save

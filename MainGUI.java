@@ -83,7 +83,7 @@ public class MainGUI extends JFrame {
 
 
                         {
-                            AdminGUI admin = new AdminGUI();
+                            AdminGUI admin = new AdminGUI(MainGUI.this);
                             admin.setVisible(true);
                         }
                     }
@@ -130,9 +130,6 @@ public class MainGUI extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
 
-                employees.add(new Employee());
-                books.add(new Book());
-
                 // modified from this source: https://www.tutorialspoint.com/java/java_serialization.htm
                 if (employees.size() > 0) {
                     try {
@@ -178,8 +175,19 @@ public class MainGUI extends JFrame {
         });
     }
 
+    /*
+    public void saveEmployees () {
+
+    }
+
+    public void saveBooks () {
+
+    }
+    */
+
     private void loadSavedData () {
         // load the employees
+        /*
         try {
             FileInputStream fileIn = new FileInputStream("employees.dat");
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -192,6 +200,7 @@ public class MainGUI extends JFrame {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        */
 
         // load the books
         try {

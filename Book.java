@@ -24,22 +24,24 @@ public class Book implements Serializable {
     private int numPages;
     private double price;
     private String isbn;
+    private int numInStock;
 
 
     //no args constructor
     public Book()
     {
-        this("unknown", "unknown",0, 0, "unknown");
+        this("unknown", "unknown",0, 0, "unknown", 0);
     }
 
     //contructor with args
-    public Book(String title, String author, int numPages, float price, String isbn)
+    public Book(String title, String author, int numPages, float price, String isbn, int numInStock)
     {
         this.title = title;
         this.author = author;
         this.numPages = numPages;
         this.price = price;
         this.isbn = isbn;
+        this.numInStock = numInStock;
     }
     //contructor with args - just one args
     public Book(String title)
@@ -114,6 +116,15 @@ public class Book implements Serializable {
     }
 
     public String getIsbn() { return isbn; }
+
+    public int getNumInStock() {
+        return numInStock;
+    }
+
+    public void setNumInStock(int numInStock) {
+        this.numInStock = numInStock;
+    }
+
     //To String method here
 
     @Override
