@@ -175,19 +175,8 @@ public class MainGUI extends JFrame {
         });
     }
 
-    /*
-    public void saveEmployees () {
-
-    }
-
-    public void saveBooks () {
-
-    }
-    */
-
     private void loadSavedData () {
         // load the employees
-        /*
         try {
             FileInputStream fileIn = new FileInputStream("employees.dat");
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -200,7 +189,6 @@ public class MainGUI extends JFrame {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        */
 
         // load the books
         try {

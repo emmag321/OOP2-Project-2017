@@ -56,6 +56,7 @@ public class AdminGUI extends JFrame implements ActionListener {
     */
 
 
+
     //customer
     String email, firstName, lastName, address, accNum;
     int password;
@@ -153,7 +154,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         JLabel pagesLabel = new JLabel("Pages :");
         JLabel priceLabel = new JLabel("Price :");
         JLabel isbnLabel = new JLabel("ISBN :");
-        JLabel numStockLabel = new JLabel("Stock Qty :");
+        JLabel numInStock = new JLabel("Stock Qty :");
 
         // set the model to the table
         table.setModel(model);
@@ -175,14 +176,14 @@ public class AdminGUI extends JFrame implements ActionListener {
         pagesLabel.setBounds(20, 280, 100, 25);
         priceLabel.setBounds(20, 310, 100, 25);
         isbnLabel.setBounds(20, 340, 100, 25);
-        numStockLabel.setBounds(20, 370, 100, 25);
+        numInStock.setBounds(17, 370, 100, 25);
 
         cPane.add(titleLabel);
         cPane.add(authorLabel);
         cPane.add(pagesLabel);
         cPane.add(priceLabel);
         cPane.add(isbnLabel);
-        cPane.add(numStockLabel);
+        cPane.add(numInStock);
 
 
         btnAdd.setBounds(180, 220, 100, 25);
@@ -233,8 +234,7 @@ public class AdminGUI extends JFrame implements ActionListener {
                 // add row to the model
                 model.addRow(row);
 
-                addBook();
-
+                //addBook();
 
             }
         });
@@ -271,6 +271,7 @@ public class AdminGUI extends JFrame implements ActionListener {
                 textPages.setText(model.getValueAt(i, 2).toString());
                 textPrice.setText(model.getValueAt(i, 3).toString());
                 textIsbn.setText(model.getValueAt(i, 4).toString());
+                textNumInStock.setText(model.getValueAt(i, 5).toString());
             }
         });
 
@@ -290,7 +291,7 @@ public class AdminGUI extends JFrame implements ActionListener {
                     model.setValueAt(textPages.getText(), i, 2);
                     model.setValueAt(textPrice.getText(), i, 3);
                     model.setValueAt(textIsbn.getText(), i, 4);
-
+                    model.setValueAt(textNumInStock.getText(), i, 5);
                 }
                 else{
                     System.out.println("Update Error");
@@ -313,14 +314,14 @@ public class AdminGUI extends JFrame implements ActionListener {
         numPages = (Integer.parseInt(textPages.getText()));
         price = (Float.parseFloat(textPrice.getText()));
         isbn = textIsbn.getText();
-        numStock = Integer.parseInt(textNumInStock.getText());
+        numStock = (Integer.parseInt(textNumInStock.getText()));
 
         Book book = new Book(title, author, numPages, price, isbn, numStock);
 
         books.add(book);
     }
 
-    /*
+
     public void save() throws IOException {
         ObjectOutputStream os;
         os = new ObjectOutputStream(new FileOutputStream("employees.dat"));
@@ -340,7 +341,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         }
 
     }//here
-    */
+
 
     //adds employees to system
     public void addEmployee(){

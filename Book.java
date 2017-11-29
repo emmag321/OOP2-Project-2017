@@ -49,23 +49,6 @@ public class Book implements Serializable {
         this.title = title;
     }
 
-
-
-   /* public Book(String t){
-        title = t;
-        author = "unknown";
-    }
-
-    public Book(String t, String a){
-        title = t;
-        author = a;
-    }
-
-    public Book(){
-        title = "unknown";
-        author = "unknown";
-    }*/
-
     //setters
     // public void setFirstName(String firstName){this.firstName = firstName;}
     public void setTitle(String Title)

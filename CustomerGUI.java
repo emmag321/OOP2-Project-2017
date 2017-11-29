@@ -39,15 +39,13 @@ public class CustomerGUI extends JFrame implements ActionListener {
         JComboBox comboBooks = new JComboBox();
 
         createOptionsMenu();
-        createAdminMenu();
-        //createCustomerMenu();
 
         //menu bar for customer section
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
         menuBar.setBackground(Color.green);
         menuBar.add(optionsMenu);
-        menuBar.add(adminMenu);
+        //menuBar.add(adminMenu);
 
         // add all the names into it
         for(Book bb: books)
@@ -81,22 +79,7 @@ public class CustomerGUI extends JFrame implements ActionListener {
         optionsMenu.add(item);
     }
 
-    //menubar with Add Employee,Display Employee,Add Book,Display Book
-    private void createAdminMenu() {
-        JMenuItem item;
 
-        adminMenu = new JMenu("Admin");
-
-        //add employee button
-        item = new JMenuItem("Add Employee");
-        item.addActionListener(this);
-        adminMenu.add(item);
-
-        //lists employee button
-        item = new JMenuItem("Display Employee");
-        item.addActionListener(this);
-        adminMenu.add(item);
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
