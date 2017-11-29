@@ -42,14 +42,15 @@ public class AdminGUI extends JFrame implements ActionListener {
     JTextArea display, customerList;
 
 
-    ArrayList<Person> employees;
-    static ArrayList<Book> books;
+    public static ArrayList<Person> employees;
+    public static ArrayList<Book> books;
 
-
+    /*
     public static void main(String[] args) {
         AdminGUI gui = new AdminGUI();
         gui.setVisible(true);
     }
+    */
 
 
     //customer
@@ -276,16 +277,16 @@ public class AdminGUI extends JFrame implements ActionListener {
         String title;
         String author;
         int numPages;
-        double price;
+        float price;
         String isbn;
 
         title = textTitle.getText();
         author = textAuthor.getText();
         numPages = (Integer.parseInt(textPages.getText()));
-        price = (Double.parseDouble(textPrice.getText()));
+        price = (Float.parseFloat(textPrice.getText()));
         isbn = textIsbn.getText();
 
-        Book book = new Book();
+        Book book = new Book(title, author, numPages, price, isbn);
 
         books.add(book);
     }
