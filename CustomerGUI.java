@@ -32,20 +32,9 @@ public class CustomerGUI extends JFrame {
 
         JComboBox comboBooks = new JComboBox();
 
-
-
-
-
         // add all the names into it
         for(Book bb: books)
             comboBooks.addItem( bb.getTitle() );
-        // Allow the user to pick one name from the combo box
-       // JOptionPane.showMessageDialog(null,title,"Person list", JOptionPane.PLAIN_MESSAGE);
-        // find the index position of the one selected
-        //int idx = title.getSelectedIndex();
-        // display this item from the array
-        //JOptionPane.showMessageDialog(null,"The person you picked was person no " + idx +
-         //       " whose full details are as follows: \n" + book[idx].toString());
 
         cPane.add(comboBooks);
     }

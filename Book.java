@@ -41,6 +41,11 @@ public class Book implements Serializable {
         this.price = price;
         this.isbn = isbn;
     }
+    //contructor with args - just one args
+    public Book(String title)
+    {
+        this.title = title;
+    }
 
 
 

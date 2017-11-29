@@ -119,11 +119,18 @@ public class AdminGUI extends JFrame implements ActionListener {
 
         // create JTextFields
         //JTextField textId = new JTextField();
-         textTitle = new JTextField();
-         textAuthor = new JTextField();
-         textPages = new JTextField();
-         textPrice = new JTextField();
-         textIsbn = new JTextField();
+        textTitle = new JTextField();
+        textAuthor = new JTextField();
+        textPages = new JTextField();
+        textPrice = new JTextField();
+        textIsbn = new JTextField();
+
+        //creating JLabels here
+        JLabel titleLabel = new JLabel("Title :");
+        JLabel authorLabel = new JLabel("Author :");
+        JLabel pagesLabel = new JLabel("Pages :");
+        JLabel priceLabel = new JLabel("Price :");
+        JLabel isbnLabel = new JLabel("ISBN :");
 
         // set the model to the table
         table.setModel(model);
@@ -133,15 +140,28 @@ public class AdminGUI extends JFrame implements ActionListener {
         JButton btnDelete = new JButton("Delete");
         JButton btnUpdate = new JButton("Update");
 
-        textTitle.setBounds(20, 220, 100, 25);
-        textAuthor.setBounds(20, 250, 100, 25);
-        textPages.setBounds(20, 280, 100, 25);
-        textPrice.setBounds(20, 310, 100, 25);
-        textIsbn.setBounds(20, 340, 100, 25);
+        textTitle.setBounds(70, 220, 100, 25);
+        textAuthor.setBounds(70, 250, 100, 25);
+        textPages.setBounds(70, 280, 100, 25);
+        textPrice.setBounds(70, 310, 100, 25);
+        textIsbn.setBounds(70, 340, 100, 25);
 
-        btnAdd.setBounds(150, 220, 100, 25);
-        btnUpdate.setBounds(150, 265, 100, 25);
-        btnDelete.setBounds(150, 310, 100, 25);
+        titleLabel.setBounds(20, 220, 100, 25);
+        authorLabel.setBounds(20, 250, 100, 25);
+        pagesLabel.setBounds(20, 280, 100, 25);
+        priceLabel.setBounds(20, 310, 100, 25);
+        isbnLabel.setBounds(20, 340, 100, 25);
+
+        cPane.add(titleLabel);
+        cPane.add(authorLabel);
+        cPane.add(pagesLabel);
+        cPane.add(priceLabel);
+        cPane.add(isbnLabel);
+
+
+        btnAdd.setBounds(180, 220, 100, 25);
+        btnUpdate.setBounds(180, 265, 100, 25);
+        btnDelete.setBounds(180, 310, 100, 25);
 
         // create JScrollPane
         JScrollPane pane = new JScrollPane(table);
@@ -311,8 +331,6 @@ public class AdminGUI extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null,firstName + "s account has successfully created");
     }
 
-
-
     //displays employees that have been put into system
     public void display(){
         JTextArea area = new JTextArea();
@@ -378,8 +396,6 @@ public class AdminGUI extends JFrame implements ActionListener {
         }
         else if (e.getActionCommand().equals ("Add Employee")){
             addEmployee();//adds employee here to system
-            CustomerGUI custGUI = new CustomerGUI();
-            custGUI.setVisible(true);
         }
         else if (e.getActionCommand().equals ("Display Employee")){
             display();//displays employye

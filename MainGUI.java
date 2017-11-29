@@ -1,13 +1,16 @@
 package OOP2_Project_MyShop;
 
-        import javax.swing.*;
-        import java.awt.*;
-        import java.awt.event.ActionEvent;
-        import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class MainGUI extends JFrame {
 
     JLabel logoLabel;
+    Employee employee = new Employee();
+    ArrayList<Employee> customers;
 
     //main method
     public static void main(String[] args) {
@@ -52,14 +55,54 @@ public class MainGUI extends JFrame {
         adminButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                loginGUI login = new loginGUI();
-                login.setVisible(true);
+               // loginGUI login = new loginGUI();
+               // login.setVisible(true);
                 //MainGUI.setVisable(false);
+                if(e.getActionCommand().equals("Admin"))
+                {
+                    String adminUserName = "emma";
+                    int password = 1234;
+                    String message;
+
+                    employee.setEmail(JOptionPane.showInputDialog(null,"Enter user name:"));
+                    employee.setPassword(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Pin:")));
+
+                    if(employee.getEmail().equals(adminUserName) && employee.getPassword() == password)
+                    {
+                        JOptionPane.showMessageDialog(null,"Welcome to the System " + adminUserName, "Welcome!",
+                                JOptionPane.INFORMATION_MESSAGE);
+
+                       // JOptionPane.showMessageDialog(null,firstName + "s account has successfully created");
+
+
+                        {
+                            AdminGUI admin = new AdminGUI();
+                            admin.setVisible(true);
+                        }
+                    }
+
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,"Error! Your email or pin was incorrect \n HINT UserName: emma \nPin: 1234","Warning!",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                }
 
             }
         });
 
-       //closes system when quit is clicked.. shows warning message before hand
+        //makes button do something here
+        customerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CustomerGUI custGUI = new CustomerGUI();
+                custGUI.setVisible(true);
+                //CustomerGUI.setVisable(false);
+
+            }
+        });
+
+        //closes system when quit is clicked.. shows warning message before hand
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
