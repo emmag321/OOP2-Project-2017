@@ -117,7 +117,8 @@ public class Book implements Serializable {
                 "Author: " + author + "\n" +
                 "Number of Pages: " +numPages + "\n" +
                 "Price: " +price + "\n" +
-                "ISBN: " +isbn + "\n" ;
+                "ISBN: " +isbn + "\n" +
+                "Stock Qty: " +numInStock + "\n";
     }
 }
 

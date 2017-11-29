@@ -11,9 +11,7 @@ public class MainGUI extends JFrame {
     JLabel logoLabel;
     Employee employee = new Employee();
 
-
     public static ArrayList<Person> employees = new ArrayList<>();
-    public static ArrayList<Person> customers = new ArrayList<>();
     public static ArrayList<Book> books = new ArrayList<>();
 
 
@@ -62,8 +60,8 @@ public class MainGUI extends JFrame {
         adminButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               // loginGUI login = new loginGUI();
-               // login.setVisible(true);
+                // loginGUI login = new loginGUI();
+                // login.setVisible(true);
                 //MainGUI.setVisable(false);
                 if(e.getActionCommand().equals("Admin"))
                 {
@@ -79,7 +77,7 @@ public class MainGUI extends JFrame {
                         JOptionPane.showMessageDialog(null,"Welcome to the System " + adminUserName, "Welcome!",
                                 JOptionPane.INFORMATION_MESSAGE);
 
-                       // JOptionPane.showMessageDialog(null,firstName + "s account has successfully created");
+                        // JOptionPane.showMessageDialog(null,firstName + "s account has successfully created");
 
 
                         {
@@ -126,7 +124,7 @@ public class MainGUI extends JFrame {
         // prevent the default window closing operation
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        // overriide the default window closing event
+        // override the default window closing event
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
 
@@ -177,6 +175,7 @@ public class MainGUI extends JFrame {
 
     private void loadSavedData () {
         // load the employees
+
         try {
             FileInputStream fileIn = new FileInputStream("employees.dat");
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -185,7 +184,6 @@ public class MainGUI extends JFrame {
             fileIn.close();
         } catch (IOException i) {
             i.printStackTrace();
-            return;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

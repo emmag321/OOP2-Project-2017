@@ -234,7 +234,7 @@ public class AdminGUI extends JFrame implements ActionListener {
                 // add row to the model
                 model.addRow(row);
 
-                //addBook();
+                addBook();
 
             }
         });
