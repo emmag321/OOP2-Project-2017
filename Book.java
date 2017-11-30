@@ -12,8 +12,6 @@
 //Emma_Griffin_OOP2_Project
 package OOP2_Project_MyShop;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.Serializable;
 
 public class Book implements Serializable {
@@ -76,6 +74,9 @@ public class Book implements Serializable {
         this.isbn = isbn;
     }
 
+    public void setNumInStock(int numInStock) {
+        this.numInStock = numInStock;
+    }
 
     //getters
     public String getTitle()
@@ -104,13 +105,8 @@ public class Book implements Serializable {
         return numInStock;
     }
 
-    public void setNumInStock(int numInStock) {
-        this.numInStock = numInStock;
-    }
+    public void setNumMinusOne(){this.numInStock=getNumInStock()-1;}
 
-    public void setNumMinusOne(){
-        this.numInStock=getNumInStock()-1;
-    }
 
     //To String method here
 

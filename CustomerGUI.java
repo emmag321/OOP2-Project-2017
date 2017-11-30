@@ -49,7 +49,7 @@ public class CustomerGUI {
             actualBook=books.get(i);
             JButton btn=new JButton(actualBook.getTitle());
             buttons.add(btn);
-            System.out.println(buttons.get(i));
+            //System.out.println(buttons.get(i));
 
             btn.addActionListener(new ActionListener() {
                 @Override
@@ -61,10 +61,6 @@ public class CustomerGUI {
                                 actualBook = books.get(i);
                     }
 
-
-                    //if(buttons.contains(btn.getText()))
-                     //   System.out.println(buttons.get())
-                    //System.out.println(btn.getText());
 
                     actualBook.setNumMinusOne();
                     System.out.println(actualBook);
@@ -99,7 +95,6 @@ public class CustomerGUI {
 
 
         JLabel text = new JLabel("By Clicking on the buttons you'll purchase the item");
-        //JTextField text=new JTextField("By Clicking on the buttons you'll purchase the item");
         text.setVisible(true);
         flowLayout.add(text);
         mainframe.add(flowLayout);

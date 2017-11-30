@@ -44,12 +44,6 @@ public class AdminGUI extends JFrame implements ActionListener {
     public static ArrayList<Person> employees = MainGUI.employees;
     public static ArrayList<Book> books = MainGUI.books;
 
-    /*
-    public static void main(String[] args) {
-        AdminGUI gui = new AdminGUI();
-        gui.setVisible(true);
-    }
-    */
 
     public AdminGUI(JFrame parent) { // constructor starts here
 
@@ -206,9 +200,6 @@ public class AdminGUI extends JFrame implements ActionListener {
 
         //sets the size of window
         cPane.setSize(900,400);
-        // frame.setLocationRelativeTo(null);
-        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // frame.setVisible(true);
 
         // action listener for button add row
         btnAdd.addActionListener(new ActionListener(){
