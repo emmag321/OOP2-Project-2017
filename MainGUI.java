@@ -100,8 +100,9 @@ public class MainGUI extends JFrame {
         customerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CustomerGUI custGUI = new CustomerGUI();
-                custGUI.setVisible(true);
+                //CustomerGUI custGUI =
+                new CustomerGUI();
+                //custGUI.setVisible(true);
                 //CustomerGUI.setVisable(false);
 
             }

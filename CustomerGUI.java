@@ -4,181 +4,53 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
-public class CustomerGUI extends JFrame implements ActionListener {
+public class CustomerGUI {
 
-    JMenu optionsMenu;
-    JLabel purchase;
-    JComboBox comboBooks;
-    JButton purchaseButton;
-
-
+    private static JFrame mainframe=new JFrame("Customer");
     ArrayList<Book> books = AdminGUI.books;
     ArrayList<Person> employees = AdminGUI.employees;
     private static Book actualBook=null;
 
-    //was trying to make this a parent class but i failed
-    //making this class the parent class
-    // private JFrame parent;
-
-    //was trying to make this a parent class but i failed
-    // public static ArrayList<Person> employees = MainGUI.employees;
-    // public static ArrayList<Book> books = MainGUI.books;
-
-
-    public CustomerGUI(/*JFrame parent*/)
-    {
-        Container cPane;
-
-        //was trying to make this a parent class but i failed
-        //this.parent = parent;
-
-        //setting default values for GUI
-        setTitle("Book Shop");
-        setSize(900, 550);
-        setResizable(true);
-        setLocation(200, 100);
-
-        //this is what the GUI does when you press the 'x' button
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        cPane = getContentPane();
-        cPane.setLayout(new FlowLayout());
-        cPane.setBackground(new Color(240,215,240));
-
-        //creating JCombo here
-         comboBooks = new JComboBox();
-
-        createOptionsMenu();
-
-        //menu bar for customer section
-        JMenuBar menuBar = new JMenuBar();
-        setJMenuBar(menuBar);
-        menuBar.setBackground(Color.green);
-        menuBar.add(optionsMenu);
-        //menuBar.add(adminMenu);
-
-        //creates new button JButton here
-        JButton backButton = new JButton("BACK");
-
-        //creating JLabels here
-        purchase = new JLabel("Purchase :");
-
-        //creates JButton
-        purchaseButton = new JButton("Purchase");
-
-        //set bounds for JButton
-        comboBooks.setBounds(180, 120, 100, 25);
-        //set bounds for JButton
-        purchaseButton.setBounds(180, 160, 100, 25);
-        //set bounds for JButton
-        purchase.setBounds(110, 120, 100, 25);
-
-        //add labels to GUI here to make visable
-        cPane.add(purchase);
-        //adds JButton to window
-        cPane.add(purchaseButton);
-        //adds to window here
-        cPane.add(backButton);
-
-        cPane.setBounds(0, 0, 880, 200);
-
-        cPane.setLayout(null);
-
-        //the back button - bring u to MainGUI
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
+    public CustomerGUI(){
+        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        mainframe.setBounds(200,200,500,500);
+        JPanel flowy=new JPanel(new FlowLayout());
+        GridLayout grid=null;
+        if(books.size()==0||books.size()==1){
+            grid=new GridLayout(1,1);
+        }else if (books.size()==2){
+            grid=new GridLayout(2,1);
+        }else{
+            for(int i=2;i<books.size();i++){
+                grid=new GridLayout(i,1);
             }
-        });
+        }
+        JPanel contentPanel=new JPanel(grid);
 
-
-        // add all the names into it
-
-        for(Book bb: books)
-            actualBook=bb;
-            comboBooks.addItem( actualBook.getTitle() );
-           // comboBooks.addItemListener(ItemListener actualBook)
-
-
-            /*comboBooks.addActionListener(new ActionListener() {
+        for (int i=0;i<books.size();i++){
+            actualBook=null;
+            actualBook=books.get(i);
+            JButton btn=new JButton(actualBook.getTitle());
+            btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     actualBook.setNumMinusOne();
-                    JOptionPane.showMessageDialog(null,"Thanks for purchasing with us");
+                    JOptionPane.showMessageDialog(null,"Thank you for purchasing the book:"+actualBook.getTitle());
                 }
             });
-*/
-        cPane.add(comboBooks);
+            contentPanel.add(btn);
+        }
+        contentPanel.setVisible(true);
+        flowy.add(contentPanel);
+
+
+
+        JTextField text=new JTextField("By Clicking on the buttons you'll purchase the item");
+        text.setVisible(true);
+        flowy.add(text);
+        mainframe.add(flowy);
+        mainframe.setVisible(true);
     }
-
-/*
-    //trying to create process here
-    public process(){
-
-
-
-        if(stock > 0)
-        {
-            JOptionPane.showMessageDialog("Book Purchased");
-        }
-
-
-
-    }*/
-
-
-    //makes make button go back to MainGUI
-    /*public void backButton(){
-        MainGUI main = new MainGUI();
-        main.setVisible(true);
-    }*/
-
-    //menu bar with - back,quit,save
-    private void createOptionsMenu() {
-        JMenuItem item;
-
-        optionsMenu = new JMenu("Options");
-
-        item = new JMenuItem("Back");
-        item.addActionListener(this);
-        optionsMenu.add(item);
-
-        item = new JMenuItem("Quit");
-        item.addActionListener(this);
-        optionsMenu.add(item);
-
-        item = new JMenuItem("Save");
-        item.addActionListener(this);
-        optionsMenu.add(item);
-    }
-
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Quit")) {
-            showMessage("Shutting down the system");
-            System.exit(0);
-        }
-        else if (e.getActionCommand().equals ("Add Employee")){
-            //addEmployee();//adds employee here to system
-        }
-        else if (e.getActionCommand().equals ("Display Employee")){
-            //display();//displays employye
-            //open();
-        }
-        else if (e.getActionCommand().equals ("Back")){
-            //backButton();//back button
-        }
-        else
-            showMessage("Did not work");
-    }
-
-    public void showMessage (String s){ JOptionPane.showMessageDialog(null,s); }
-
 }
