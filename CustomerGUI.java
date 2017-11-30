@@ -9,19 +9,26 @@ import java.util.ArrayList;
 public class CustomerGUI extends JFrame implements ActionListener {
 
     JMenu optionsMenu;
-    JMenu adminMenu;
+
 
     ArrayList<Book> books = AdminGUI.books;
     ArrayList<Person> employees = AdminGUI.employees;
 
-    public static void main(String[] args) {
-        CustomerGUI gui = new CustomerGUI();
-        gui.setVisible(true);
-    }
+    //was trying to make this a parent class but i failed
+    //making this class the parent class
+    // private JFrame parent;
 
-    public CustomerGUI()
+    //was trying to make this a parent class but i failed
+    // public static ArrayList<Person> employees = MainGUI.employees;
+    // public static ArrayList<Book> books = MainGUI.books;
+
+
+    public CustomerGUI(/*JFrame parent*/)
     {
         Container cPane;
+
+        //was trying to make this a parent class but i failed
+        //this.parent = parent;
 
         //setting default values for GUI
         setTitle("Book Shop");

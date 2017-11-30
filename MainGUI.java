@@ -52,11 +52,12 @@ public class MainGUI extends JFrame {
 
         cpane.setLayout(null);
 
+        //adds buttons to window
         cpane.add(adminButton);
         cpane.add(customerButton);
         cpane.add(quitButton);
 
-        //makes button do something here
+        //makes admin button open up login windows for username and pass - the displays AdminGUI
         adminButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,13 +78,12 @@ public class MainGUI extends JFrame {
                         JOptionPane.showMessageDialog(null,"Welcome to the System " + adminUserName, "Welcome!",
                                 JOptionPane.INFORMATION_MESSAGE);
 
-                        // JOptionPane.showMessageDialog(null,firstName + "s account has successfully created");
-
 
                         {
                             AdminGUI admin = new AdminGUI(MainGUI.this);
                             admin.setVisible(true);
                         }
+
                     }
 
                     else

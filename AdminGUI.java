@@ -13,7 +13,7 @@
  *    Author: unknown- doesn't say
  *    Site owner/sponsor: 1bestcsharp.blogspot.ie
  *    Date: unknown- doesn't say
- *    Code version: unknown- doesn't say
+ *    Code version: edited 26/11/17
  *    Availability: http://1bestcsharp.blogspot.ie/2015/05/java-jtable-add-delete-update-row.html(Accessed 27/11/2017)
  *    Modified: changed to suit my project and to be displayed with in this GUI
  *****************************************************/
@@ -32,17 +32,13 @@ import java.util.*;
 
 public class AdminGUI extends JFrame implements ActionListener {
 
+    //creating JTextField, JMenu, JButton, JTextArea here - they are called below then
+    JTextField textTitle, textAuthor, textPages, textPrice, textIsbn, textNumInStock;
+    JMenu optionsMenu, adminMenu;
+    JButton backButton, bookButton;
+    JTextArea display;
 
-    JTextField textTitle;
-    JTextField textAuthor;
-    JTextField textPages;
-    JTextField textPrice;
-    JTextField textIsbn;
-    JTextField textNumInStock;
-    JMenu optionsMenu;
-    JMenu adminMenu;
-    JButton backButton, loginButton, addCustButton, cancelButton, registerButton, bookButton;
-    JTextArea display, customerList;
+    //making this class the parent class
     private JFrame parent;
 
     public static ArrayList<Person> employees = MainGUI.employees;
@@ -55,19 +51,12 @@ public class AdminGUI extends JFrame implements ActionListener {
     }
     */
 
-
-
-    //customer
-    String email, firstName, lastName, address, accNum;
-    int password;
-    float phoneNum;
-
     public AdminGUI(JFrame parent) {
-        //newSystem();
 
         DefaultListModel listCust = new DefaultListModel();
         JList list = new JList(listCust);
 
+        //makes this class the parent - feeds threw info
         this.parent = parent;
 
         Container cPane;
@@ -164,6 +153,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         JButton btnDelete = new JButton("Delete");
         JButton btnUpdate = new JButton("Update");
 
+        //setting bounds of my JTextFields here
         textTitle.setBounds(70, 220, 100, 25);
         textAuthor.setBounds(70, 250, 100, 25);
         textPages.setBounds(70, 280, 100, 25);
@@ -171,13 +161,15 @@ public class AdminGUI extends JFrame implements ActionListener {
         textIsbn.setBounds(70, 340, 100, 25);
         textNumInStock.setBounds(70, 370, 100, 25);
 
+        //setting bounds of my JLabels here
         titleLabel.setBounds(20, 220, 100, 25);
         authorLabel.setBounds(20, 250, 100, 25);
         pagesLabel.setBounds(20, 280, 100, 25);
         priceLabel.setBounds(20, 310, 100, 25);
         isbnLabel.setBounds(20, 340, 100, 25);
-        numInStock.setBounds(17, 370, 100, 25);
+        numInStock.setBounds(13, 370, 100, 25);
 
+        //add labels to GUI here to make visable
         cPane.add(titleLabel);
         cPane.add(authorLabel);
         cPane.add(pagesLabel);
@@ -185,20 +177,21 @@ public class AdminGUI extends JFrame implements ActionListener {
         cPane.add(isbnLabel);
         cPane.add(numInStock);
 
-
+        //setting bounds for my buttons here
         btnAdd.setBounds(180, 220, 100, 25);
         btnUpdate.setBounds(180, 265, 100, 25);
         btnDelete.setBounds(180, 310, 100, 25);
 
-        // create JScrollPane
+        // create JScrollPane - this allows you to be able to scroll with in data grid
         JScrollPane pane = new JScrollPane(table);
         pane.setBounds(0, 0, 880, 200);
 
         cPane.setLayout(null);
 
+        //create window pane to jframe here
         cPane.add(pane);
 
-        // add JTextFields to the jframe
+        // add JTextFields to the window
         cPane.add(textTitle);
         cPane.add(textAuthor);
         cPane.add(textPages);
@@ -206,17 +199,18 @@ public class AdminGUI extends JFrame implements ActionListener {
         cPane.add(textIsbn);
         cPane.add(textNumInStock);
 
-        // add JButtons to the jframe
+        //add JButtons to the jframe
         cPane.add(btnAdd);
         cPane.add(btnDelete);
         cPane.add(btnUpdate);
 
+        //sets the size of window
         cPane.setSize(900,400);
         // frame.setLocationRelativeTo(null);
         // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // frame.setVisible(true);
 
-        // button add row
+        // action listener for button add row
         btnAdd.addActionListener(new ActionListener(){
 
             // create an array of objects to set the row data
@@ -239,7 +233,7 @@ public class AdminGUI extends JFrame implements ActionListener {
             }
         });
 
-        // button remove row
+        // action listener - button remove row
         btnDelete.addActionListener(new ActionListener(){
 
             @Override
@@ -301,7 +295,9 @@ public class AdminGUI extends JFrame implements ActionListener {
         //referenced code ends here
     }
 
+    //add book method here
     private void addBook() {
+        //my attributes here
         String title;
         String author;
         int numPages;
@@ -309,6 +305,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         String isbn;
         int numStock;
 
+        //this basically reads in the text that was inserted into these fields
         title = textTitle.getText();
         author = textAuthor.getText();
         numPages = (Integer.parseInt(textPages.getText()));
@@ -321,14 +318,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         books.add(book);
     }
 
-
-    public void save() throws IOException {
-        ObjectOutputStream os;
-        os = new ObjectOutputStream(new FileOutputStream("employees.dat"));
-        os.writeObject(employees);
-        os.close();
-    }
-
+    //open method
     public void open() {
         try {
             ObjectInputStream is;
@@ -426,30 +416,10 @@ public class AdminGUI extends JFrame implements ActionListener {
         }
         else if (e.getActionCommand().equals ("Display Employee")){
             display();//displays employye
+            open();
         }
         else if (e.getActionCommand().equals ("Back")){
             backButton();//back button
-        }
-        else if (e.getActionCommand().equals ("New File")){
-            //newSystem();
-        }
-        else if (e.getActionCommand().equals ("Save")){
-            /*
-            try{
-                //save();
-                showMessage("Data saved successfully");
-            }
-            catch (IOException f){
-                showMessage("Not able to save the file:\n"+
-                        "Check the console printout to see why ");
-                f.printStackTrace();
-            }
-            */
-        }
-
-        else if (e.getActionCommand() .equals ("Open")){
-            //open();
-            display();
         }
         else
             showMessage("Did not work");
