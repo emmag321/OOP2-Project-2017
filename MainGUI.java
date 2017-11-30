@@ -88,7 +88,7 @@ public class MainGUI extends JFrame {
 
                     else
                     {
-                        JOptionPane.showMessageDialog(null,"Error! Your email or pin was incorrect \n HINT UserName: emma \nPin: 1234","Warning!",
+                        JOptionPane.showMessageDialog(null,"Error! Your email or pin was incorrect \n HINT UserName: e \nPass:: 1","Warning!",
                                 JOptionPane.ERROR_MESSAGE);
                     }
                 }
