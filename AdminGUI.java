@@ -51,7 +51,7 @@ public class AdminGUI extends JFrame implements ActionListener {
     }
     */
 
-    public AdminGUI(JFrame parent) {
+    public AdminGUI(JFrame parent) { // constructor starts here
 
         DefaultListModel listCust = new DefaultListModel();
         JList list = new JList(listCust);
@@ -293,7 +293,7 @@ public class AdminGUI extends JFrame implements ActionListener {
             }
         });
         //referenced code ends here
-    }
+    } // constructor ends here
 
     //add book method here
     private void addBook() {
@@ -425,6 +425,7 @@ public class AdminGUI extends JFrame implements ActionListener {
             showMessage("Did not work");
     }
 
+    //this displays
     public void showMessage (String s){ JOptionPane.showMessageDialog(null,s); }
 
     public void showMessage (JTextArea s){

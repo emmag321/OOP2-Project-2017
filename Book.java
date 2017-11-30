@@ -108,6 +108,10 @@ public class Book implements Serializable {
         this.numInStock = numInStock;
     }
 
+    public void setNumMinusOne(){
+        this.numInStock=getNumInStock()-1;
+    }
+
     //To String method here
 
     @Override

@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 public class CustomerGUI extends JFrame implements ActionListener {
@@ -16,6 +18,7 @@ public class CustomerGUI extends JFrame implements ActionListener {
 
     ArrayList<Book> books = AdminGUI.books;
     ArrayList<Person> employees = AdminGUI.employees;
+    private static Book actualBook=null;
 
     //was trying to make this a parent class but i failed
     //making this class the parent class
@@ -95,11 +98,39 @@ public class CustomerGUI extends JFrame implements ActionListener {
 
 
         // add all the names into it
-        for(Book bb: books)
-            comboBooks.addItem( bb.getTitle() );
 
+        for(Book bb: books)
+            actualBook=bb;
+            comboBooks.addItem( actualBook.getTitle() );
+           // comboBooks.addItemListener(ItemListener actualBook)
+
+
+            /*comboBooks.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    actualBook.setNumMinusOne();
+                    JOptionPane.showMessageDialog(null,"Thanks for purchasing with us");
+                }
+            });
+*/
         cPane.add(comboBooks);
     }
+
+/*
+    //trying to create process here
+    public process(){
+
+
+
+        if(stock > 0)
+        {
+            JOptionPane.showMessageDialog("Book Purchased");
+        }
+
+
+
+    }*/
+
 
     //makes make button go back to MainGUI
     /*public void backButton(){
