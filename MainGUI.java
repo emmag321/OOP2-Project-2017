@@ -66,8 +66,8 @@ public class MainGUI extends JFrame {
                 //MainGUI.setVisable(false);
                 if(e.getActionCommand().equals("Admin"))
                 {
-                    String adminUserName = "emma";
-                    int password = 1234;
+                    String adminUserName = "e";
+                    int password = 1;
                     String message;
 
                     employee.setEmail(JOptionPane.showInputDialog(null,"Enter user name:"));
