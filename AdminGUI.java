@@ -66,7 +66,7 @@ public class AdminGUI extends JFrame implements ActionListener {
 
         cPane = getContentPane();
         cPane.setLayout(new FlowLayout());
-        cPane.setBackground(new Color(240,210,240));
+        cPane.setBackground(new Color(240, 210, 240));
 
         createOptionsMenu();
         createAdminMenu();
@@ -99,7 +99,7 @@ public class AdminGUI extends JFrame implements ActionListener {
 
         //referenced code starts here
         // create a table model and set a Column Identifiers to this model
-        Object[] columns = {"Title","Author","Pages","Price","ISBN", "Num in Stock"};
+        Object[] columns = {"Title", "Author", "Pages", "Price", "ISBN", "Num in Stock"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
 
@@ -199,13 +199,14 @@ public class AdminGUI extends JFrame implements ActionListener {
         cPane.add(btnUpdate);
 
         //sets the size of window
-        cPane.setSize(900,400);
+        cPane.setSize(900, 400);
 
         // action listener for button add row
-        btnAdd.addActionListener(new ActionListener(){
+        btnAdd.addActionListener(new ActionListener() {
 
             // create an array of objects to set the row data
             Object[] row = new Object[6];
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -225,28 +226,27 @@ public class AdminGUI extends JFrame implements ActionListener {
         });
 
         // action listener - button remove row
-        btnDelete.addActionListener(new ActionListener(){
+        btnDelete.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 // i = the index of the selected row
                 int i = table.getSelectedRow();
-                if(i >= 0){
+                if (i >= 0) {
                     // remove a row from jtable
                     model.removeRow(i);
-                }
-                else{
+                } else {
                     System.out.println("Delete Error");
                 }
             }
         });
 
         // get selected row data From table to textfields
-        table.addMouseListener(new MouseAdapter(){
+        table.addMouseListener(new MouseAdapter() {
 
             @Override
-            public void mouseClicked(MouseEvent e){
+            public void mouseClicked(MouseEvent e) {
 
                 // i = the index of the selected row
                 int i = table.getSelectedRow();
@@ -261,7 +261,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         });
 
         // button update row
-        btnUpdate.addActionListener(new ActionListener(){
+        btnUpdate.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -269,16 +269,14 @@ public class AdminGUI extends JFrame implements ActionListener {
                 // i = the index of the selected row
                 int i = table.getSelectedRow();
 
-                if(i >= 0)
-                {
+                if (i >= 0) {
                     model.setValueAt(textTitle.getText(), i, 0);
                     model.setValueAt(textAuthor.getText(), i, 1);
                     model.setValueAt(textPages.getText(), i, 2);
                     model.setValueAt(textPrice.getText(), i, 3);
                     model.setValueAt(textIsbn.getText(), i, 4);
                     model.setValueAt(textNumInStock.getText(), i, 5);
-                }
-                else{
+                } else {
                     System.out.println("Update Error");
                 }
             }
@@ -325,7 +323,7 @@ public class AdminGUI extends JFrame implements ActionListener {
 
 
     //adds employees to system
-    public void addEmployee(){
+    public void addEmployee() {
         String firstName = JOptionPane.showInputDialog("Enter first name: ");
         String lastName = JOptionPane.showInputDialog("Enter surname: ");
         String address = JOptionPane.showInputDialog("Enter address: ");
@@ -333,28 +331,27 @@ public class AdminGUI extends JFrame implements ActionListener {
         String email = JOptionPane.showInputDialog("enter email:");
         String userName = JOptionPane.showInputDialog("enter user name:");
         int password = (Integer.parseInt(JOptionPane.showInputDialog("enter password(must be digits):")));
-        Employee employee = new Employee(firstName,lastName,address,phoneNum, email, userName, password);
+        Employee employee = new Employee(firstName, lastName, address, phoneNum, email, userName, password);
         employees.add(employee);
 
-        JOptionPane.showMessageDialog(null,firstName + "s account has successfully created");
+        JOptionPane.showMessageDialog(null, firstName + "s account has successfully created");
     }
 
     //displays employees that have been put into system
-    public void display(){
+    public void display() {
         JTextArea area = new JTextArea();
         int numCustomers = employees.size();
-        if (numCustomers>0) {
+        if (numCustomers > 0) {
             area.setText("Employees: \n\n");
-            for (int i = 0; i<numCustomers; i++)
-                area.append("User no: " + i + " " + employees.get(i).toString()+"\n");
+            for (int i = 0; i < numCustomers; i++)
+                area.append("User no: " + i + " " + employees.get(i).toString() + "\n");
             showMessage(area);
-        }
-        else
+        } else
             showMessage("No Users in the system");
     }
 
     //makes make button go back to MainGUI
-    public void backButton(){
+    public void backButton() {
         this.dispose();
         parent.setVisible(true);
     }
@@ -401,25 +398,23 @@ public class AdminGUI extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("Quit")) {
             showMessage("Shutting down the system");
             System.exit(0);
-        }
-        else if (e.getActionCommand().equals ("Add Employee")){
+        } else if (e.getActionCommand().equals("Add Employee")) {
             addEmployee();//adds employee here to system
-        }
-        else if (e.getActionCommand().equals ("Display Employee")){
+        } else if (e.getActionCommand().equals("Display Employee")) {
             display();//displays employye
             open();
-        }
-        else if (e.getActionCommand().equals ("Back")){
+        } else if (e.getActionCommand().equals("Back")) {
             backButton();//back button
-        }
-        else
+        } else
             showMessage("Did not work");
     }
 
     //this displays
-    public void showMessage (String s){ JOptionPane.showMessageDialog(null,s); }
+    public void showMessage(String s) {
+        JOptionPane.showMessageDialog(null, s);
+    }
 
-    public void showMessage (JTextArea s){
-        JOptionPane.showMessageDialog(null,s);
+    public void showMessage(JTextArea s) {
+        JOptionPane.showMessageDialog(null, s);
     }
 }

@@ -11,43 +11,43 @@ import java.util.ArrayList;
 
 public class CustomerGUI {
 
-    private static JFrame mainframe=new JFrame("Customer");
+    private static JFrame mainframe = new JFrame("Customer");
     ArrayList<Book> books = AdminGUI.books;
     ArrayList<JButton> buttons;
     ArrayList<Person> employees = AdminGUI.employees;
-    private static Book actualBook=null;
+    private static Book actualBook = null;
 
     //declaring JLabel here
     JLabel text;
 
     //this is where my process is taking place - the purchasing of a book
-    public CustomerGUI(){
+    public CustomerGUI() {
         //the frame will close when 'x' is pressed
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         //default settings of the frame
-        mainframe.setBounds(200,200,500,500);
+        mainframe.setBounds(200, 200, 500, 500);
         //creating new JPanel here
-        JPanel flowLayout=new JPanel(new FlowLayout());
-        GridLayout grid=null;
+        JPanel flowLayout = new JPanel(new FlowLayout());
+        GridLayout grid = null;
 
         //this is my process here
-        if(books.size()==0||books.size()==1){
-            grid=new GridLayout(1,1);
-        }else if (books.size()==2){
-            grid=new GridLayout(2,1);
-        }else{
-            for(int i=2;i<books.size();i++){
-                grid=new GridLayout(i,1);
+        if (books.size() == 0 || books.size() == 1) {
+            grid = new GridLayout(1, 1);
+        } else if (books.size() == 2) {
+            grid = new GridLayout(2, 1);
+        } else {
+            for (int i = 2; i < books.size(); i++) {
+                grid = new GridLayout(i, 1);
             }
         }
-        JPanel contentPanel=new JPanel(grid);
+        JPanel contentPanel = new JPanel(grid);
 
         buttons = new ArrayList<JButton>();
 
-        for (int i=0;i<books.size();i++){
+        for (int i = 0; i < books.size(); i++) {
 
-            actualBook=books.get(i);
-            JButton btn=new JButton(actualBook.getTitle());
+            actualBook = books.get(i);
+            JButton btn = new JButton(actualBook.getTitle());
             buttons.add(btn);
             //System.out.println(buttons.get(i));
 
@@ -55,17 +55,15 @@ public class CustomerGUI {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    for(int i=0;i<buttons.size();i++)
-                    {
-                        if(buttons.get(i).getText().equals(btn.getText()))
-                                actualBook = books.get(i);
+                    for (int i = 0; i < buttons.size(); i++) {
+                        if (buttons.get(i).getText().equals(btn.getText()))
+                            actualBook = books.get(i);
                     }
 
 
                     actualBook.setNumMinusOne();
                     System.out.println(actualBook);
-                    JOptionPane.showMessageDialog(null,"Thank you for purchasing the book:"+actualBook.getTitle());
-
+                    JOptionPane.showMessageDialog(null, "Thank you for purchasing  :" + actualBook.getTitle() + "\nThere are " + actualBook.getNumInStock() + " left in stock");
 
 
                     if (books.size() > 0) {
