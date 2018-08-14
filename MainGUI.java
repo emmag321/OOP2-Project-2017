@@ -79,9 +79,9 @@ public class MainGUI extends JFrame {
 
                         {
                             AdminGUI admin = new AdminGUI(MainGUI.this);
-                            //MainGUI main = MainGUI();
+
                             admin.setVisible(true);
-                            //main.setVisable(false);
+                            //added this here to get MainGUI to close when AdminGUI button was clicked
                             MainGUI.this.dispose();
                         }
 
@@ -98,10 +98,9 @@ public class MainGUI extends JFrame {
         customerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //CustomerGUI custGUI =
                 new CustomerGUI();
-                //custGUI.setVisible(true);
-                //CustomerGUI.setVisable(false);
+                //added this change also so the MainGUI would close when the custommer button was clicked
+                MainGUI.this.dispose();
 
             }
         });

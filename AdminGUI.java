@@ -30,6 +30,8 @@ import java.awt.*;
 import java.io.*;
 import java.util.*;
 
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+
 public class AdminGUI extends JFrame implements ActionListener {
 
     //creating JTextField, JMenu, JButton, JTextArea here - they are called below then
@@ -60,6 +62,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         setSize(900, 550);
         setResizable(true);
         setLocation(200, 100);
+
 
         //this is what the GUI does when you press the 'x' button
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -96,6 +99,8 @@ public class AdminGUI extends JFrame implements ActionListener {
                 setVisible(false);
             }
         });
+
+
 
         //referenced code starts here
         // create a table model and set a Column Identifiers to this model
@@ -225,21 +230,25 @@ public class AdminGUI extends JFrame implements ActionListener {
             }
         });
 
+
         // action listener - button remove row
         btnDelete.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
 
+
+
+
                 // i = the index of the selected row
                 int i = table.getSelectedRow();
                 if (i >= 0) {
                     // remove a row from jtable
-                    model.removeRow(i);
+                   model.removeRow(table.getSelectedRow());
                 } else {
                     System.out.println("Delete Error");
                 }
-            }
+        }
         });
 
         // get selected row data From table to textfields
@@ -251,14 +260,15 @@ public class AdminGUI extends JFrame implements ActionListener {
                 // i = the index of the selected row
                 int i = table.getSelectedRow();
 
-                textTitle.setText(model.getValueAt(i, 0).toString());
-                textAuthor.setText(model.getValueAt(i, 1).toString());
-                textPages.setText(model.getValueAt(i, 2).toString());
-                textPrice.setText(model.getValueAt(i, 3).toString());
-                textIsbn.setText(model.getValueAt(i, 4).toString());
-                textNumInStock.setText(model.getValueAt(i, 5).toString());
+                textTitle.setText(table.getValueAt(i, 0).toString());
+                textAuthor.setText(table.getValueAt(i, 1).toString());
+                textPages.setText(table.getValueAt(i, 2).toString());
+                textPrice.setText(table.getValueAt(i, 3).toString());
+                textIsbn.setText(table.getValueAt(i, 4).toString());
+                textNumInStock.setText(table.getValueAt(i, 5).toString());
             }
         });
+
 
         // button update row
         btnUpdate.addActionListener(new ActionListener() {
@@ -270,19 +280,73 @@ public class AdminGUI extends JFrame implements ActionListener {
                 int i = table.getSelectedRow();
 
                 if (i >= 0) {
-                    model.setValueAt(textTitle.getText(), i, 0);
-                    model.setValueAt(textAuthor.getText(), i, 1);
-                    model.setValueAt(textPages.getText(), i, 2);
-                    model.setValueAt(textPrice.getText(), i, 3);
-                    model.setValueAt(textIsbn.getText(), i, 4);
-                    model.setValueAt(textNumInStock.getText(), i, 5);
+                    table.setValueAt(textTitle.getText(), i, 0);
+                    table.setValueAt(textAuthor.getText(), i, 1);
+                    table.setValueAt(textPages.getText(), i, 2);
+                    table.setValueAt(textPrice.getText(), i, 3);
+                    table.setValueAt(textIsbn.getText(), i, 4);
+                    table.setValueAt(textNumInStock.getText(), i, 5);
                 } else {
                     System.out.println("Update Error");
+
                 }
             }
         });
-        //referenced code ends here
+
+
+
+
+        // override the default window closing event
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent ev) {
+
+                // modified from this source: https://www.tutorialspoint.com/java/java_serialization.htm
+                if (books.size() > 0) {
+                    try {
+                        FileOutputStream fileOut = new FileOutputStream("books.dat");
+                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                        out.writeObject(books);
+                        out.close();
+                        fileOut.close();
+                        System.out.printf("Serialized data to books.dat file");
+                    } catch (IOException i) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Failed to save books",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                        i.printStackTrace();
+                    }
+                }
+
+                if (books.size() > 0) {
+                    try {
+                        FileOutputStream fileOut = new FileOutputStream("books.dat");
+                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                        out.writeObject(books);
+                        out.close();
+                        fileOut.close();
+                        System.out.printf("Serialized data to books.dat file");
+                    } catch (IOException i) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Failed to save books",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                        i.printStackTrace();
+                    }
+                }
+
+                AdminGUI.this.dispose();
+
+            }
+        });
     } // constructor ends here
+
+
+
 
     //add book method here
     private void addBook() {
