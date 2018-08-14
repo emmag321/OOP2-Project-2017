@@ -79,7 +79,10 @@ public class MainGUI extends JFrame {
 
                         {
                             AdminGUI admin = new AdminGUI(MainGUI.this);
+                            //MainGUI main = MainGUI();
                             admin.setVisible(true);
+                            //main.setVisable(false);
+                            MainGUI.this.dispose();
                         }
 
                     } else {
