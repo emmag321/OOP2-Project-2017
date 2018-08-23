@@ -21,11 +21,11 @@ public class MainGUI extends JFrame {
         gui.setVisible(true);
     }
 
-    public MainGUI(){
-        setTitle     ("Main GUI");
-        setSize      (600,550);
-        setResizable (true);
-        setLocation  (500,100);
+    public MainGUI() {
+        setTitle("Main GUI");
+        setSize(600, 550);
+        setResizable(true);
+        setLocation(500, 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         loadSavedData();
@@ -64,31 +64,29 @@ public class MainGUI extends JFrame {
                 // loginGUI login = new loginGUI();
                 // login.setVisible(true);
                 //MainGUI.setVisable(false);
-                if(e.getActionCommand().equals("Admin"))
-                {
+                if (e.getActionCommand().equals("Admin")) {
                     String adminUserName = "e";
                     int password = 1;
                     String message;
 
-                    employee.setEmail(JOptionPane.showInputDialog(null,"Enter user name:"));
-                    employee.setPassword(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Pin:")));
+                    employee.setEmail(JOptionPane.showInputDialog(null, "Enter user name:"));
+                    employee.setPassword(Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Pin:")));
 
-                    if(employee.getEmail().equals(adminUserName) && employee.getPassword() == password)
-                    {
-                        JOptionPane.showMessageDialog(null,"Welcome to the System " + adminUserName, "Welcome!",
+                    if (employee.getEmail().equals(adminUserName) && employee.getPassword() == password) {
+                        JOptionPane.showMessageDialog(null, "Welcome to the System " + adminUserName, "Welcome!",
                                 JOptionPane.INFORMATION_MESSAGE);
 
 
                         {
                             AdminGUI admin = new AdminGUI(MainGUI.this);
+
                             admin.setVisible(true);
+                            //added this here to get MainGUI to close when AdminGUI button was clicked
+                            MainGUI.this.dispose();
                         }
 
-                    }
-
-                    else
-                    {
-                        JOptionPane.showMessageDialog(null,"Error! Your email or pin was incorrect \n HINT UserName: e \nPass:: 1","Warning!",
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error! Your email or pin was incorrect \n HINT UserName: e \nPass:: 1", "Warning!",
                                 JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -100,10 +98,9 @@ public class MainGUI extends JFrame {
         customerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //CustomerGUI custGUI =
                 new CustomerGUI();
-                //custGUI.setVisible(true);
-                //CustomerGUI.setVisable(false);
+                //added this change also so the MainGUI would close when the custommer button was clicked
+                MainGUI.this.dispose();
 
             }
         });
@@ -112,11 +109,10 @@ public class MainGUI extends JFrame {
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int confirmMessage = JOptionPane.showConfirmDialog(null,"Are you sure you want to Quit?",
-                        "Closing", JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+                int confirmMessage = JOptionPane.showConfirmDialog(null, "Are you sure you want to Quit?",
+                        "Closing", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 
-                if(confirmMessage == 0)
-                {
+                if (confirmMessage == 0) {
                     System.exit(0);
                 }
             }
@@ -174,7 +170,7 @@ public class MainGUI extends JFrame {
         });
     }
 
-    private void loadSavedData () {
+    private void loadSavedData() {
         // load the employees
 
         try {

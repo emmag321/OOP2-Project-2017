@@ -10,8 +10,7 @@ public class Employee extends Person implements Serializable {
     private int password;
 
     //Constructors
-    public Employee()
-    {
+    public Employee() {
         super();//this to bring att from person threw-- super class
 
         email = "unknown";
@@ -20,8 +19,7 @@ public class Employee extends Person implements Serializable {
 
     }
 
-    public Employee(String firstName, String lastName, String address, String phoneNum, String email, String userName, int password)
-    {
+    public Employee(String firstName, String lastName, String address, String phoneNum, String email, String userName, int password) {
         super(firstName, lastName, address, phoneNum);
 
         this.email = email;
@@ -30,30 +28,30 @@ public class Employee extends Person implements Serializable {
     }
 
     //setters
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setUserName(String userName)
-    {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public void setPassword(int password) { this.password = password; }
+    public void setPassword(int password) {
+        this.password = password;
+    }
 
     //getters
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
-    public String getUserName()
-    {
+    public String getUserName() {
         return userName;
     }
 
-    public int getPassword() { return password; }
+    public int getPassword() {
+        return password;
+    }
 
     //toString method
     @Override

@@ -26,14 +26,12 @@ public class Book implements Serializable {
 
 
     //no args constructor
-    public Book()
-    {
-        this("unknown", "unknown",0, 0, "unknown", 0);
+    public Book() {
+        this("unknown", "unknown", 0, 0, "unknown", 0);
     }
 
     //contructor with args
-    public Book(String title, String author, int numPages, float price, String isbn, int numInStock)
-    {
+    public Book(String title, String author, int numPages, float price, String isbn, int numInStock) {
         this.title = title;
         this.author = author;
         this.numPages = numPages;
@@ -41,36 +39,31 @@ public class Book implements Serializable {
         this.isbn = isbn;
         this.numInStock = numInStock;
     }
+
     //contructor with args - just one args
-    public Book(String title)
-    {
+    public Book(String title) {
         this.title = title;
     }
 
     //setters
     // public void setFirstName(String firstName){this.firstName = firstName;}
-    public void setTitle(String Title)
-    {
+    public void setTitle(String Title) {
         this.title = title;
     }
 
-    public void setAuthor(String Author)
-    {
+    public void setAuthor(String Author) {
         this.author = author;
     }
 
-    public void setNumPages(int numPages)
-    {
+    public void setNumPages(int numPages) {
         this.numPages = numPages;
     }
 
-    public void setPrice(double price)
-    {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public void setIsbn(String isbn)
-    {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -79,33 +72,33 @@ public class Book implements Serializable {
     }
 
     //getters
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public String getAuthor()
-    {
+    public String getAuthor() {
         return author;
     }
 
-    public int getNumPages()
-    {
+    public int getNumPages() {
         return numPages;
     }
 
-    public double getPrice()
-    {
+    public double getPrice() {
         return price;
     }
 
-    public String getIsbn() { return isbn; }
+    public String getIsbn() {
+        return isbn;
+    }
 
     public int getNumInStock() {
         return numInStock;
     }
 
-    public void setNumMinusOne(){this.numInStock=getNumInStock()-1;}
+    public void setNumMinusOne() {
+        this.numInStock = getNumInStock() - 1;
+    }
 
 
     //To String method here
@@ -114,11 +107,11 @@ public class Book implements Serializable {
     public String toString() {
         return
                 "Title: " + title + "\n" +
-                "Author: " + author + "\n" +
-                "Number of Pages: " +numPages + "\n" +
-                "Price: " +price + "\n" +
-                "ISBN: " +isbn + "\n" +
-                "Stock Qty: " +numInStock + "\n";
+                        "Author: " + author + "\n" +
+                        "Number of Pages: " + numPages + "\n" +
+                        "Price: " + price + "\n" +
+                        "ISBN: " + isbn + "\n" +
+                        "Stock Qty: " + numInStock + "\n";
     }
 }
 

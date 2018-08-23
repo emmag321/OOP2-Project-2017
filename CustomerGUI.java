@@ -22,13 +22,16 @@ public class CustomerGUI {
 
     //this is where my process is taking place - the purchasing of a book
     public CustomerGUI(){
-        //the frame will close when 'x' is pressed
+
+        mainframe.setTitle("Customer GUI");
+        mainframe.setSize(600, 550);
+        mainframe.setResizable(true);
+        mainframe.setLocation(500, 100);
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        //default settings of the frame
-        mainframe.setBounds(200,200,500,500);
-        //creating new JPanel here
+
         JPanel flowLayout=new JPanel(new FlowLayout());
         GridLayout grid=null;
+
 
         //this is my process here
         if(books.size()==0||books.size()==1){
@@ -64,7 +67,7 @@ public class CustomerGUI {
 
                     actualBook.setNumMinusOne();
                     System.out.println(actualBook);
-                    JOptionPane.showMessageDialog(null,"Thank you for purchasing the book:"+actualBook.getTitle());
+                    JOptionPane.showMessageDialog(null,"Thank you for purchasing  :"+actualBook.getTitle() + "\nThere are "+ actualBook.getNumInStock()+" left in stock");
 
 
 

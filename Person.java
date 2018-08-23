@@ -12,14 +12,12 @@ public class Person implements Serializable {
     private String phoneNum;
 
     //no args constructor
-    public Person()
-    {
+    public Person() {
         this("unknown", "unknown", "unknown", "unknown");
     }
 
     //contructor with args
-    public Person(String firstName, String lastName, String address, String phoneNum)
-    {
+    public Person(String firstName, String lastName, String address, String phoneNum) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -27,44 +25,36 @@ public class Person implements Serializable {
     }
 
     //mutators -- they set
-    public void setFirstName(String firstName)
-    {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public void setLastName(String lastName)
-    {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public void setAddress(String address)
-    {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public void setPhoneNum(String phoneNum)
-    {
+    public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
 
     //accessors -- they get
-    public String getFirstName()
-    {
+    public String getFirstName() {
         return firstName;
     }
 
-    public String getLastName()
-    {
+    public String getLastName() {
         return lastName;
     }
 
-    public String getAddress()
-    {
+    public String getAddress() {
         return address;
     }
 
-    public String getPhoneNum()
-    {
+    public String getPhoneNum() {
         return phoneNum;
     }
 
