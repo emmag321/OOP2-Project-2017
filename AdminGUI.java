@@ -62,7 +62,32 @@ public class AdminGUI extends JFrame implements ActionListener {
         setLocation(200, 100);
 
         //this is what the GUI does when you press the 'x' button
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent ev) {
+                if (books.size() > 0) {
+                    try {
+                        FileOutputStream fileOut = new FileOutputStream("books.dat");
+                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                        out.writeObject(books);
+                        out.close();
+                        fileOut.close();
+                        System.out.printf("Serialized data to books.dat file");
+                    } catch (IOException i) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Failed to save books",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                        i.printStackTrace();
+                    }
+                }
+
+                AdminGUI.this.dispose();
+                System.exit(0);
+            }
+        });
 
         cPane = getContentPane();
         cPane.setLayout(new FlowLayout());
@@ -355,6 +380,24 @@ public class AdminGUI extends JFrame implements ActionListener {
 
     //makes make button go back to MainGUI
     public void backButton(){
+        if (books.size() > 0) {
+            try {
+                FileOutputStream fileOut = new FileOutputStream("books.dat");
+                ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                out.writeObject(books);
+                out.close();
+                fileOut.close();
+                System.out.printf("Serialized data to books.dat file");
+            } catch (IOException i) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Failed to save books",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                i.printStackTrace();
+            }
+        }
         this.dispose();
         parent.setVisible(true);
     }

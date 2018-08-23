@@ -149,7 +149,7 @@ public class MainGUI extends JFrame {
                     }
                 }
 
-                if (books.size() > 0) {
+                /*if (books.size() > 0) {
                     try {
                         FileOutputStream fileOut = new FileOutputStream("books.dat");
                         ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -166,7 +166,7 @@ public class MainGUI extends JFrame {
                         );
                         i.printStackTrace();
                     }
-                }
+                }*/
 
                 MainGUI.this.dispose();
 
