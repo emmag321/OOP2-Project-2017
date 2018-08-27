@@ -21,6 +21,7 @@
 package OOP2_Project_MyShop;
 
 
+import jdk.nashorn.internal.scripts.JO;
 import sun.applet.Main;
 
 import javax.swing.*;
@@ -62,7 +63,35 @@ public class AdminGUI extends JFrame implements ActionListener {
         setLocation(200, 100);
 
         //this is what the GUI does when you press the 'x' button
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent ev) {
+                if (books.size() > 0) {
+
+                    try {
+                        //got from a youtube tutorial https://www.youtube.com/watch?v=V-sgbrg5jW4
+                        BufferedWriter writer = new BufferedWriter(new FileWriter("myBooks.txt"));
+                        display.write(writer);
+                        writer.close();
+
+                        System.out.printf("Serialized data to myBooks.txt file");
+                    }
+
+                    catch (IOException i) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Failed to save books",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                        i.printStackTrace();
+                    }
+                }
+
+                AdminGUI.this.dispose();
+                System.exit(0);
+            }
+        });
 
         cPane = getContentPane();
         cPane.setLayout(new FlowLayout());
@@ -103,22 +132,6 @@ public class AdminGUI extends JFrame implements ActionListener {
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
 
-         /* // display and saved books
-        for (Book book : books) {
-            Object[] row = new Object[6];
-
-            row[0] = book.getTitle();
-            row[1] = book.getAuthor();
-            row[2] = book.getNumPages();
-            row[3] = book.getPrice();
-            row[4] = book.getIsbn();
-            row[5] = book.getNumInStock();
-
-            // add row to the model
-            model.addRow(row);
-        }*/
-
-        //call method here
         loadSavedData();
         // load the books got from stackOverFlow https://stackoverflow.com/questions/16265693/how-to-use-buffered-reader-in-java
         BufferedReader reader = null;
@@ -255,12 +268,19 @@ public class AdminGUI extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                //Update of display textArea
                 row[0] = textTitle.getText();
+                display.append(textTitle.getText() + "-");
                 row[1] = textAuthor.getText();
+                display.append(textAuthor.getText() + "-");
                 row[2] = textPages.getText();
+                display.append(textPages.getText() + "-");
                 row[3] = textPrice.getText();
+                display.append(textPrice.getText() + "-");
                 row[4] = textIsbn.getText();
+                display.append(textIsbn.getText() + "-");
                 row[5] = textNumInStock.getText();
+                display.append(textNumInStock.getText() + "-");
 
                 // add row to the model
                 model.addRow(row);
@@ -281,6 +301,26 @@ public class AdminGUI extends JFrame implements ActionListener {
                 if(i >= 0){
                     // remove a row from jtable
                     model.removeRow(i);
+
+                    try {
+                        //got from a youtube tutorial https://www.youtube.com/watch?v=V-sgbrg5jW4
+                        //adding a blank line to delete
+                        BufferedWriter writer = new BufferedWriter(new FileWriter("myBooks.txt"));
+                        display.write(writer);
+                        writer.close();
+
+                        System.out.printf("Serialized data to myBooks.txt file");
+                    }
+
+                    catch (IOException o) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Failed to save books",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                        o.printStackTrace();
+                    }
                 }
                 else{
                     System.out.println("Delete Error");
@@ -323,6 +363,32 @@ public class AdminGUI extends JFrame implements ActionListener {
                     model.setValueAt(textPrice.getText(), i, 3);
                     model.setValueAt(textIsbn.getText(), i, 4);
                     model.setValueAt(textNumInStock.getText(), i, 5);
+
+                    try {
+                        //got from a youtube tutorial https://www.youtube.com/watch?v=V-sgbrg5jW4
+                        //update the Display textArea with the new data for saving
+                        BufferedWriter writer = new BufferedWriter(new FileWriter("myBooks.txt"));
+                        display.append(textTitle.getText() + "-");
+                        display.append(textAuthor.getText() + "-");
+                        display.append(textPages.getText() + "-");
+                        display.append(textPrice.getText() + "-");
+                        display.append(textIsbn.getText() + "-");
+                        display.append(textNumInStock.getText() + "-");
+                        display.write(writer);
+                        writer.close();
+
+                        System.out.printf("Serialized data to myBooks.txt file");
+                    }
+
+                    catch (IOException a) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Failed to save books",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                        a.printStackTrace();
+                    }
                 }
                 else{
                     System.out.println("Update Error");
@@ -401,6 +467,24 @@ public class AdminGUI extends JFrame implements ActionListener {
 
     //makes make button go back to MainGUI
     public void backButton(){
+        if (books.size() > 0) {
+            try {
+                FileOutputStream fileOut = new FileOutputStream("books.dat");
+                ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                out.writeObject(books);
+                out.close();
+                fileOut.close();
+                System.out.printf("Serialized data to books.dat file");
+            } catch (IOException i) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Failed to save books",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                i.printStackTrace();
+            }
+        }
         this.dispose();
         parent.setVisible(true);
     }
@@ -469,7 +553,6 @@ public class AdminGUI extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null,s);
     }
 
-    //created method to load saved data
     private void loadSavedData() {
         // load the employees
         try {
