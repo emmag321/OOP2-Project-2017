@@ -4,8 +4,7 @@ package OOP2_Project_MyShop;
 import javax.swing.*;
 
 public class TestMyBookShop {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         //creating employee object
         Employee employee1 = new Employee();
 
