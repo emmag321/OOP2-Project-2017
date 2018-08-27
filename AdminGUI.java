@@ -103,7 +103,8 @@ public class AdminGUI extends JFrame implements ActionListener {
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
 
-        // display and saved books
+        loadSavedData();
+       /* // display and saved books
         for (Book book : books) {
             Object[] row = new Object[6];
 
@@ -116,7 +117,7 @@ public class AdminGUI extends JFrame implements ActionListener {
 
             // add row to the model
             model.addRow(row);
-        }
+        }*/
 
         //http://1bestcsharp.blogspot.ie/2015/05/java-jtable-add-delete-update-row.html
         // create JFrame and JTable
@@ -285,6 +286,10 @@ public class AdminGUI extends JFrame implements ActionListener {
         });
         //referenced code ends here
     } // constructor ends here
+
+    //created method to load saved data
+    private void loadSavedData() {
+    }
 
     //add book method here
     private void addBook() {
