@@ -103,7 +103,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
 
-        // display and saved books
+        /*// display and saved books
         for (Book book : books) {
             Object[] row = new Object[6];
 
@@ -113,6 +113,51 @@ public class AdminGUI extends JFrame implements ActionListener {
             row[3] = book.getPrice();
             row[4] = book.getIsbn();
             row[5] = book.getNumInStock();
+
+            // add row to the model
+            model.addRow(row);
+        }*/
+
+        loadSavedData();
+        // load the books got from stackOverFlow https://stackoverflow.com/questions/16265693/how-to-use-buffered-reader-in-java
+        BufferedReader reader = null;
+        try {
+            File file = new File("myBooks.txt");
+            reader = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+                String [] data = line.split("-");
+                model.addRow(data);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // display and saved books
+        for (Book book : books) {
+            Object[] row = new Object[6];
+
+            //Update the display textArea for saving
+            row[0] = textTitle.getText();
+            display.append(textTitle.getText() + "-");
+            row[1] = textAuthor.getText();
+            display.append(textAuthor.getText() + "-");
+            row[2] = textPages.getText();
+            display.append(textPages.getText() + "-");
+            row[3] = textPrice.getText();
+            display.append(textPrice.getText() + "-");
+            row[4] = textIsbn.getText();
+            display.append(textIsbn.getText() + "-");
+            row[5] = textNumInStock.getText();
+            display.append(textNumInStock.getText() + "-");
 
             // add row to the model
             model.addRow(row);
@@ -286,6 +331,8 @@ public class AdminGUI extends JFrame implements ActionListener {
         //referenced code ends here
     } // constructor ends here
 
+
+
     //add book method here
     private void addBook() {
         //my attributes here
@@ -422,4 +469,8 @@ public class AdminGUI extends JFrame implements ActionListener {
     public void showMessage (JTextArea s){
         JOptionPane.showMessageDialog(null,s);
     }
+
+    private void loadSavedData() {
+    }
+
 }
