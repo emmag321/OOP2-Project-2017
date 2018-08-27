@@ -471,11 +471,17 @@ public class AdminGUI extends JFrame implements ActionListener {
 
     //created method to load saved data
     private void loadSavedData() {
-        try{
-
-        }
-        catch (Exception e){
-         
+        // load the employees
+        try {
+            FileInputStream fileIn = new FileInputStream("employees.dat");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            employees = (ArrayList<Person>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }
