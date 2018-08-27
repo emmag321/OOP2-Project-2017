@@ -141,7 +141,28 @@ public class AdminGUI extends JFrame implements ActionListener {
                 e.printStackTrace();
             }
         }
-        
+
+        // display and saved books
+        for (Book book : books) {
+            Object[] row = new Object[6];
+
+            //Update the display textArea for saving
+            row[0] = textTitle.getText();
+            display.append(textTitle.getText() + "-");
+            row[1] = textAuthor.getText();
+            display.append(textAuthor.getText() + "-");
+            row[2] = textPages.getText();
+            display.append(textPages.getText() + "-");
+            row[3] = textPrice.getText();
+            display.append(textPrice.getText() + "-");
+            row[4] = textIsbn.getText();
+            display.append(textIsbn.getText() + "-");
+            row[5] = textNumInStock.getText();
+            display.append(textNumInStock.getText() + "-");
+
+            // add row to the model
+            model.addRow(row);
+        }
 
         //http://1bestcsharp.blogspot.ie/2015/05/java-jtable-add-delete-update-row.html
         // create JFrame and JTable
