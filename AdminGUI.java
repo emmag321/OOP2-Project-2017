@@ -118,6 +118,7 @@ public class AdminGUI extends JFrame implements ActionListener {
             model.addRow(row);
         }*/
 
+        //buffer reader
         loadSavedData();
         // load the books got from stackOverFlow https://stackoverflow.com/questions/16265693/how-to-use-buffered-reader-in-java
         BufferedReader reader = null;
