@@ -103,8 +103,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
 
-        loadSavedData();
-       /* // display and saved books
+         /* // display and saved books
         for (Book book : books) {
             Object[] row = new Object[6];
 
@@ -118,6 +117,31 @@ public class AdminGUI extends JFrame implements ActionListener {
             // add row to the model
             model.addRow(row);
         }*/
+
+        //call method here
+        loadSavedData();
+        // load the books got from stackOverFlow https://stackoverflow.com/questions/16265693/how-to-use-buffered-reader-in-java
+        BufferedReader reader = null;
+        try {
+            File file = new File("myBooks.txt");
+            reader = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+                String [] data = line.split("-");
+                model.addRow(data);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
 
         //http://1bestcsharp.blogspot.ie/2015/05/java-jtable-add-delete-update-row.html
         // create JFrame and JTable
@@ -287,10 +311,6 @@ public class AdminGUI extends JFrame implements ActionListener {
         //referenced code ends here
     } // constructor ends here
 
-    //created method to load saved data
-    private void loadSavedData() {
-    }
-
     //add book method here
     private void addBook() {
         //my attributes here
@@ -426,5 +446,9 @@ public class AdminGUI extends JFrame implements ActionListener {
 
     public void showMessage (JTextArea s){
         JOptionPane.showMessageDialog(null,s);
+    }
+
+    //created method to load saved data
+    private void loadSavedData() {
     }
 }
