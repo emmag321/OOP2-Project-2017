@@ -471,5 +471,11 @@ public class AdminGUI extends JFrame implements ActionListener {
 
     //created method to load saved data
     private void loadSavedData() {
+        try{
+
+        }
+        catch (Exception e){
+         
+        }
     }
 }
