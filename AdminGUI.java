@@ -21,7 +21,6 @@
 package OOP2_Project_MyShop;
 
 
-import jdk.nashorn.internal.scripts.JO;
 import sun.applet.Main;
 
 import javax.swing.*;
@@ -30,6 +29,8 @@ import java.awt.event.*;
 import java.awt.*;
 import java.io.*;
 import java.util.*;
+
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 
 public class AdminGUI extends JFrame implements ActionListener {
 
@@ -62,40 +63,13 @@ public class AdminGUI extends JFrame implements ActionListener {
         setResizable(true);
         setLocation(200, 100);
 
+
         //this is what the GUI does when you press the 'x' button
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        this.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent ev) {
-                if (books.size() > 0) {
-
-                    try {
-                       //got from a youtube tutorial https://www.youtube.com/watch?v=V-sgbrg5jW4
-                       BufferedWriter writer = new BufferedWriter(new FileWriter("myBooks.txt"));
-                       display.write(writer);
-                       writer.close();
-
-                       System.out.printf("Serialized data to myBooks.txt file");//here is problem
-                    }
-
-                    catch (IOException i) {
-                        JOptionPane.showMessageDialog(
-                                null,
-                                "Failed to save books",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE
-                        );
-                        i.printStackTrace();
-                    }
-                }
-
-                AdminGUI.this.dispose();
-                System.exit(0);
-            }
-        });
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         cPane = getContentPane();
         cPane.setLayout(new FlowLayout());
-        cPane.setBackground(new Color(240,210,240));
+        cPane.setBackground(new Color(240, 210, 240));
 
         createOptionsMenu();
         createAdminMenu();
@@ -122,56 +96,28 @@ public class AdminGUI extends JFrame implements ActionListener {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(true);
+                setVisible(false);
             }
         });
 
+
+
         //referenced code starts here
         // create a table model and set a Column Identifiers to this model
-        Object[] columns = {"Title","Author","Pages","Price","ISBN", "Num in Stock"};
+        Object[] columns = {"Title", "Author", "Pages", "Price", "ISBN", "Num in Stock"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
-
-        loadSavedData();
-        // load the books got from stackOverFlow https://stackoverflow.com/questions/16265693/how-to-use-buffered-reader-in-java
-        BufferedReader reader = null;
-        try {
-            File file = new File("myBooks.txt");
-            reader = new BufferedReader(new FileReader(file));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-                String [] data = line.split("-");
-                model.addRow(data);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
         // display and saved books
         for (Book book : books) {
             Object[] row = new Object[6];
 
-            //Update the display textArea for saving
-            row[0] = textTitle.getText();
-            display.append(textTitle.getText() + "-");
-            row[1] = textAuthor.getText();
-            display.append(textAuthor.getText() + "-");
-            row[2] = textPages.getText();
-            display.append(textPages.getText() + "-");
-            row[3] = textPrice.getText();
-            display.append(textPrice.getText() + "-");
-            row[4] = textIsbn.getText();
-            display.append(textIsbn.getText() + "-");
-            row[5] = textNumInStock.getText();
-            display.append(textNumInStock.getText() + "-");
+            row[0] = book.getTitle();
+            row[1] = book.getAuthor();
+            row[2] = book.getNumPages();
+            row[3] = book.getPrice();
+            row[4] = book.getIsbn();
+            row[5] = book.getNumInStock();
 
             // add row to the model
             model.addRow(row);
@@ -258,29 +204,23 @@ public class AdminGUI extends JFrame implements ActionListener {
         cPane.add(btnUpdate);
 
         //sets the size of window
-        cPane.setSize(900,400);
+        cPane.setSize(900, 400);
 
         // action listener for button add row
-        btnAdd.addActionListener(new ActionListener(){
+        btnAdd.addActionListener(new ActionListener() {
 
             // create an array of objects to set the row data
             Object[] row = new Object[6];
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                //Update of display textArea
                 row[0] = textTitle.getText();
-                display.append(textTitle.getText() + "-");
                 row[1] = textAuthor.getText();
-                display.append(textAuthor.getText() + "-");
                 row[2] = textPages.getText();
-                display.append(textPages.getText() + "-");
                 row[3] = textPrice.getText();
-                display.append(textPrice.getText() + "-");
                 row[4] = textIsbn.getText();
-                display.append(textIsbn.getText() + "-");
                 row[5] = textNumInStock.getText();
-                display.append(textNumInStock.getText() + "-");
 
                 // add row to the model
                 model.addRow(row);
@@ -290,64 +230,48 @@ public class AdminGUI extends JFrame implements ActionListener {
             }
         });
 
+
         // action listener - button remove row
-        btnDelete.addActionListener(new ActionListener(){
+        btnDelete.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
 
+
+
+
                 // i = the index of the selected row
                 int i = table.getSelectedRow();
-                if(i >= 0){
+                if (i >= 0) {
                     // remove a row from jtable
-                    model.removeRow(i);
-
-                    try {
-                        //got from a youtube tutorial https://www.youtube.com/watch?v=V-sgbrg5jW4
-                        //adding a blank line to delete
-                        BufferedWriter writer = new BufferedWriter(new FileWriter("myBooks.txt"));
-                        display.write(writer);
-                        writer.close();
-
-                        System.out.printf("Serialized data to myBooks.txt 8678file");
-                    }
-
-                    catch (IOException o) {
-                        JOptionPane.showMessageDialog(
-                                null,
-                                "Failed to save books",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE
-                        );
-                        o.printStackTrace();
-                    }
-                }
-                else{
+                   model.removeRow(table.getSelectedRow());
+                } else {
                     System.out.println("Delete Error");
                 }
-            }
+        }
         });
 
         // get selected row data From table to textfields
-        table.addMouseListener(new MouseAdapter(){
+        table.addMouseListener(new MouseAdapter() {
 
             @Override
-            public void mouseClicked(MouseEvent e){
+            public void mouseClicked(MouseEvent e) {
 
                 // i = the index of the selected row
                 int i = table.getSelectedRow();
 
-                textTitle.setText(model.getValueAt(i, 0).toString());
-                textAuthor.setText(model.getValueAt(i, 1).toString());
-                textPages.setText(model.getValueAt(i, 2).toString());
-                textPrice.setText(model.getValueAt(i, 3).toString());
-                textIsbn.setText(model.getValueAt(i, 4).toString());
-                textNumInStock.setText(model.getValueAt(i, 5).toString());
+                textTitle.setText(table.getValueAt(i, 0).toString());
+                textAuthor.setText(table.getValueAt(i, 1).toString());
+                textPages.setText(table.getValueAt(i, 2).toString());
+                textPrice.setText(table.getValueAt(i, 3).toString());
+                textIsbn.setText(table.getValueAt(i, 4).toString());
+                textNumInStock.setText(table.getValueAt(i, 5).toString());
             }
         });
 
+
         // button update row
-        btnUpdate.addActionListener(new ActionListener(){
+        btnUpdate.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -355,48 +279,74 @@ public class AdminGUI extends JFrame implements ActionListener {
                 // i = the index of the selected row
                 int i = table.getSelectedRow();
 
-                if(i >= 0)
-                {
-                    model.setValueAt(textTitle.getText(), i, 0);
-                    model.setValueAt(textAuthor.getText(), i, 1);
-                    model.setValueAt(textPages.getText(), i, 2);
-                    model.setValueAt(textPrice.getText(), i, 3);
-                    model.setValueAt(textIsbn.getText(), i, 4);
-                    model.setValueAt(textNumInStock.getText(), i, 5);
+                if (i >= 0) {
+                    table.setValueAt(textTitle.getText(), i, 0);
+                    table.setValueAt(textAuthor.getText(), i, 1);
+                    table.setValueAt(textPages.getText(), i, 2);
+                    table.setValueAt(textPrice.getText(), i, 3);
+                    table.setValueAt(textIsbn.getText(), i, 4);
+                    table.setValueAt(textNumInStock.getText(), i, 5);
+                } else {
+                    System.out.println("Update Error");
 
+                }
+            }
+        });
+
+
+
+
+        // override the default window closing event
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent ev) {
+
+                // modified from this source: https://www.tutorialspoint.com/java/java_serialization.htm
+                if (books.size() > 0) {
                     try {
-                        //got from a youtube tutorial https://www.youtube.com/watch?v=V-sgbrg5jW4
-                        //update the Display textArea with the new data for saving
-                        BufferedWriter writer = new BufferedWriter(new FileWriter("myBooks.txt"));
-                        display.append(textTitle.getText() + "-");
-                        display.append(textAuthor.getText() + "-");
-                        display.append(textPages.getText() + "-");
-                        display.append(textPrice.getText() + "-");
-                        display.append(textIsbn.getText() + "-");
-                        display.append(textNumInStock.getText() + "-");
-                        display.write(writer);
-                        writer.close();
-
-                        System.out.printf("Serialized data to myBooks.txt 300file");
-                    }
-
-                    catch (IOException a) {
+                        FileOutputStream fileOut = new FileOutputStream("books.dat");
+                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                        out.writeObject(books);
+                        out.close();
+                        fileOut.close();
+                        System.out.printf("Serialized data to books.dat file");
+                    } catch (IOException i) {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Failed to save books",
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE
                         );
-                        a.printStackTrace();
+                        i.printStackTrace();
                     }
                 }
-                else{
-                    System.out.println("Update Error");
+
+                if (books.size() > 0) {
+                    try {
+                        FileOutputStream fileOut = new FileOutputStream("books.dat");
+                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                        out.writeObject(books);
+                        out.close();
+                        fileOut.close();
+                        System.out.printf("Serialized data to books.dat file");
+                    } catch (IOException i) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Failed to save books",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                        i.printStackTrace();
+                    }
                 }
+
+                AdminGUI.this.dispose();
+
             }
         });
-        //referenced code ends here
     } // constructor ends here
+
+
+
 
     //add book method here
     private void addBook() {
@@ -437,7 +387,7 @@ public class AdminGUI extends JFrame implements ActionListener {
 
 
     //adds employees to system
-    public void addEmployee(){
+    public void addEmployee() {
         String firstName = JOptionPane.showInputDialog("Enter first name: ");
         String lastName = JOptionPane.showInputDialog("Enter surname: ");
         String address = JOptionPane.showInputDialog("Enter address: ");
@@ -445,46 +395,27 @@ public class AdminGUI extends JFrame implements ActionListener {
         String email = JOptionPane.showInputDialog("enter email:");
         String userName = JOptionPane.showInputDialog("enter user name:");
         int password = (Integer.parseInt(JOptionPane.showInputDialog("enter password(must be digits):")));
-        Employee employee = new Employee(firstName,lastName,address,phoneNum, email, userName, password);
+        Employee employee = new Employee(firstName, lastName, address, phoneNum, email, userName, password);
         employees.add(employee);
 
-        JOptionPane.showMessageDialog(null,firstName + "s account has successfully created");
+        JOptionPane.showMessageDialog(null, firstName + "s account has successfully created");
     }
 
     //displays employees that have been put into system
-    public void display(){
+    public void display() {
         JTextArea area = new JTextArea();
         int numCustomers = employees.size();
-        if (numCustomers>0) {
+        if (numCustomers > 0) {
             area.setText("Employees: \n\n");
-            for (int i = 0; i<numCustomers; i++)
-                area.append("User no: " + i + " " + employees.get(i).toString()+"\n");
+            for (int i = 0; i < numCustomers; i++)
+                area.append("User no: " + i + " " + employees.get(i).toString() + "\n");
             showMessage(area);
-        }
-        else
+        } else
             showMessage("No Users in the system");
     }
 
     //makes make button go back to MainGUI
-    public void backButton(){
-        if (books.size() > 0) {
-            try {
-                FileOutputStream fileOut = new FileOutputStream("books.dat");
-                ObjectOutputStream out = new ObjectOutputStream(fileOut);
-                out.writeObject(books);
-                out.close();
-                fileOut.close();
-                System.out.printf("Serialized data to books.dat file");
-            } catch (IOException i) {
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Failed to save books",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE
-                );
-                i.printStackTrace();
-            }
-        }
+    public void backButton() {
         this.dispose();
         parent.setVisible(true);
     }
@@ -531,40 +462,23 @@ public class AdminGUI extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("Quit")) {
             showMessage("Shutting down the system");
             System.exit(0);
-        }
-        else if (e.getActionCommand().equals ("Add Employee")){
+        } else if (e.getActionCommand().equals("Add Employee")) {
             addEmployee();//adds employee here to system
-        }
-        else if (e.getActionCommand().equals ("Display Employee")){
+        } else if (e.getActionCommand().equals("Display Employee")) {
             display();//displays employye
             open();
-        }
-        else if (e.getActionCommand().equals ("Back")){
+        } else if (e.getActionCommand().equals("Back")) {
             backButton();//back button
-        }
-        else
+        } else
             showMessage("Did not work");
     }
 
     //this displays
-    public void showMessage (String s){ JOptionPane.showMessageDialog(null,s); }
-
-    public void showMessage (JTextArea s){
-        JOptionPane.showMessageDialog(null,s);
+    public void showMessage(String s) {
+        JOptionPane.showMessageDialog(null, s);
     }
 
-    private void loadSavedData() {
-        // load the employees
-        try {
-            FileInputStream fileIn = new FileInputStream("employees.dat");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            employees = (ArrayList<Person>) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    public void showMessage(JTextArea s) {
+        JOptionPane.showMessageDialog(null, s);
     }
 }
