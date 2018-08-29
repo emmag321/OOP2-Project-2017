@@ -30,7 +30,7 @@ public class CustomerGUI {
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel flowLayout=new JPanel(new FlowLayout());
-        GridLayout grid=null;
+        GridLayout grid = null;
 
 
         //this is my process here
@@ -73,12 +73,12 @@ public class CustomerGUI {
 
                     if (books.size() > 0) {
                         try {
-                            FileOutputStream fileOut = new FileOutputStream("books.dat");
+                            FileOutputStream fileOut = new FileOutputStream("myBooks.txt");
                             ObjectOutputStream out = new ObjectOutputStream(fileOut);
                             out.writeObject(books);
                             out.close();
                             fileOut.close();
-                            System.out.printf("Serialized data to books.dat file");
+                            System.out.printf("Serialized data to myBooks.txt file");
                         } catch (IOException i) {
                             JOptionPane.showMessageDialog(
                                     null,

@@ -28,8 +28,6 @@ public class MainGUI extends JFrame {
         setLocation(500, 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        loadSavedData();
-
         Container cpane = getContentPane();
         cpane.setLayout(new FlowLayout());
 
@@ -145,58 +143,9 @@ public class MainGUI extends JFrame {
                     }
                 }
 
-                /*if (books.size() > 0) {
-                    try {
-                        FileOutputStream fileOut = new FileOutputStream("books.dat");
-                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-                        out.writeObject(books);
-                        out.close();
-                        fileOut.close();
-                        System.out.printf("Serialized data to books.dat file");
-                    } catch (IOException i) {
-                        JOptionPane.showMessageDialog(
-                                null,
-                                "Failed to save books",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE
-                        );
-                        i.printStackTrace();
-                    }
-                }*/
-
                 MainGUI.this.dispose();
 
             }
         });
-    }
-
-    private void loadSavedData() {
-        // load the employees
-
-        try {
-            FileInputStream fileIn = new FileInputStream("employees.dat");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            employees = (ArrayList<Person>) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        // load the books
-        try {
-            FileInputStream fileIn = new FileInputStream("books.dat");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            books = (ArrayList<Book>) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-            return;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 }
