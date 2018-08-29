@@ -17,7 +17,7 @@
  *    Availability: http://1bestcsharp.blogspot.ie/2015/05/java-jtable-add-delete-update-row.html(Accessed 27/11/2017)
  *    Modified: changed to suit my project and to be displayed with in this GUI
  *****************************************************/
-//
+////
 package OOP2_Project_MyShop;
 
 
