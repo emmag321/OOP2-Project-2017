@@ -205,6 +205,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         JButton btnAdd = new JButton("Add");
         JButton btnDelete = new JButton("Delete");
         JButton btnUpdate = new JButton("Update");
+        JButton btnPurchaseBook = new JButton("Purchase");
 
         //setting bounds of my JTextFields here
         textTitle.setBounds(70, 220, 100, 25);
@@ -234,6 +235,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         btnAdd.setBounds(180, 220, 100, 25);
         btnUpdate.setBounds(180, 265, 100, 25);
         btnDelete.setBounds(180, 310, 100, 25);
+        btnPurchaseBook.setBounds(180, 355, 100, 25);
 
         // create JScrollPane - this allows you to be able to scroll with in data grid
         JScrollPane pane = new JScrollPane(table);
@@ -256,6 +258,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         cPane.add(btnAdd);
         cPane.add(btnDelete);
         cPane.add(btnUpdate);
+        cPane.add(btnPurchaseBook);
 
         //sets the size of window
         cPane.setSize(900,400);
@@ -305,7 +308,7 @@ public class AdminGUI extends JFrame implements ActionListener {
                     try {
                         //got from a youtube tutorial https://www.youtube.com/watch?v=V-sgbrg5jW4
                         //adding a blank line to delete
-                        BufferedWriter writer = new BufferedWriter(new FileWriter("myBooks.txt"));
+                        BufferedWriter writer = new BufferedWriter(new FileWriter("myBooks.txt",true));
                         display.write(writer);
                         writer.close();
 
@@ -327,6 +330,44 @@ public class AdminGUI extends JFrame implements ActionListener {
                 }
             }
         });
+
+        btnPurchaseBook.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+               /* int i = table.getSelectedRow();
+                //trying to create process here when you click the purchase button the stock drops by one
+
+                    model.getValueAt(i, 5);*/
+
+            /*    int i = table.getSelectedRow();
+                textNumInStock.setText(model.getValueAt(i, 5).toString());*/
+
+
+                }
+
+                 /*if (books.size() > 0) {
+                try {
+                    FileOutputStream fileOut = new FileOutputStream("myBooks.txt");
+                    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                    out.writeObject(books);
+                    out.close();
+                    fileOut.close();
+                    System.out.printf("Serialized data to myBooks.txt file");
+                } catch (IOException i) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Failed to save books",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    i.printStackTrace();
+                }
+            }*/
+    });
+
+
 
         // get selected row data From table to textfields
         table.addMouseListener(new MouseAdapter(){
